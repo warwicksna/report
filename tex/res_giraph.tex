@@ -1,2 +1,12 @@
 \subsection{Giraph}
 Giraph is a free implementation of Google's Pregel framework.
+
+\subsubsection{Pregel}
+Pregel is a framework developed at Google for large-scale graph processing \cite{pregel}
+
+\subsubsection{Giraph}
+Giraph is a graph processing framework, inspired by Pregel, initially developed at Yahoo!. It has since become an Apache Incubator project\footnote{\url{http://incubator.apache.org/giraph/}}.
+
+Giraph is a framework which was designed for large-scale graph processing on Hadoop. There are a number of existing solutions to achieve large-scale graph processing, however these also have their own problems.
+
+Graph algorithms can be executed as a sequence of map-reduce jobs in Hadoop, but this suffers from the overheads of repeatedly launching these jobs and the map-reduce model is not a good fit for graph algorithms. Pregel itself has problems in that it requires a separate computing infrastructure, and is also unavailable to non-Google employees. The Message Passage Interface can also be used for graph processing, however it lacks any form of fault tolerance and is consider too generic \cite{giraphtalk}.
