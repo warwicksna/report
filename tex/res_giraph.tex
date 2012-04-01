@@ -10,3 +10,27 @@ Giraph is a graph processing framework, inspired by Pregel, initially developed 
 Giraph is a framework which was designed for large-scale graph processing on Hadoop. There are a number of existing solutions to achieve large-scale graph processing, however these also have their own problems.
 
 Graph algorithms can be executed as a sequence of map-reduce jobs in Hadoop, but this suffers from the overheads of repeatedly launching these jobs and the map-reduce model is not a good fit for graph algorithms. Pregel itself has problems in that it requires a separate computing infrastructure, and is also unavailable to non-Google employees. The Message Passage Interface can also be used for graph processing, however it lacks any form of fault tolerance and is consider too generic \cite{giraphtalk}.
+
+\lstset{language=Java,caption={PageRank algorithm in Giraph},label=giraphpagerank,tabsize=2,breaklines=true,breakatwhitespace=true,frame=single}
+\begin{lstlisting}
+public class SimplePageRankVertex extends HadoopVertex<LongWritable, DoubleWritable, FloatWritable, DoubleWritable> {
+
+	public void compute(Iterator<DoubleWritable> msgIterator) {
+		double sum = 0;
+		
+		while (msgIterator.hasNext()) {
+			sum += msgIterator.next().get();
+		}
+		
+		setVertexValue(new DoubleWritable((0.15f/getNumVertices()) + 0.85f * sum);
+		
+		if (getSuperstep() < 30) {
+			long edges = getOutEdgeIterator().size();
+			
+			sendMsgToAllEdges(new DoubleWritable(getVertexValue().get() / edges));
+		} else {
+			voteToHalt();
+		}
+	}
+}					
+\end{lstlisting}
