@@ -6,7 +6,8 @@
   pagebackref=true,
   pdftex,
   pdfborder={0 0 0},
-  colorlinks=false]{hyperref}
+  colorlinks=false,
+  plainpages=false]{hyperref}
 \usepackage{listings}
 \usepackage{parskip}
 \usepackage{graphicx}
@@ -16,14 +17,17 @@
 
 % Title
 \input{./tex/title.tex}
+\pagenumbering{alph}
 \maketitle
 
 % Abstract
 
 % Table of contents
+\clearpage\pagenumbering{roman}
 \tableofcontents
 
 % Chapters
+\clearpage\pagenumbering{arabic}
 \input{./tex/res_research}
 
 % Bibliography
