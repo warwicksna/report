@@ -1,5 +1,5 @@
-\subsection{Giraph}
-Giraph is a graph processing framework, inspired by Pregel, initially developed at Yahoo!. It has since become an Apache Incubator project\footnote{\url{http://incubator.apache.org/giraph/}}. Giraph is still under development, with more features being added and improved.
+\subsection{Graph Processing}
+Whilst MapReduce and Hadoop provide a way for most algorithms to perform in a distributed manner, not all algorithms can be expressed in the MapReduce paradigm easily, or suffer from problems of being adapted to MapReduce when a different paradigm would be more suited. Google developed a framework called Pregel \cite{pregel}, and an open-source development inspired by Pregel, called Giraph \citep{giraphtalk} began in \citeyear{giraphtalk}
 
 \subsubsection{Pregel}
 Pregel is a framework developed at Google for large-scale graph processing. The purpose of Pregel was to produce a scalable and fault-tolerant platform with an API that is sufficiently flexible to express arbitrary graph algorithms \cite{pregel}. Existing solutions, other than Pregel, which achieve large-scale graph processing do suffer from issues ranging from poor performance, to a lack of fault tolerance within the system. Pregel addresses these issues within its framework.
@@ -49,7 +49,7 @@ class PageRankVertex
 Listing \ref{lst:pregelpagerank} shows how the PageRank algorithm \cite{pagerank} can be written using the Pregel framework. It can clearly be seen how the algorithm works. Each vertex receives a series of messages which contain the PageRank for the vertex which sent the message. The sum of these PageRanks is then computed, and the damping factor applied, and the result is stored as the value of the vertex. This values is then divided by the number of outgoing edges from the vertex, and is then sent as a message to each of the vertices the vertex is connected to.
 
 \subsubsection{Giraph}
-Giraph is a framework which was designed for large-scale graph processing on Hadoop. There are a number of existing solutions to achieve large-scale graph processing, however these also have their own problems.
+Giraph is a graph processing framework, inspired by Pregel, initially developed at Yahoo!. It has since become an Apache Incubator project\footnote{\url{http://incubator.apache.org/giraph/}}. Giraph is still under development, with more features being added and improved. There are a number of existing solutions to achieve large-scale graph processing, however these also have their own problems.
 
 Graph algorithms can be executed as a sequence of map-reduce jobs in Hadoop, but this suffers from the overheads of repeatedly launching these jobs and the map-reduce model is not a good fit for graph algorithms. Pregel itself has problems in that it requires a separate computing infrastructure, and is also unavailable to non-Google employees. The Message Passage Interface can also be used for graph processing, however it lacks any form of fault tolerance and is consider too generic \cite{giraphtalk}.
 
