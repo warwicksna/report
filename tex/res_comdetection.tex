@@ -4,7 +4,16 @@ An important aspect of social network analysis is the detection of communities w
 \subsubsection{Clustering}
 Within social networks, there are distinct regions of vertices with many connections passing between them, and a much smaller number connected to other vertices outside of this region. These regions are termed as \emph{clusters}.
 
-Social networks are a prime example of this.
+Social networks are a prime example of this. A person tends to have groups of friends distinct from each other, and friends within these groups are also friends of each other. Figure \ref{fig:socialnetwork} is a social network constructed from data regarding mutual friends of a person. Within this Figure, it can clearly be seen that there exists five distinct regions of mutual friends, with very few links between these regions. These regions are the clusters described above.
+
+With data presented in this manner, it is clear to an observer where these clusters exist, and how many distinct clusters there are. \cite{girvan02} presents an approach to identifying communities within a graph.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.5\textwidth]{./img/socialnetwork.png}
+\caption{Social Network constructed from Facebook friends using the myFnetwork app}
+\label{fig:socialnetwork}
+\end{figure}
 
 \subsubsection{\emph{k}-Cliques}
 The term $clique$ is introduced by \citeauthor{luce49} in \cite{luce49} to describe a subgraph which consists of at least three vertices, each of which are fully connected with each other. From a social network perspective, this translates to saying that for each person in the clique, all of their friends  within the clique are friends of each other as well.
@@ -32,7 +41,7 @@ Identifying cliques, and solving problems involving cliques as been shown to be 
 There have been numerous generalisations of the clique construct to improve usefulness of the clique through relaxation of some of the properties of the clique. These include the \emph{n}-clique \cite{luce50}, \emph{n}-clan \cite{alba73} and \emph{n}-club \cite{mokken79}. However these new constructs do not solve the issues of identifying cliques, and remain hard to compute and produce too many results.
 
 \subsubsection{\emph{k}-Trusses}
-Following from relaxing properties of the clique, \citeauthor{trusses} in \cite{trusses} introduces a new construct called a truss. A \emph{k}-truss is a subgraph where an edge between two vertices, A and B, exists if at least \emph{k-2} other vertices are connected to both of A and B. The \emph{k}-truss has similar definitions to the clique. A maximal \emph{k}-truss is a \emph{k}-truss that is not a proprt subgraph of another \emph{k}-truss.
+Following from relaxing properties of the clique, \citeauthor{trusses} in \cite{trusses} introduces a new construct called a truss. A \emph{k}-truss is a subgraph where an edge between two vertices, A and B, exists if at least \emph{k-2} other vertices are connected to both of A and B. The \emph{k}-truss has similar definitions to the clique. A maximal \emph{k}-truss is a \emph{k}-truss that is not a proper subgraph of another \emph{k}-truss.
 
 \begin{figure}[htbp]
 \centering
@@ -46,4 +55,4 @@ Figure \ref{fig:trusses} shows an example application of \emph{k}-trusses. Figur
 The \emph{k}-truss is also computable in polynomial time to the input graph, which offers a marked improvement on the computation costs of identifying cliques and similar constructs. \cite{trusses} shows that the naive algorithm  for computing maximal \emph{k}-trusses is bounded by $O(n|E|^2 + n)$, where \emph{n} is the number of vertices in the graph, and \emph{|E|} is the number of edges in the graph. A more efficient method is shown to take $O(\Sigma d^2(v))$, where \emph{d(v)} is the degree of a vertex, \emph{v}.
 
 \subsubsection{Clustering Coefficients}
-Clustering coefficients provide a way to measure the amount to which vertices within a graph cluster together. 
+Clustering coefficients provide a way to measure the amount to which vertices within a graph cluster together.
