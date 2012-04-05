@@ -81,3 +81,52 @@ public class SimplePageRankVertex extends HadoopVertex<LongWritable, DoubleWrita
 Listing \ref{lst:giraphpagerank} shows the PageRank algorithm \cite{pagerank} produced using Giraph. Strong comparisons can be seen between this, and the Pregel implementation in Listing \ref{lst:pregelpagerank}. Both Listings show that a vertex receives a series of messages, of which the values of each are summer together. A damping factor is then applied and the result stored as the value of the vertex, before this value divided by the number of outgoing edges is sent to each vertex this vertex is connected to.
 
 Small differences can be seen, due to Giraph using Hadoop as an underlying component, such as the type system used in Giraph being composed from Java objects as opposed to primitive date types in Pregel.
+
+There are advantages to Giraph being built on top of Hadoop. Hadoop is being used by a large number of organisations for educational and production uses\footnote{\url{http://wiki.apache.org/hadoop/PoweredBy}} with other organisations providing Hadoop services for users\footnote{\url{http://wiki.apache.org/hadoop/Distributions and Commercial Support}}. This means that Giraph can be deployed onto these clusters with minimal effort required. It also means that Giraph only suffers from Hadoop-based problems, such as the Hadoop namenode and jobtracker being single points of failure for a Hadoop cluster.
+
+Being inspired by Pregel, Giraph also makes use of the Bulk Synchronous Parallel computation model \cite{bsp}. Again for similar reasons to Pregel, the Bulk Synchronous Parallel model provides natural barriers for checkpoints during the execution of programs, and programs can restart from a previous superstep in the case of any failure. Giraph also operates with one copy of the program being designated the \emph{master} and the remaining copies being designated as \emph{workers}. The \emph{master} co-ordinates the \emph{workers}, and also handles the distribution of the input data across the cluster. The \emph{workers} execute the \verb/compute()/ method for every vertex on the partition of data they receive.
+
+Giraph operates as a Map-only job on Hadoop, with there being no Reduce stage. A Giraph job has its own InputFormat and OutputFormat classes which call the user defined Vertex versions of these classes to load the data into each of the \emph{worker} processes.
+
+The basic construct of a Giraph program is similar in style to a Hadoop program. Table \ref{tab:hadoopgiraph} shows this similarity. The \verb/compute()/ method of Giraph is analogous to the \verb/map()/ method of Hadoop. The I, V, E and M represent datatypes to be chosen by the user for their own implementation of Vertex, where:
+
+\begin{itemize}
+	\item I $\rightarrow$ VertexId
+	\item V $\rightarrow$ VertexValue
+	\item E $\rightarrow$ EdgeValue
+	\item M $\rightarrow$ MsgValue
+\end{itemize}
+
+\begin{table}%
+\centering
+\begin{tabular}{|m{7.25cm}|m{7.25cm}|} \hline
+Hadoop & Giraph \\ \hline
+\begin{verbatim}
+
+public class Mapper<
+    KEYIN,
+    VALUEIN,
+    KEYOUT,
+    VALUEOUT> {
+  void map(KEYIN key,
+           VALUEIN value,
+           Context context)
+           throws IOException,
+           InterruptedException;
+}
+\end{verbatim} &
+\begin{verbatim}
+public class Vertex<
+    I extends WritableComparable,
+    V extends Writable,
+    E extends Writable,
+    M extends Writable> {
+  void compute(
+    Iterator<M> msgIterator);
+}
+\end{verbatim} \\
+\hline
+\end{tabular}
+\caption{Comparison between basic Hadoop and Giraph program construct \cite{giraphtalk}}
+\label{tab:hadoopgiraph}
+\end{table}
