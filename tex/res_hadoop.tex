@@ -1,8 +1,35 @@
 \subsection{Hadoop}
-Hadoop is framework for performing distributed computing. It is a free implementation of Google's MapReduce and Google File System papers. \cite{mapreduce}
+Hadoop is framework for performing distributed computing. It is a free implementation of Google's MapReduce and Google File System papers.
 
 \subsubsection{MapReduce}
+MapReduce is a programming framework designed to simply processing data on large clusters \cite{mapreduce}. MapReduce works by the user supplying two functions, Map and Reduce, which operate in parallel on the data set provided. The Map function processes data from key/value pairs into an intermediate set of key/value pairs, before the Reduce function processes this intermediate set into final key/value pairs.
 
+\lstset{language=C++,caption={Calculating the frequency of words in files using MapReduce \cite{mapreduce}},label=lst:mapreduceexample,tabsize=2,breaklines=true,breakatwhitespace=true,frame=single}
+\begin{lstlisting}[float]
+map(String key, String value):
+	// key: document name
+	// value: document contents
+	for each word w in value:
+		EmitIntermediate(w, ``1'');
+		
+reduce(String key, Iterator values):
+	// key: a word
+	// values: a list of counts
+	int result = 0;
+	for each v in values:
+		result += ParseInt(v);
+	Emit(AsString(result));	
+\end{lstlisting}
+
+Listing \ref{lst:mapreduceexample} is an example MapReduce program which counts the frequency of words within a selection of documents stored on a system. The Map function reads each word, \emph{w}, and emits the word as key/value pair \emph{(w, ``1'')} to signify that there is an occurrence of \emph{w} at that position. The Reduce function sums together the value each of these emitted key/value pairs, where the key is the same, and emits the sum for each word.
+
+Whilst the example given in Listing \ref{lst:mapreduceexample} uses Strings for the input and output for both of the Map and Reduce functions, it is not necessarily the case that all Map and Reduce functions operate in this way. \cite{mapreduce} explains that the types used by both are linked, as shown by:
+
+\begin{verbatim}
+map     (k1, v1)        -> list(k2, v2)
+reduce  (k2, list(v2))  -> list(v2)
+\end{verbatim}
+
+This states the input keys and values are from a different domain to the output keys and values, which also means that the types used can differ.
 
 \subsubsection{Google File System}
-
