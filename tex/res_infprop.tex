@@ -1,0 +1,11 @@
+\subsection{Influence Propogation}
+
+ Influence propogation algorithms attempt to model the spread of ideas, beliefs, viruses, or other transmissable entities, through a population. A social network is modeled as a graph, with nodes representing individuals, and vertices representing relationships between individuals. In most influence propogation models, nodes can be in one of two states: "converted" or "unconverted". (!change or cite following sentence) Such a model can represent the adoption of new ideas (Rogers 2003), the spread of infectious disease (Anderson and May 1991), word-of-mouth recommendations (Goldenberg, Libai and Muller 2001), viral marketing campaigns (Kempe, Kleinberg and Tardos 2003) and information cascades in online social networks (Lerman and Ghosh 2010).
+
+ The influence propagation model must also describe how influence spreads over time; that is, the conditions that cause a node to change states from "unconverted" to "converted". There are two main models of transmission used; the independent cascade model, and the linear threshold model.
+
+ In the independent cascade model, whenever a node becomes converted, it has one chance to convert each of its neighbours. Every edge (A -> B) is assigned a weight, which represents the probability that node A can convert node B, or vice versa.
+
+ In the linear threshold model, every node has a threshold value t. When the number of converted neighbours is greater than t, the node becomes converted. Again, edges can be weighted, in which case the condition for conversion is <maths>.
+
+ There are limitations to the two-state model. For example, it cannot represent a scenario where two competing ideas spread through a network. <paper> studies a model for such situations where nodes can be in one of 3 states; "unconverted", "converted to idea A", or "converted to idea B". In this case, A and B represent opposing beliefs.
