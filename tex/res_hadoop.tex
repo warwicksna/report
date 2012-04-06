@@ -21,7 +21,7 @@ reduce(String key, Iterator values):
 	Emit(AsString(result));	
 \end{lstlisting}
 
-Listing \ref{lst:mapreduceexample} is an example MapReduce program which counts the frequency of words within a selection of documents stored on a system. The Map function reads each word, \emph{w}, and emits the word as key/value pair \emph{(w, ``1'')} to signify that there is an occurrence of \emph{w} at that position. The Reduce function sums together the value each of these emitted key/value pairs, where the key is the same, and emits the sum for each word.
+Listing \ref{lst:mapreduceexample} is an example MapReduce program which counts the frequency of words within a selection of documents stored on a system. The Map function reads each word, \emph{w}, and emits the word as key/value pair \verb/(w, ``1'')/ to signify that there is an occurrence of \emph{w} at that position. The Reduce function sums together the value each of these emitted key/value pairs, where the key is the same, and emits the sum for each word.
 
 Whilst the example given in Listing \ref{lst:mapreduceexample} uses Strings for the input and output for both of the Map and Reduce functions, it is not necessarily the case that all Map and Reduce functions operate in this way. \cite{mapreduce} explains that the types used by both are linked, as shown by:
 

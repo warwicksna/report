@@ -15,6 +15,30 @@ Whilst a fairly simple measure to compute, degree centrality can be useful. A pe
 The PageRank algorithm \cite{pagerank} developed by Google is a further extension of the eigenvector centrality measure, and has similarities to the Katz centrality 
 
 \subsubsection{Closeness Centrality}
+Closeness centrality is a measure of the average distance from a vertex to other vertices. A geodesic path between two vertices is the minimum number of edges required to connect them within a graph. The closeness centrality defined in equation \ref{eq:closenesscentrality1} is the sum of the length of all geodesic paths, $d_{ij}$, from a vertex, $i$, to all other vertices, $j$:
+
+\begin{equation}
+l_i = \frac{1}{n}\sum_{j} d_{ij}
+\label{eq:closenesscentrality1}
+\end{equation}
+
+A slight alternative is to exclude the geodesic path $d_{ij}$ when $i = j$ because this is trivially 0, and a vertex's influence on itself is not relevant to the calculation of centrality:
+
+\begin{equation}
+l_i = \frac{1}{n-1}\sum_{j(\neq i)} d_{ij}
+\label{eq:closenesscentrality2}
+\end{equation}
+
+Closeness centrality defined in equations \ref{eq:closenesscentrality1} and \ref{eq:closenesscentrality2} produce results differently to other measures of centrality, whereby a lower value for $l_i$ indicates that vertex $i$ is more central within the network. Because of this, closeness centrality can also be defined as:
+
+\begin{equation}
+C_i = \frac{1}{l_i} = \frac{n}{\sum_{j(\neq i)} d_{ij}}
+\label{eq:closenesscentrality3}
+\end{equation}
+
+Equation \ref{eq:closenesscentrality3} produces results more consistent with other measures of centrality as a higher value of $C_i$ indicates vertex $i$ is more central. This equation is simply the inverse of equation \ref{eq:closenesscentrality1}.
+
+Within a social network, a person with a high closeness centrality, defined by equation \ref{eq:closenesscentrality3}, could find that their opinions reach others in the community faster than someone with a lower closeness centrality \cite{newman10}.
 
 \subsubsection{Betweeness Centrality}
 
