@@ -16,9 +16,9 @@ With data presented in this manner, it is clear to an observer where these clust
 \end{figure}
 
 \subsubsection{\emph{k}-Cliques}
-The term $clique$ is introduced by \citeauthor{luce49} in \cite{luce49} to describe a subgraph which consists of at least three vertices, each of which are fully connected with each other. From a social network perspective, this translates to saying that for each person in the clique, all of their friends  within the clique are friends of each other as well.
+The term \emph{clique} is introduced by \citeauthor{luce49} in \cite{luce49} to describe a subgraph which consists of at least three vertices, each of which are fully connected with each other. From a social network perspective, this translates to saying that for each person in the clique, all of their friends  within the clique are friends of each other as well.
 
-A \emph{k}-clique is defined as a clique which has size \emph{k}. A \emph{maximal clique} is a clique to which no more vertices can be added without violating the conditions of a clique, and the maximum clique is a clique within a graph which contains the largest number of vertices.
+A \emph{k}-clique is defined as a clique which has size \emph{k}. A \emph{maximal clique} is a clique to which no more vertices can be added without violating the conditions of a clique, and the maximum clique is a clique within a graph which contains the largest number of vertices. A 3-clique is also known as a triangle, due to the shape of the graph they are normally represented as (Figure \ref{fig:3clique}).
 
 \begin{figure}[htbp]
 \centering
@@ -31,7 +31,7 @@ Figure \ref{fig:clique} shows an example graph highlighting a 3-clique. It has o
 
 \begin{figure}
   \centering
-  \subfloat[3-clique]{\label{fig:gull}\includegraphics[width=0.3\textwidth]{./img/3-clique}} ~ \subfloat[4-clique]{\label{fig:tiger}\includegraphics[width=0.3\textwidth]{./img/4-clique}} ~ \subfloat[5-clique]{\label{fig:mouse}\includegraphics[width=0.3\textwidth]{./img/5-clique}}
+  \subfloat[3-clique]{\label{fig:3clique}\includegraphics[width=0.3\textwidth]{./img/3-clique}} ~ \subfloat[4-clique]{\label{fig:4clique}\includegraphics[width=0.3\textwidth]{./img/4-clique}} ~ \subfloat[5-clique]{\label{fig:5clique}\includegraphics[width=0.3\textwidth]{./img/5-clique}}
   \caption{\emph{k}-cliques}
   \label{fig:cliques}
 \end{figure}
@@ -53,6 +53,3 @@ Following from relaxing properties of the clique, \citeauthor{trusses} in \cite{
 Figure \ref{fig:trusses} shows an example application of \emph{k}-trusses. Figure \ref{fig:trusses}(a) shows the original graph. Figures \ref{fig:trusses}(b-f) show the \emph{k}-truss for increasing values of \emph{k}. If the same original graph were to be analysed for \emph{k}-cliques for the same values of \emph{k}, more vertices in the graph would have been removed in earlier stages, which would have lost the interesting stage where Figures \ref{fig:trusses}(c) and (d) are identical.
 
 The \emph{k}-truss is also computable in polynomial time to the input graph, which offers a marked improvement on the computation costs of identifying cliques and similar constructs. \cite{trusses} shows that the naive algorithm  for computing maximal \emph{k}-trusses is bounded by $O(n|E|^2 + n)$, where \emph{n} is the number of vertices in the graph, and \emph{|E|} is the number of edges in the graph. A more efficient method is shown to take $O(\Sigma d^2(v))$, where \emph{d(v)} is the degree of a vertex, \emph{v}.
-
-\subsubsection{Clustering Coefficients}
-Clustering coefficients provide a way to measure the amount to which vertices within a graph cluster together.

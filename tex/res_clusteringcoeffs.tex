@@ -1,0 +1,38 @@
+\subsection{Clustering Coefficients}
+Clustering coefficients provide a way to measure the amount to which vertices within a graph cluster together. Calculating clustering coefficients requires knowing the number of triangles within the graph.
+
+\subsubsection{Global Clustering Coefficient}
+The global clustering coefficient is also known as the transitivity of a network. This is because it is similar to the mathematical property of transitivity. A relation ``$\circ$'' is said to be transitive if $a \circ b$ and $b \circ c$ imply together imply $a \circ c$. An example would be the equality relation, as if $a = b$, and $b = c$ it follows that $a = c$ \cite{newman10}. Within a social network, the transitive relation could be described as \textit{``the friend of my friend is also my friend''}.
+
+A global clustering coefficient of 1 implies a social network where all components are cliques. A global clustering coefficient of 0 implies a social network where there are no mutual friends between any two people.
+
+The global clustering coefficient is defined as:
+
+\begin{equation}
+C_G = \frac{3 * number\: of\: triangles}{number\: of\: connected\: triples}
+\label{eq:globalcc}
+\end{equation}
+
+A connected triple is simply three vertices $uvw$ connected with edges ($u, v$) and ($v, w$); edge ($u, w$) does not need to be present \cite{newman10}. The factor 3 is present because each triangle is composed of three connected triples.
+
+\subsubsection{Local Clustering Coefficient}
+A clustering coefficient can also be applied to each vertex within a graph. The local clustering coefficient is the probability that vertices connected to a vertex are themselves also connected to each other.
+
+The local clustering coefficient is defined as:
+
+\begin{equation}
+C_L = \frac{number\: of\: triangles\: connected\: to\: vertex\: v}{number\: of\: triples\: centered\: on\: vertex\: v}
+\label{eq:localcc}
+\end{equation}
+
+Within social network analysis, the local clustering coefficient
+
+\subsubsection{Network Local Clustering Coefficient}
+The network local clustering coefficient is simply the mean of all local clustering coefficients within a network. It can be used to show the average level of connectedness between verticies in a network.
+
+\begin{equation}
+C_N = \frac{1}{n}\sum_{i=1}^{n} C_i
+\label{eq:networkcc}
+\end{equation}
+
+$C_i$ represents the local clustering coefficient of the vertex $n_i$. The result of this calculation is a number between 0 and 1, with 1 meaning all vertices are connected to each other \cite{watts98}.
