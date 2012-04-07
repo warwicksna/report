@@ -1,0 +1,29 @@
+\section{Hadoop Cluster}
+\subsection{Requirements}
+Hadoop itself does not have any explicit hardware requirements, and is able to run on mainst
+
+Hadoop also very few software requirements and is able to run on both Microsoft Windows and varieties of GNU/Linux. Use of Hadoop on a Windows environment is recommended only as a development platform, as Hadoop has not been well tested as a production platform for Windows. Both development and production have been tested using GNU/Linux environments, and is the recommended for use of Hadoop.
+
+Hadoop only has two explicit software requirements: Java\footnote{\url{http://www.java.com/}} and ssh\footnote{\url{http://www.openssh.com/}}. Hadoop launches each of the services required to manage a cluster as Java processes, and as such requires the Java Runtime Environment 1.6.x to be present. As programs developed using Giraph are written in Java, the Java Development Kit is also required, and includes the Java Runtime Environment. Ssh is required, with sshd running on all nodes, to allow the NameNode to manage all nodes within the cluster. 
+
+\subsection{Single-Node Cluster}
+For development purposes single-node cluster \cite{nollsingle}
+
+\begin{figure}[htbp]
+  \centering
+    \includegraphics{./img/singlenode}
+  \caption{Single-node Hadoop cluster \cite{nollsingle}.}
+  \label{fig:singlenode}
+\end{figure}
+
+\subsection{Two-Node Cluster}
+\cite{nollmulti}
+
+\begin{figure}[htbp]
+  \centering
+    \includegraphics{./img/twonode}
+  \caption{Two-nodes Hadoop cluster \cite{nollmulti}.}
+  \label{fig:twonode}
+\end{figure}
+
+\subsection{Multi-Node Cluster}
