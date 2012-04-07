@@ -29,7 +29,7 @@ class PageRankVertex
 			: public Vertex<double, void, double> {
 	public :	
 		virtual void Compute(MessageIterator* msgs) {
-			if (superstep() >= 1) {
+g			if (superstep() >= 1) {
 				double sum = 0;
 				for(; !msgs->Done(); msgs->Next())
 					sum += msgs->Value();
