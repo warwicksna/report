@@ -1,0 +1,38 @@
+\subsection{Influence Propogation}
+Implementing the influence propagation algorithms on a cluster proved tricky. As they are graph algorithms, and Hadoop was not originally designed for processing graphs, adapting them for use on Hadoop required some thought.
+
+The main reason graph algorithms are so hard to scale is because they are inherently about dependencies. Frameworks like Hadoop are good for ``embarassingly parallel'' problems, where data can be partitioned into independent sets that can be processed seperately. This is not normally possible with graph algorithms. 
+
+Graphs normally represent connections or relationships between entities. Even with a smart graph partitioning algorithm, it is not normally possible to split the graph into completely independent subgraphs. For example, if a graph contains an edge (n1, n2), and Hadoop partitions n1 onto the compute node c1, and n2 onto the compute node c2, then at some point c1 and c2 must communicate. 
+
+We decided to implement the influence propogation algorithms without using Giraph, ie, using only the core Hadoop framework. This allowed us to explore the general suitability of the MapReduce paradigm for tasks like this. 
+
+\subsubsection{Linear Threshold}
+
+When implementing the influence propogation algorithms on Hadoop jobs, the basic idea was to create ``iterative'' Hadoop tasks, that is, tasks which were run repeatedly, with the output of one task being fed into the input for the next task.
+
+If we take the basic linear threshold algorithm:
+
+<pseudocode>
+do
+  convertednodes = 0
+  for node in unconvertednodes
+    ...
+
+while convertednodes > 0
+
+We can see that it is all wrapped within one while loop. Our basic strategy is then to make one Hadoop task equal to one iteration of the loop. Each task will take the state of the graph as input, and output a new graph, possibly with some newly converted nodes. If some nodes have been converted, the task is run again with the previous output as input. If no nodes were converted in the last step, no more tasks will be run and the algorithm terminates.
+
+This means that each task must implement the following pseudocode:
+
+<pseudocode>
+
+
+\subsubsection{Independent Cascade}
+
+
+
+
+
+
+

@@ -4,7 +4,7 @@ Whilst MapReduce and Hadoop provide a way for most algorithms to perform in a di
 \subsubsection{Pregel}
 Pregel is a framework developed at Google for large-scale graph processing. The purpose of Pregel was to produce a scalable and fault-tolerant platform with an API that is sufficiently flexible to express arbitrary graph algorithms \cite{pregel}. Existing solutions, other than Pregel, which achieve large-scale graph processing do suffer from issues ranging from poor performance, to a lack of fault tolerance within the system. Pregel addresses these issues within its framework.
 
-A Pregel program executes as a series of parallel supersteps, similar in style to the Bulk Synchronous Parallel computation model described in \cite{bsp}. At each superstep, each active vertex performs some computation, which could modify the state of itself, its outgoing edges or send messages to other vertices to be received in the next superstep. An active vertex can also $VoteToHalt$, which stops this vertex it from performing any extra computation whilst the algorithm is being executed, unless the inactive vertex receives a message, in which case it becomes active again to process the messages it has received. When all vertices have voted to halt, the algorithm terminates.
+A Pregel program executes as a series of parallel supersteps, similar in style to the Bulk Synchronous Parallel computation model described in \cite{bsp}. At each superstep, each active vertex performs some computation, which could modify the state of itself, its outgoing edges or send messages to other vertices to be received in the next superstep. An active vertex can also \emph{VoteToHalt}, which stops this vertex it from performing any extra computation whilst the algorithm is being executed, unless the inactive vertex receives a message, in which case it becomes active again to process the messages it has received. When all vertices have voted to halt, the algorithm terminates.
 
 \begin{figure}[htbp]
   \centering
@@ -15,9 +15,9 @@ A Pregel program executes as a series of parallel supersteps, similar in style t
 
 Figure \ref{fig:superstep} shows an example program in Pregel, which finds the maximum vertex value. Initially, all vertices are active, and send a message to each vertex they are connected directly containing their value. In the next superstep, if a vertex receives a message with a higher value than its currently stored value, then it stores the new higher value, otherwise the vertex deactivates as it currently has a local maximum whilst the program has not terminated. The vertices which did change send their value send a message containing their updated value to their neighbours. In superstep 2, the third vertex activates and changes its value from 2 to 6 as it receives a message containing the value 6. The two active vertices deactivate because they did not receive a message. The third vertex then sends a message to the second and fourth vertices containing the value 6, and in the third superstep, no vertex receiving a message changes its value, so does not need to send a message resulting in all vertices becoming inactive and terminating the program. The maximum value of all the vertices within the graph is now stored in all vertices.
 
-As a Pregel program begins execution, multiple copies of the program start executing on a cluster of machines. A single copy is assigned as the $master$ which does not perform any work for the actual program, and instead manages the remaining $worker$ copies of the program. The $master$ partitions the input graph across the $workers$ and instructs the $workers$ to perform a superstep. This causes one iteration of the program to occur, and is repeated until all vertices vote-to-halt. The $master$ can the instruct each $worker$ to save its partition of the graph to memory.
+As a Pregel program begins execution, multiple copies of the program start executing on a cluster of machines. A single copy is assigned as the \emph{master} which does not perform any work for the actual program, and instead manages the remaining \emph{worker} copies of the program. The \emph{master} partitions the input graph across the \emph{workers} and instructs the \emph{workers} to perform a superstep. This causes one iteration of the program to occur, and is repeated until all vertices vote-to-halt. The \emph{master} can the instruct each \emph{worker} to save its partition of the graph to memory.
 
-The use of an underlying Bulk Synchonous Parallel model provides the Pregel framework with a simple way to model iteration of graph algorithms, and also provides a simple way to achieve a fault tolerant system. Each superstep in the execution of a Pregel program provides a natural barrier to synchronise each vertex's computation. If a $worker$ fails to communicate with the $master$ within a defined time period, the $master$ assumes that the $worker$ has failed, and can restart the program from the checkpoint made at the previous superstep completion, re-partitioning the graph if the failed $worker$ is still unavailable.
+The use of an underlying Bulk Synchonous Parallel model provides the Pregel framework with a simple way to model iteration of graph algorithms, and also provides a simple way to achieve a fault tolerant system. Each superstep in the execution of a Pregel program provides a natural barrier to synchronise each vertex's computation. If a \emph{worker} fails to communicate with the \emph{master} within a defined time period, the \emph{master} assumes that the \emph{worker} has failed, and can restart the program from the checkpoint made at the previous superstep completion, re-partitioning the graph if the failed \emph{worker} is still unavailable.
 
 The Pregel framework also provides some extra useful features called combiners and aggregators. A combiner groups together a series of messages from one vertex to another into a single message containing the result of an operation on these messages. This is to reduce the overhead incurred from sending many messages and then performing the same operation at the receiving vertex. An aggregator is a global data construct, which each vertex has access to its value at each superstep, and the value can be updated at the end of each superstep in time for the next superstep. Aggregators can be used to store information about a graph, such as the number of edges in the graph.
 
@@ -49,6 +49,7 @@ class PageRankVertex
 Listing \ref{lst:pregelpagerank} shows how the PageRank algorithm \cite{pagerank} can be written using the Pregel framework. It can clearly be seen how the algorithm works. Each vertex receives a series of messages which contain the PageRank for the vertex which sent the message. The sum of these PageRanks is then computed, and the damping factor applied, and the result is stored as the value of the vertex. This values is then divided by the number of outgoing edges from the vertex, and is then sent as a message to each of the vertices the vertex is connected to.
 
 \subsubsection{Giraph}
+\label{sec:res_giraph}
 Giraph is a graph processing framework, inspired by Pregel, initially developed at Yahoo!. It has since become an Apache Incubator project\footnote{\url{http://incubator.apache.org/giraph/}}. Giraph is still under development, with more features being added and improved. There are a number of existing solutions to achieve large-scale graph processing, however these also have their own problems.
 
 Graph algorithms can be executed as a sequence of map-reduce jobs in Hadoop, but this suffers from the overheads of repeatedly launching these jobs and the map-reduce model is not a good fit for graph algorithms. Pregel itself has problems in that it requires a separate computing infrastructure, and is also unavailable to non-Google employees. The Message Passage Interface can also be used for graph processing, however it lacks any form of fault tolerance and is consider too generic \cite{giraphtalk}.
@@ -80,3 +81,52 @@ public class SimplePageRankVertex extends HadoopVertex<LongWritable, DoubleWrita
 Listing \ref{lst:giraphpagerank} shows the PageRank algorithm \cite{pagerank} produced using Giraph. Strong comparisons can be seen between this, and the Pregel implementation in Listing \ref{lst:pregelpagerank}. Both Listings show that a vertex receives a series of messages, of which the values of each are summer together. A damping factor is then applied and the result stored as the value of the vertex, before this value divided by the number of outgoing edges is sent to each vertex this vertex is connected to.
 
 Small differences can be seen, due to Giraph using Hadoop as an underlying component, such as the type system used in Giraph being composed from Java objects as opposed to primitive date types in Pregel.
+
+There are advantages to Giraph being built on top of Hadoop. Hadoop is being used by a large number of organisations for educational and production uses\footnote{\url{http://wiki.apache.org/hadoop/PoweredBy}} with other organisations providing Hadoop services for users\footnote{\url{http://wiki.apache.org/hadoop/Distributions and Commercial Support}}. This means that Giraph can be deployed onto these clusters with minimal effort required. It also means that Giraph only suffers from Hadoop-based problems, such as the Hadoop namenode and jobtracker being single points of failure for a Hadoop cluster.
+
+Being inspired by Pregel, Giraph also makes use of the Bulk Synchronous Parallel computation model \cite{bsp}. Again for similar reasons to Pregel, the Bulk Synchronous Parallel model provides natural barriers for checkpoints during the execution of programs, and programs can restart from a previous superstep in the case of any failure. Giraph also operates with one copy of the program being designated the \emph{master} and the remaining copies being designated as \emph{workers}. The \emph{master} co-ordinates the \emph{workers}, and also handles the distribution of the input data across the cluster. The \emph{workers} execute the \verb/compute()/ method for every vertex on the partition of data they receive.
+
+Giraph operates as a Map-only job on Hadoop, with there being no Reduce stage. A Giraph job has its own InputFormat and OutputFormat classes which call the user defined Vertex versions of these classes to load the data into each of the \emph{worker} processes.
+
+The basic construct of a Giraph program is similar in style to a Hadoop program. Table \ref{tab:hadoopgiraph} shows this similarity. The \verb/compute()/ method of Giraph is analogous to the \verb/map()/ method of Hadoop. The I, V, E and M represent datatypes to be chosen by the user for their own implementation of Vertex, where:
+
+\begin{itemize}
+	\item I $\rightarrow$ VertexId
+	\item V $\rightarrow$ VertexValue
+	\item E $\rightarrow$ EdgeValue
+	\item M $\rightarrow$ MsgValue
+\end{itemize}
+
+\begin{table}%
+\centering
+\begin{tabular}{|m{7.25cm}|m{7.25cm}|} \hline
+Hadoop & Giraph \\ \hline
+\begin{verbatim}
+
+public class Mapper<
+    KEYIN,
+    VALUEIN,
+    KEYOUT,
+    VALUEOUT> {
+  void map(KEYIN key,
+           VALUEIN value,
+           Context context)
+           throws IOException,
+           InterruptedException;
+}
+\end{verbatim} &
+\begin{verbatim}
+public class Vertex<
+    I extends WritableComparable,
+    V extends Writable,
+    E extends Writable,
+    M extends Writable> {
+  void compute(
+    Iterator<M> msgIterator);
+}
+\end{verbatim} \\
+\hline
+\end{tabular}
+\caption{Comparison between basic Hadoop and Giraph program construct \cite{giraphtalk}}
+\label{tab:hadoopgiraph}
+\end{table}
