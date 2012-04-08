@@ -16,7 +16,7 @@ With data presented in this manner, it is clear to an observer where these clust
 \end{figure}
 
 \subsubsection{Partitioning}
-Partitioning of a graph differs from clustering slightly. To partition a graph, we first must know the number of partitions we wish to make, and also the size of each of these partitions. Clustering does not need to know this information as the clusters are produced by the algorithms performing the clustering.
+Partitioning of a graph differs from clustering slightly. To partition a graph, we first must know the number of partitions we wish to make, and also the size of each of these partitions. Clustering does not need to know this information as the clusters are produced by the algorithms performing the clustering. Partitioning is related to clustering as it splits the input graph into distinct smaller subgraphs of highly connected vertices, with the subgraphs representing communities within the original graph.
 
 The process of graph partitioning is to divide a graph into smaller parts, such that the number of connections between these smaller parts is as few as possible. The partitions produced are non-overlapping, of a given size, and of a given number.
 
@@ -36,7 +36,7 @@ Which, if our two partitions $n_1$ and $n_2$ are equal in size, then the number 
 
 This shows that running time of the \emph{brute force} algorithm to find all permutations grows exponentially with the size of the input graph.
 
-\citeauthor{kernighan70} proposed an algorithm to solve the partitioning of a graph into two sections \cite{kernighan70}. Initially, the graph is split into two partitions, \emph{A} and \emph{B}. For each pair of vertices (\emph{i, j}) such that $i \in A$ and $j \in B$, the algorithm finds the pair which reduces the number of connections between \emph{A} and \emph{B} the most (see Figure \ref{fig:kernighanlin1}), and swap them (Figure \ref{fig:kernighanlin2}). If there is no pair which reduces the number of connections between the two partitions, then the pair which increases the number of connections by the smallest amount are swapped. This is then repeated until vertices within one partition have been swapped, with the condition that once a vertex has been swapped, it cannot be swapped again. Following this, each state the graph was in after a swap is revisited, with the state with the minimum number of connections between \emph{A} and \emph{B} is minimal. These steps are then repeated until \emph{A} and \emph{B} do not change between rounds.
+\citeauthor{kernighan70} proposed an algorithm to solve the partitioning of a graph into two sections \cite{kernighan70}. Initially, the graph is split into two partitions, \emph{A} and \emph{B}. For each pair of vertices (\emph{i, j}) such that $i \in A$ and $j \in B$, the algorithm finds the pair which reduces the number of connections between \emph{A} and \emph{B} the most (see Figure \ref{fig:kernighanlin1}), and swap them (Figure \ref{fig:kernighanlin2}). If there is no pair which reduces the number of connections between the two partitions, then the pair which increases the number of connections by the smallest amount are swapped. This is then repeated until vertices within one partition have been swapped, with the condition that once a vertex has been swapped, it cannot be swapped again. Following this, each state the graph was in after a swap is revisited, with the state with the minimum number of connections between \emph{A} and \emph{B} is minimal. These steps are then repeated until \emph{A} and \emph{B} do not change between rounds. The algorithm has been shown to run in $O(n^2\: log\: n)$ time \cite{kernighan70}, which is marked improvement over the \emph{brute force} $O(2^n)$, but still remains slow and unsuitable for graphs with a over a few thousand vertices \cite{newman10}.
 
 \begin{figure}[htbp]
   \centering
@@ -47,6 +47,12 @@ This shows that running time of the \emph{brute force} algorithm to find all per
   \caption{The Kernighan-Lin algorithm \cite{newman10}}
   \label{fig:kernighanlin}
 \end{figure}
+
+Figure \ref{fig:kernighanlin} shows the effect of the Kernigham-Lin algorithm on the original network (Figure \ref{fig:kernighanlin1}). The two vertices highlighted with red reduce the number of connections between the two groups the most, so are swapped. This swap is also the best swap which happens during this iteration of the algorithm, so the network in Figure \ref{fig:kernighanlin2} is selected as the initial network for the next iteration. As no vertex swapping can improve on this, and as such this network is the best network for the next iteration, this network is the solution from the algorithm and the algorithm terminates.
+
+To split a graph into more than two partitions, repeated application of partitioning the subgraphs produced from previous partitioning is applied.
+
+There exist other algorithms to partition graphs, notably spectral algorithms \cite{pothen90,fiedler73}, which make use of properties of the matrix which can be used to define a graph. These spectral algorithms are a lot more complex in the operations needed to execute them, however they operate in $O(n^2)$ time, which is an order $n$ faster than the Kernighan-Lin algorithm \cite{newman10}. It is also noted that spectral algorithms do not necessarily give the best partition, with the partitions produced being of the rough general shape but not quite as good as other algorithms \cite{newman10}.
 
 \subsubsection{\emph{k}-Cliques}
 The term \emph{clique} is introduced by \citeauthor{luce49} in \cite{luce49} to describe a subgraph which consists of at least three vertices, each of which are fully connected with each other. From a social network perspective, this translates to saying that for each person in the clique, all of their friends  within the clique are friends of each other as well.
