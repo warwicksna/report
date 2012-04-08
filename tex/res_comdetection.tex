@@ -15,6 +15,39 @@ With data presented in this manner, it is clear to an observer where these clust
 \label{fig:socialnetwork}
 \end{figure}
 
+\subsubsection{Partitioning}
+Partitioning of a graph differs from clustering slightly. To partition a graph, we first must know the number of partitions we wish to make, and also the size of each of these partitions. Clustering does not need to know this information as the clusters are produced by the algorithms performing the clustering.
+
+The process of graph partitioning is to divide a graph into smaller parts, such that the number of connections between these smaller parts is as few as possible. The partitions produced are non-overlapping, of a given size, and of a given number.
+
+Graph partitioning is known to be a difficult and complex problem to solve. For simplicity, assume that we are to partition a graph into two partitions. To naively \emph{brute force} all permutations to find the ``best'' partition, which minimises the number of connections between the two partitions, soon becomes unfeasible for anything but the smallest graphs, due to the number of ways of partitioning \emph{n} verticies into two groups \emph{$n_1$} and \emph{$n_2$}. This is $\frac{n!}{n_1!n_2!}$ permutations, and with application of Stirling's formula, can we rewritten as \cite{newman10}:
+
+\begin{equation}
+\frac{n!}{n_1!n_2!} \simeq \frac{\sqrt{2\pi n}(n/e)^n}{\sqrt{2\pi n_1}(n_1/e)^{n_1} \sqrt{2\pi n_2}(n_2/e)^{n_2}} = \frac{n^{n+1/2}}{n_1^{n_1+1/2} n_2^{n_2+1/2}} 
+\label{eq:partioning1}
+\end{equation}
+
+Which, if our two partitions $n_1$ and $n_2$ are equal in size, then the number of permutations of the partition is \cite{newman10}:
+
+\begin{equation}
+\frac{n^{n+1/2}}{(n.2)^{n+1}} = \frac{2^{n+1}}{\sqrt{n}}
+\label{eq:}
+\end{equation}
+
+This shows that running time of the \emph{brute force} algorithm to find all permutations grows exponentially with the size of the input graph.
+
+\citeauthor{kernighan70} proposed an algorithm to solve the partitioning of a graph into two sections \cite{kernighan70}. Initially, the graph is split into two partitions, \emph{A} and \emph{B}. For each pair of vertices (\emph{i, j}) such that $i \in A$ and $j \in B$, the algorithm finds the pair which reduces the number of connections between \emph{A} and \emph{B} the most (see Figure \ref{fig:kernighanlin1}), and swap them (Figure \ref{fig:kernighanlin2}). If there is no pair which reduces the number of connections between the two partitions, then the pair which increases the number of connections by the smallest amount are swapped. This is then repeated until vertices within one partition have been swapped, with the condition that once a vertex has been swapped, it cannot be swapped again. Following this, each state the graph was in after a swap is revisited, with the state with the minimum number of connections between \emph{A} and \emph{B} is minimal. These steps are then repeated until \emph{A} and \emph{B} do not change between rounds.
+
+\begin{figure}[htbp]
+  \centering
+  \subfloat[Original network]{\label{fig:kernighanlin1}\includegraphics[width=0.3\textwidth]{./img/kernighanlin1}}
+  ~ 
+  \subfloat[The same network after interchange of two vertices]{\label{fig:kernighanlin2}\includegraphics[width=0.3\textwidth]{./img/kernighanlin2}}
+  ~ 
+  \caption{The Kernighan-Lin algorithm \cite{newman10}}
+  \label{fig:kernighanlin}
+\end{figure}
+
 \subsubsection{\emph{k}-Cliques}
 The term \emph{clique} is introduced by \citeauthor{luce49} in \cite{luce49} to describe a subgraph which consists of at least three vertices, each of which are fully connected with each other. From a social network perspective, this translates to saying that for each person in the clique, all of their friends  within the clique are friends of each other as well.
 
