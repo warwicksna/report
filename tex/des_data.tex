@@ -1,0 +1,17 @@
+\section{Data Acquisition}
+
+\subsection{Twitter}
+We scraped Twitter for data on the EDL and UAF
+
+\subsection{Enron}
+
+\subsection{Stanford Large Network Dataset Collection}
+Stanford University host a project called \emph{Stanford Network Analysis Platform}, SNAP.
+
+\begin{quote}
+``SNAP is a general purpose network analysis and graph mining library. It is written in C++ and easily scales to massive networks with hundreds of millions of nodes, and billions of edges. It efficiently manipulates large graphs, calculates structural properties, generates regular and random graphs, and supports attributes on nodes and edges.''\footnote{\url{http://snap.stanford.edu}}
+\end{quote}
+
+In addition to this library, the SNAP project also hosts a collection of large datasets in the \emph{Stanford Large Network Dataset Collection}\footnote{\url{http://snap.stanford.edu/data}}. This collection of datasets includes a variety of different networks, examples including social networks, communication networks, citation networks, collaboration networks and web graphs.
+
+The majority of these datasets are of the form $NodeId \rightarrow NodeId$, which indicates that these networks cannot be analysed from a temporal perspective. However, the sheer size of some of these networks, notably a LiveJournal network containing 4,847,571 nodes and 68,993,773 edges, and a network of Twitter users from 2009 \cite{kwak10} containing 41.7 million nodes and 1.47 billion edges, should prove DSNAT's viability in performing analysis on large-scale social networks.
