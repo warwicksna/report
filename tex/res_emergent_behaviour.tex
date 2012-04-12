@@ -1,0 +1,251 @@
+\section{Emergent Behaviour}
+
+The purpose of this component of the project is to observe and
+describe how networks converge and to look at how robust these
+networks are in the presence of infiltrators.  More specifically,
+we will be looking at networks which use a tag-based approach to
+cooperation and the infiltrators will be self-interested agents
+which do not follow the social norms of the network.  In our case,
+these self-interested agents could be thought of as law-enforcement
+individuals.  In general, the presence of self-interested agents
+have a negative affect on the cooperation within such a network.
+Therefore, we will look at methods to preserve the cooperation rates
+in networks where self-interested agents are present.
+
+\subsection{Existing Research}
+
+We are extending the work of Griffiths and Luck (2010) on tag-based
+cooperation in a network in the presence of self-interested agents.
+This work employs an image-scoring mechanism, network rewiring, and
+a learning-based approach to evolution.
+
+The work by Griffiths and Luck extends previous work on tag-based
+cooperation, especially Riolo, Cohen, and Axelrod (2001); and Hales
+and Edmonds (?).
+
+\subsection{RCA Tag-based Cooperation}
+
+Tag-based cooperation was introduced (Riolo, Cohen and Axelrod,
+2001) to observe the nature and method that cooperation in a network
+emerges.
+
+The cooperation approach described by RCA takes place in a population
+of agents.  Each agent is assigned a single tag and a single tolerance
+value.  Both the tag and tolerance are selected randomly from a
+uniform distribution between 0 and 1.
+The tag is a cultural artefact, a form of a public identifier.
+The tolerance is used to determine the willingness of an agent to cooperate.
+
+The approach described by RCA is generational.  Each generation is
+divided into two phases: a donation phase and a reproduction phase.
+The donation phase occurs first, which allows every agent to perform
+a number of donations.  After the donation phase, the reproduction
+phase allows agents to reproduce based on their relative success.
+
+During the donation phase, each agent in the population is selected
+to make a number of donations.  The number of donations each agent
+is selected to make is known as the number of interactions pairings
+per generation, P.  When an agent has been selected for donation,
+they pick an agent at random to which they have the opportunity to
+donate.  In the RCA approach, an agent will donate to the random
+agent if the difference between the two agents' tags is less than
+the tolerance of the donator.  If an agent chooses to donate, they
+will incur a small cost, c, and provide a benefit, b, to the receiving
+agent.
+
+\begin{align*}
+    |\tau_A - \tau_B| < T_A
+\end{align*}
+
+The cooperation of a population of agents is measured by the donation rate in each generation.
+
+Once every agent has been given an opportunity to donate $P$ times,
+the reproduction phase takes place.  During the reproduction phase,
+each agent reproduces in accordance with their relative success.
+The most successful agents produce more offspring than the less
+successful agents.  Each agent compares itself to a random agent.
+If the agent is less successful than the random agent, then its
+offspring derives from the random agent.  If the agent is more
+successful than the random agent, then its offspring derives from
+iteself.  The offspring takes the tag and tolerance values of the
+more successful agent.  There is a small chance that the tag and
+tolerance values could be mutated.  If the tag is mutated, the
+offspring will receive a new tag taken randomly from the uniform
+distribution $\left[0, 1\right]$.  If the tolerance is mutated, a
+small amount of gaussian noise with a mean of $0$ is added to the
+tolerance value.
+
+Once the donation and reproduction phases for a given generation
+have occurred, the process is repeated on the new population.
+
+RCA noted that the donation rate quickly stabilises after around
+100 generations.  Occasionally, an agent gets a tolerance value
+that is much smaller than the average tolerance as the result of a
+mutation.  This mutation allows the agent to become more successful
+as they are less likely to donate.  The impact of this reduces the
+overall donation rate until the agents converge on the new tag---due
+to the reproduction process---at which time the donation rate raises
+and stabilises again.
+
+By experimentation, RCA found that with a higher number of interaction
+pairings in each generation, the donation rate and average tolerance
+increases.  RCA also noted that when the cost of donating became
+too high relative to the benefit of receiving a donation, the
+donation rate dropped dramatically.  From these results, we will
+choose the number of interaction pairings per generation, $P$, to
+be at least $3$, the cost of donation to be $0.1$, and the benefit
+of receiving a donation to be $1$.
+
+\subsection{Learning-Interpretation of Reproduction}
+
+Hales and Edmonds (2003) extended the notion of tag-based cooperation by RCA
+by introducing the notion of a {\emph learning} interpretation instead of a {\emph reproduction} interpretation.
+
+The learning interpretation differs from the {\emph reproduction} interpretation of RCA
+in that offspring are not produced in the reproduction phase.
+Instead, when an agent is comparing itself to a more successful agent,
+they will adopt that agents' tags and tolerances.
+This means that the population of agents remains the same,
+just the tag and tolerances of an agent change over generations.
+Hales and Edmonds showed that the cooperation was not altered by adopting this approach.
+
+Hales and Edmonds also changed the notion of the tag so that
+the tag represented the neighbourhood of an agent.
+When a new tag is learnt from another agent or through mutation,
+the agent in effect rewires its neighbourhood to remove connections to those agents with its old tag,
+and forging connections to agents with the same new tag.
+In Hales and Edmonds' approach, donations are only permitted between agents in the same neighbourhood.
+
+\subsection{Image Scoring}
+
+Griffiths (2008) extended the cooperation approach of RCA,
+using the learning interpretation of HE, by connecting agents
+in a graph.
+All agents are connected in a graph with a random network topology.
+Agents are only able to donate to agents to which they are connected.
+
+This model was used to observe the effect of self-interested agents (cheaters)
+on the donation rate.
+A cheater is an agent that never chooses to donate, despite the tags and tolerance values.
+As such, a cheater is likely to be very successful as they
+receive the benefits of donation without incurring the costs.
+It was shown that the presence of just a small amount of cheaters in the network
+caused a large reduction in the overall rates of cooperation.
+
+To address this problem, image scoring was introduced.
+In image scoring, each agent can observe the interation pairings of its neighbours.
+Therefore,
+and agent can keep track of the times when a neighbour chooses to donate and refuses to donate.
+These observations for each neighbour are stored in a queue data structure.
+When an agent is selected to make a donation, they will consider the observations of their local network
+when donating in addition to their tag and tolerance values.
+
+This approach to ranking a neighbourhood is chosen
+due to the lack of direct reciprocity.
+Direct reciprocity is when, by donating to another agent, it is likely that the other agent will in future donate to you.
+It is therefore important to consider the neighbourhood to which an agent belongs when they make a donation.
+
+\begin{align*}
+    T_A' = T_A + \left(T_A \times \frac{\sum_{i = 1}^{n}\delta_i}{n}\right)
+\end{align*}
+
+Until each agent has recorded enough observations,
+the basic tag and tolerance approach described by RCA is used.
+
+It was observed that using this approach,
+a significant increase in the donation rate, particularly
+with small percentage of cheaters, could be achieved.
+
+\subsection{Network Rewiring}
+
+In order to further increase cooperation
+in the presence of cheaters, network rewiring was introduced (Griffiths and Luck, 2010).
+This allows an agent to rewire their connections to other agents,
+in effect changing the neighbourhood of an agent.
+The purpose of this is to allow an agent to remove connections
+to agents which are unlikely to donate and forge connections to agents
+which are more likely to donate.
+
+Each agent which learnt during the learning phase,
+is given an opportunity to rewire their own connections.
+At this point, each of these agents is allowed to drop any number of its
+connections to other agents and then add connections to new neighbours.
+The aim of this is to allow agents to remove un-cooperative agents from
+their neighbourhood in order to increase cooperation in their network.
+
+There are two parameters that are used to control the rewiring phase:
+the rewire proportion and the rewire strategy.
+The rewire proportion is a percentage which is used to determine the number of
+neighbours removed or added during a rewiring.
+Whent the rewire proportion is zero, then no rewiring takes place.
+When the rewire proportion is one, then all of an agents connections will be dropped and replaced with new connections.
+There is a single rewire proportion value for all agents, which remains constant throughout the whole simulation.
+
+The rewiring strategies determine which of an agents' connections are dropped and which new connections are to be acquired.
+In their paper, Griffiths and Luck introduced four different rewiring strategies,
+these are: Random, Random Replace Worst, Individual Replace Worst and Group Replace Worst.
+For the purposes of the following descriptions of these strategies,
+it is assumed that each neighbour of an agent can be ranked in order of their observed past donation behaviour.
+This assumption is used to allow a rewiring strategy to identify the most and least cooperative agents in an agent's network.
+
+\begin{description}
+\item[Random Rewiring Strategy]
+When the random rewiring strategy is used,
+each agent will drop a proportion of their connections at random.
+Once an agent has dropped these connections, the agent will then add new
+connections to new agents at random to replace the connections dropped.
+
+\item[Random Replace Worst Rewiring Strategy]
+In this strategy, each agent will rank their neighbouring agents in terms
+of their perceived willingness to donate, based on past observations.
+Based on these rankings, the rewiring agent will drop their neighbours
+which have the worst donation rate track record. Once these connections have
+been dropped, random connections to new neighbours will be forged---as in
+the random rewiring strategy.
+
+\item[Individual Replace Worst Rewiring Strategy]
+The individual replace worst strategy will---like the random replace
+worst rewire strategy---remove connections to their neighbours which have
+the worst record of donations. After these connections have been dropped,
+the agent will look at their most willing neighbour and replace the lost
+connections with their neighbour's best ranked connections. In the case where
+adding a new connection would duplicate an existing connection, or connect an
+agent to itself, a random connection is added instead. The effect of this is
+that the new connections are the same as the best connections of their best
+neighbour.
+
+\item[Group Replace Worst Rewiring Strategy]
+The group replace worst rewiring strategy is very similar to the individual
+replace worst rewiring strategy. Like the individual replace worst rewiring
+strategy, the neighbouring agents with the worst donation track record are
+dropped. Once these connections have been dropped, the agent will connect
+to the best ranked neighbour of each of its best ranked neighbours. As in the
+individual replace worst rewiring strategy, any possible duplicate connections
+will instead by replace by a random new connection.
+
+\end{description}
+
+\subsection{Effects of Rewiring Strategy on Cooperation}
+
+To observe the effect of these different rewiring strategies as well as the
+rewire proportion on the donation rate, Griffiths and Luck performed a number
+of experiments.
+
+It was found that the random rewiring strategy performed better than the RCA
+approach, but worse than the RCA approach augmented with context assessment
+(Griffiths, 2008). It was found that all the other rewiring strategies resulted
+in a better donation rate than either of the RCA approaches. It was found that
+rewiring was poorest when the rewiring proportion was close to zero or one.
+It was found that the random replace worst rewwiring strategy performed poorly
+when the rewiring proportion was greater than around $0.6$. It was found that
+the individual and group replace worst rewiring strategies performed similarly
+and had the best results when the rewire proportion was between $0.4$ and $0.8$.
+
+From the results, it was show that by implementing these simple rewiring
+strategies, it is possible to get a significant increase in overall cooperation---
+in the paper, there was an increase of around 20\% over the image-scoring approach
+in populations with 10\%, 20\%, and 30\% cheaters.
+
+From these results, it appears to be sensible to choose a rewire proportion in
+the range $0.4$ to $0.8$. In the paper, it was suggested to use a value of $0.6$
+for the rewire proportion.
