@@ -55,6 +55,24 @@ as the number of generations to simulate, or the number of interaction
 pairings per agent per generation---and to allow multiple simulations to
 be run with different parameters in order to compare the results.
 
+Parameters which will be able to be set are:
+
+\begin{tabular}{llll}
+    Name & Type & Default Value & Remarks \\
+    \hline
+    Generations & Integer & 1,000 & Must be greater than 0\\
+    Cost & Double & 0.1 & Must be greater than 0 \\
+    Benefit & Double & 1 & Must be greater than Cost \\
+    Context Influence & Double & 0.6 & Must be in $[0, 1]$ \\
+    Learn Probability & Double & 0.1 & Must be in $[0, 1]$ \\
+    Rewire Proportion & Double & 0.5 & Must be in $[0, 1]$ \\
+    Cheater Proportion & Double & 0.1 & Must be in $[0, 1]$ \\
+    Mutation Probability & Double & 0.01 & Must be in $[0, 1]$ \\
+    Graph Type & Graph Type & Random & Null values are not permitted \\
+    Rewire Strategy & Rewire Strategy & Null & Null values are permitted
+    \\
+\end{tabular}
+
 The simulation will be started by passing in a set of parameters.
 The simulation will then generate a graph and set the initial state of
 the simulation according to the parameters passed in.
