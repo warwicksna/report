@@ -1,0 +1,68 @@
+\section{Emergent Behaviour}
+
+The simulation will be written in Java.
+Java was chosen for many reasons, such as:
+\begin{itemize}
+    \item it is available on all of the most popular computing platforms;
+    \item it produces cross-platform applications;
+    \item it is easy to package dependencies in one bundle;
+    \item there is a wealth of third-party libraries and tools which can be
+used.
+    \item it has good performance, which is necessary given the scale of the
+simulations.
+\end{itemize}
+
+The simulation will use the Java Universal Network/Graph Framework
+(JUNG),
+as the base for the graph implementation.
+JUNG is an open-source graph library and contains a lot of data
+structures for representing graphs and routines for manipulating the
+graphs.
+JUNG was chosen for many reasons, including:
+\begin{itemize}
+    \item it is able to generate many different types of graphs;
+    \item it is mature, and has no bugs which would impair the results;
+    \item writing bespoke code to handle graphs would be challenging to get
+right;
+    \item it includes many useful algorithms that can be useful in analysing the
+graphs.
+\end{itemize}
+
+A `wrapper' class will be written around the JUNG {\tt graph} class in
+order to introduce additional functionality that will be required in the
+simulation.
+
+Graphs will be generated using JUNG's random graph generators.
+
+Every vertex in the graph will represent an agent in the simulation.
+To allow individual vertices to be randomly access in a fast manner,
+each vertex will have a unique identifier and be stored in a lookup
+data-structure.
+
+Each agent will have a tag and tolerance instance variable to be able to
+represent an agent in the graph.
+Every agent will also have a {\tt score} instance variable which will be
+used to keep track of the success of the agent.
+When the agent donates, the cost of donation, $c$, will be subtracted
+from the agent's score variable.
+When the agent receives a donation, the benefit, $b$, will be added to
+the agent's score variable.
+This approach allows the success of a given agent to be compared to the
+success of another agent by comparing the score variables of each agent.
+
+A class will be created to control the parameters of a simulation---such
+as the number of generations to simulate, or the number of interaction
+pairings per agent per generation---and to allow multiple simulations to
+be run with different parameters in order to compare the results.
+
+The simulation will be started by passing in a set of parameters.
+The simulation will then generate a graph and set the initial state of
+the simulation according to the parameters passed in.
+The simulation will then be run.
+
+\begin{algorithmic}
+\While {iterations remain}
+    \State Donation()
+    \State Reproduction()
+\EndWhile
+\end{algorithmic}
