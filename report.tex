@@ -11,7 +11,8 @@
   hypertexnames=false]{hyperref}
 \usepackage{listings}
 \usepackage{parskip}
-\usepackage{graphicx}
+% Graphicx commented out for MetaUML, see below.
+% \usepackage{graphicx}
 \usepackage{subfig}
 \usepackage[numbers]{natbib}
 \usepackage{fullpage}
@@ -24,6 +25,14 @@
 
 % Algorithms stuff
 \usepackage{algpseudocode}
+
+% Needed for MetaUML diagrams
+\ifx\pdftexversion\undefined
+\usepackage[dvips]{graphicx}
+\else
+\usepackage[pdftex]{graphicx}
+\DeclareGraphicsRule{*}{mps}{*}{}
+\fi
 
 % Options
 \setcounter{secnumdepth}{3}
