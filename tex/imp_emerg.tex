@@ -1,0 +1,113 @@
+\section{Emergent Behaviour}
+
+The following provides a short description of each class in each
+package.
+
+\begin{itemize}
+    \item {\tt sim}
+
+    \begin{description}
+        \item[Sim] The application entry point, sets the parameters and
+        runs a simulation.
+    \end{description}
+
+    \item {\tt sim.generators}
+
+    \begin{description}
+        \item[GraphGenerator] Abstract base class, used to generate
+        graphs.
+        \item[RandomGenerator] Extends {\tt GraphGenerator}, creates a
+        random graph using an {\it Erdos-Renyi Generator}. Requires
+        target vertex and edge counts.
+        \item[ScaleFreeGenerator] Extends {\tt GraphGenerator}, creates
+        a scale-free graph using a {\it Barabasi-Albert Generator}.
+        Requires the initial vertex count, the number of edges to add per
+        timestep, and the number of timesteps.
+        \item[SmallWorldGenerator] Extends {\tt GraphGenerator}, creates
+        a small-world graph using a {\it Kleinberg Generator}.
+        Required the lattice size, the number of long distance connections,
+        and the clustering exponent.
+    \end{description}
+
+    \item {\tt sim.io.graphml}
+
+    \begin{description}
+        \item[GraphMLReader] Reads graphs from GraphML files.
+    \end{description}
+
+    \item {\tt sim.model}
+
+    \begin{description}
+        \item[Observer] Records an Agent's observations of another
+        Agent.
+        \item[Parameters] Stores the parameters of a simulation.
+    \end{description}
+
+    \item {\tt sim.model.edge}
+
+    \begin{description}
+        \item[Edge] Empty class---used to represent edges in the graph
+    \end{description}
+
+    \item {\tt sim.model.graph}
+
+    \begin{description}
+        \item[GraphDelegate] An interface defining methods which can be
+        used to respond to changes to the graph.
+        \item[GraphType] Abstract base type, used to specify the nature
+        of the graph to generate in a simulation.
+        \item[RandomGraph] Extends {\tt GraphType}.
+        \item[ScaleFreeGraph] Extends {\tt GraphType}.
+        \item[SmallWorldGraph] Extends {\tt GraphType}.
+        \item[SimGraph] Wrapper around the {\sc jung} {\tt Graph} class.
+        Provides notifications to a delegate object of changes to the
+        underlying graph.
+    \end{description}
+
+    \item {\tt sim.model.rewiring}
+
+    \begin{description}
+        \item[RewireStrategy] Abstract base class for rewiring
+        algorithms. Provides methods to rank neighbours and perform
+        basic rewiring operations.
+        \item[RandomRewire] Extends {\tt RewireStrategy}, implements the
+        Random rewiring algorithm.
+        \item[RandomReplaceWorstRewire] Extends {\tt RewireStrategy},
+        implements the Random-Replace-Worst rewiring algorithm.
+        \item[IndividualReplaceWorstRewire] Extends {\tt
+        RewireStrategy}, implements the Individual-Replace-Worst
+        rewiring algorithm.
+        \item[GroupReplaceWorstRewire] Extends {\tt RewireStrategy},
+        implements the Group-Replace-Worst rewiring algorithm.
+    \end{description}
+
+    \item {\tt sim.model.vertex}
+
+    \begin{description}
+        \item[Vertex] Used as a vertex in the {\sc jung} graph.
+        \item[Agent] Extends {\tt Vertex}, used to store data about each
+        agent, such as the tag and tolerance.
+        \item[VertexFactory] Used to generate new {\tt Agent} objects as
+        Vertices in the graph, allows lookup of generated {\tt Agent}
+        instances by id.
+    \end{description}
+
+    \item {\tt sim.simulation}
+
+    \begin{description}
+        \item[Agents] Keeps track of all the agents in a graph, along
+        with their observations.
+        \item[DonateAlgorithm] Implementation of the donation phase.
+        \item[LearnAlgorithm] Implementation of the learning phase.
+        \item[Simulation] Main code for the simulation, takes a set of
+        parameters, generates the graph and initial state of the
+        simulation, and then runs the simulation.
+    \end{description}
+
+    \item {\tt sim.util}
+
+    \begin{description}
+        \item[RNG] A singleton subclass of java's {\tt Random} class.
+    \end{description}
+
+\end{itemize}
