@@ -3,10 +3,13 @@
 *.aux
 *.bbl
 *.blg
+*.brf
+*.lof
+*.lol
+*.lot
 *.log
 *.out
 *.pdf
 *.txt
 *.toc
-*.brf
 report.fdb_latexmk
