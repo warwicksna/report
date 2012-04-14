@@ -91,7 +91,7 @@ Listing \ref{lst:json} represents the graph shown in Figure \ref{fig:json}. The 
   \label{fig:json}
 \end{figure}
 
-\lstset{language=Java,caption={Giraph JSON-style input \cite{giraphexample} },label=lst:giraphvertexinput,tabsize=2,breaklines=true,breakatwhitespace=true,frame=single}
+\lstset{language=Java,caption={Giraph example VertexInputFormat \cite{giraphexample} },label=lst:giraphvertexinput,tabsize=2,breaklines=true,breakatwhitespace=true,frame=single}
 \begin{lstlisting}[float]
 public static class SimpleShortestPathsVertexInputFormat extends
         TextVertexInputFormat<LongWritable, DoubleWritable, FloatWritable> {
@@ -106,7 +106,7 @@ public static class SimpleShortestPathsVertexInputFormat extends
 }
 \end{lstlisting}
 
-\lstset{language=Java,caption={Giraph JSON-style input \cite{giraphexample} },label=lst:giraphvertexreader,tabsize=2,breaklines=true,breakatwhitespace=true,frame=single,showstringspaces=false}
+\lstset{language=Java,caption={Giraph example VertexReader \cite{giraphexample} },label=lst:giraphvertexreader,tabsize=2,breaklines=true,breakatwhitespace=true,frame=single,showstringspaces=false}
 \begin{lstlisting}[float]
 public static class SimpleShortestPathsVertexReader extends
         TextVertexReader<LongWritable, DoubleWritable, FloatWritable> {
@@ -146,7 +146,7 @@ public static class SimpleShortestPathsVertexReader extends
 }}
 \end{lstlisting}
 
-\lstset{language=Java,caption={Giraph JSON-style input \cite{giraphexample} },label=lst:giraphvertexoutput,tabsize=2,breaklines=true,breakatwhitespace=true,frame=single,showstringspaces=false}
+\lstset{language=Java,caption={Giraph example VertexOutputFormat \cite{giraphexample} },label=lst:giraphvertexoutput,tabsize=2,breaklines=true,breakatwhitespace=true,frame=single,showstringspaces=false}
 \begin{lstlisting}[float]
 public static class SimpleShortestPathsVertexOutputFormat extends
         TextVertexOutputFormat<LongWritable, DoubleWritable,
@@ -163,7 +163,7 @@ public static class SimpleShortestPathsVertexOutputFormat extends
 }
 \end{lstlisting}
 
-\lstset{language=Java,caption={Giraph JSON-style input \cite{giraphexample} },label=lst:giraphvertexwriter,tabsize=2,breaklines=true,breakatwhitespace=true,frame=single,showstringspaces=false}
+\lstset{language=Java,caption={Giraph example VertexWriter \cite{giraphexample} },label=lst:giraphvertexwriter,tabsize=2,breaklines=true,breakatwhitespace=true,frame=single,showstringspaces=false}
 \begin{lstlisting}[float]
 public static class SimpleShortestPathsVertexWriter extends
         TextVertexWriter<LongWritable, DoubleWritable, FloatWritable> {
