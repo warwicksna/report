@@ -1,5 +1,61 @@
 \chapter{Motivation}
 
-\section{Blah}
+\section{Why Is This Important?}
+Crimes are frequently committed by a network of individuals, be they loose-knit,
+tight-knit, grassroots clusters or hierarchical supply chains. Aspects of the
+relationships and power structures that compose these networks are betrayed in
+the resulting address books and digital social networks, which the police can
+frequently gain access to. However, this information has been distorted,
+flattened; a deep relationship may appear as a series of unrelated entries in an
+addressbook. While direct detective-work is invaluable for making these
+connections, the ever-increasing quantity of data to be processed is rendering
+this approach less effective . By modelling these networks as graphs, and
+through the application of various algorithms, we can attempt to recover some of
+this lost data. This will provide information about both individual users and
+the overall network; cluster identification may detect distinct groups within a
+single network and the influence and centrality of individual people can
+likewise be calculated. At its simplest this information could help inform
+decisions on which people the police should focus their resources on
+apprehending, and where in the network to introduce undercover agents to
+maximise their influence. 
+
+\subsection{Scale}
+Owing to the computational complexity of these algorithms, existing tools have
+serious scalability issues. The advent of social networking sites has led to
+sprawling networks with vast quantities of low-grade information that needs to
+be heavily processed to extract anything of value. We have tackled this by
+distributing the workload across clusters. Clusters are networks of computers
+typically built with commodity-grade components, rendering them cheap and
+scalable.
++some more on clusters
+
+\subsection{Relevance}
+Lacking access to any police datasets we chose to use publicly available data
+from the 'microblogging' site Twitter. Twitter is used by two groups the police
+are interested in; the 'English Defence League' (EDL) and 'Unite Against Facism'
+(UAF). Previous projects used Enron's emails. Times have changed since then;
+emails only make up a fraction of a user's interactions and social networks have
+a far higher degree. We demonstrate these techniques on modern, relevant
+networks. 
++poor operational security – HBGary / Anonymous
+
+\subsection{Alternative Applications: Marketing}
+Modelling influence manipulation and the like is also a core requirement of
+'viral' marketing; marketers want to choose the ideal starting point in a
+network to achieve maximum saturation. At its purest, the website
+http://sponsoredtweets.com allows advertises to pay a set amount for a tweet
+from a particular user and influence propagation can be used to inform decisions
+about whether a well-connected root is worth the money. 
+
+\subsection{Alternative applications: Persona Management}
+This won't just aid manual infiltration by undercover agents; once it is
+automated to a suitable degree it may be combined with 'persona management
+systems'; software that enables a single operator to control large numbers of
+fake online identities, massively increasing their voice and influence over
+discussions. Manual identification of influence relationships simply doesn't
+scale to this level.
+http://www.faqs.org/patents/app/20090313274
+
++specific example use-case
 % \input{./tex/res_hadoop}
 
