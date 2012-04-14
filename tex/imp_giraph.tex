@@ -1,6 +1,25 @@
 \subsection{Giraph}
 Giraph programs all follow a similar construct. As a minimum, the \verb/compute()/ method needs to be implemented because this is where the algorithms are executed on each vertex within the graph.
 
+\lstset{language=Java,caption={Basic structure of a Giraph program},label=lst:giraphstructure,tabsize=2,breaklines=true,breakatwhitespace=true,frame=single}
+\begin{lstlisting}[float]
+public class Vertex<I, V, E, M> {
+	public void compute(Iterator<M> msgIterator) {}
+	
+	public static class VertexInputFormat {}
+	
+	public static class VertexReader {}
+	
+	public static class VertexOutputFormat {}
+	
+	public static class VertexWriter {}
+	
+	public int run(String[] argArray) {}
+	
+	public static void main (String[] args) {}
+}						
+\end{lstlisting}
+
 As explained in Section \ref{sec:res_giraph}, a Giraph program is executed as a Hadoop job. This means that in addition to the \verb/compute()/ method being complete, other classes are required to read in and write out the graphs before and after processing to the HDFS.
 
 Following on from the shortest paths example \cite{giraphexample} provided by Apache for Giraph, the decision was taken to use the same JSON\footnote{JavaScript Object Notation \url{http://www.json.org/}} style format to store the graphs as adjacency list structures in the HDFS.
