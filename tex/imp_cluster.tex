@@ -31,3 +31,8 @@ For development purposes single-node cluster \cite{nollsingle}
 \end{figure}
 
 \subsection{Multi-Node Cluster}
+At request, a nine machine Hadoop cluster was set up for use during this project in the department of computer science. This cluster composed a head-node, {\tt hadoopmaster}, and eight slave-nodes, {\tt hadoop\{0-7\}}.
+
+HERE WILL BE SOME TECHNICAL SPECS ABOUT THE HADOOP CLUSTER IN THE DEPARTMENT
+
+We did not have direct access to the Hadoop cluster, and were required to {\tt ssh} to a machine located within the department, before {\tt ssh}ing from this machine into the Hadoop cluster. This added an extra level of complexity to access the Hadoop cluster , yet was resolved though use of ssh-keys to allow this \emph{machine-in-the-middle} to send and receive files from hadoopmaster with requiring a password.

@@ -1,5 +1,7 @@
 \subsection{Giraph}
-Giraph programs all follow a similar construct. As a minimum, the \verb/compute()/ method needs to be implemented because this is where the algorithms are executed on each vertex within the graph. Listing \ref{lst:giraphstructure} shows the structure of most of the 
+Giraph programs all follow a similar construct. As a minimum, the \verb/compute()/ method needs to be implemented because this is where the algorithms are executed on each vertex within the graph. Listing \ref{lst:giraphstructure} shows the structure of most of the algorithms implemented using Giraph.
+
+As explained in Section \ref{sec:res_giraph}, a Giraph program is executed as a Hadoop job. This means that in addition to the \verb/compute()/ method being complete, other classes are required to read in and write out the graphs before and after processing to the HDFS.
 
 \lstset{language=Java,caption={Basic structure of a Giraph program},label=lst:giraphstructure,tabsize=2,breaklines=true,breakatwhitespace=true,frame=single}
 \begin{lstlisting}[float]
@@ -20,7 +22,7 @@ public class Vertex<I, V, E, M> {
 }						
 \end{lstlisting}
 
-The following briefly describes each of these components
+The following briefly describes each of these components:
 
 \begin{itemize}
 
@@ -68,8 +70,6 @@ The following briefly describes each of these components
     
 \end{itemize}
 
-As explained in Section \ref{sec:res_giraph}, a Giraph program is executed as a Hadoop job. This means that in addition to the \verb/compute()/ method being complete, other classes are required to read in and write out the graphs before and after processing to the HDFS.
-
 Following on from the shortest paths example \cite{giraphexample} provided by Apache for Giraph, the decision was taken to use the same JSON\footnote{JavaScript Object Notation \url{http://www.json.org/}} style format to store the graphs as adjacency list structures in the HDFS.
 
 \lstset{language=C,caption={JSON adjacency list representation of a graph},label=lst:json,tabsize=2,breaklines=true,breakatwhitespace=true,frame=single}
@@ -91,6 +91,9 @@ Listing \ref{lst:json} represents the graph shown in Figure \ref{fig:json}. The 
   \label{fig:json}
 \end{figure}
 
+Listings \ref{lst:giraphvertexinput}-\ref{lst:giraphvertexwriter} show example implementations of the classes {\tt VertexInputFormat}, {\tt VertexReader}, {\tt VertexOutputFormat} and {\tt VertexWriter} found in Listing \ref{lst:giraphstructure}.
+
+
 \lstset{language=Java,caption={Giraph example VertexInputFormat \cite{giraphexample} },label=lst:giraphvertexinput,tabsize=2,breaklines=true,breakatwhitespace=true,frame=single}
 \begin{lstlisting}[float]
 public static class SimpleShortestPathsVertexInputFormat extends
@@ -102,6 +105,23 @@ public static class SimpleShortestPathsVertexInputFormat extends
                                throws IOException {
         return new SimpleShortestPathsVertexReader(
             textInputFormat.createRecordReader(split, context));
+    }
+}
+\end{lstlisting}
+
+\lstset{language=Java,caption={Giraph example VertexOutputFormat \cite{giraphexample} },label=lst:giraphvertexoutput,tabsize=2,breaklines=true,breakatwhitespace=true,frame=single,showstringspaces=false}
+\begin{lstlisting}[float]
+public static class SimpleShortestPathsVertexOutputFormat extends
+        TextVertexOutputFormat<LongWritable, DoubleWritable,
+        FloatWritable> {
+
+    @Override
+    public VertexWriter<LongWritable, DoubleWritable, FloatWritable>
+            createVertexWriter(TaskAttemptContext context)
+            throws IOException, InterruptedException {
+        RecordWriter<Text, Text> recordWriter =
+            textOutputFormat.getRecordWriter(context);
+        return new SimpleShortestPathsVertexWriter(recordWriter);
     }
 }
 \end{lstlisting}
@@ -144,23 +164,6 @@ public static class SimpleShortestPathsVertexReader extends
         }
         return true;
 }}
-\end{lstlisting}
-
-\lstset{language=Java,caption={Giraph example VertexOutputFormat \cite{giraphexample} },label=lst:giraphvertexoutput,tabsize=2,breaklines=true,breakatwhitespace=true,frame=single,showstringspaces=false}
-\begin{lstlisting}[float]
-public static class SimpleShortestPathsVertexOutputFormat extends
-        TextVertexOutputFormat<LongWritable, DoubleWritable,
-        FloatWritable> {
-
-    @Override
-    public VertexWriter<LongWritable, DoubleWritable, FloatWritable>
-            createVertexWriter(TaskAttemptContext context)
-            throws IOException, InterruptedException {
-        RecordWriter<Text, Text> recordWriter =
-            textOutputFormat.getRecordWriter(context);
-        return new SimpleShortestPathsVertexWriter(recordWriter);
-    }
-}
 \end{lstlisting}
 
 \lstset{language=Java,caption={Giraph example VertexWriter \cite{giraphexample} },label=lst:giraphvertexwriter,tabsize=2,breaklines=true,breakatwhitespace=true,frame=single,showstringspaces=false}
