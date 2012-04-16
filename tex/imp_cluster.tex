@@ -31,7 +31,9 @@ For development purposes single-node cluster \cite{nollsingle}
 \end{figure}
 
 \subsection{Multi-Node Cluster}
-At request, a nine machine Hadoop cluster was set up for use during this project in the department of computer science. This cluster composed a head-node, {\tt hadoopmaster}, and eight slave-nodes, {\tt hadoop\{0-7\}}.
+At request, a nine machine Hadoop cluster was set up for use during this project in the department of computer science. This cluster composed a master head-node, {\tt hadoopmaster}, and eight slave-nodes, {\tt hadoop\{0-7\}}. 
+
+Being the master, {\tt hadoopmaster} runs the NameNode, JobTracker and SecondaryNameNode processes. Each of the slave-nodes run the DataNode and TaskTracker processes.
 
 HERE WILL BE SOME TECHNICAL SPECS ABOUT THE HADOOP CLUSTER IN THE DEPARTMENT
 
