@@ -14,7 +14,11 @@ Analysis of social networks is becoming ever-increasing in importance, with the 
 \input{./tex/res_emergent_behaviour}
 
 \section{Distributed Computing}
-THIS BIT HERE SHOULD EXPLAIN WHY WE NEED DISTRIBUTED COMPUTING
+With the huge sizes social networks can reach, there needs to be efficient approaches to decrease the running time of algorithms for analysis of the networks. One approach is to use distributed computing to parallelise these algorithms, so that computation across the network occurs at the same time, where possible, and as such should reduce the running time of these algorithms.
+
+One area of distributed computing which has been growing in recently is the use of the MapReduce framework developed by Google, and the free implementation by Apache of MapReduce, Hadoop. We will be looking to use Hadoop as an approach to parallelise algorithms for social network analysis.
+
+This should achieve a reduced running time for algorithms, and also allow analysis of far larger networks than previously possible due to the scalability of the Hadoop framework.
 
 \input{./tex/res_hadoop}
 \input{./tex/res_giraph}

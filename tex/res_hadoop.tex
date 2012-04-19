@@ -32,7 +32,22 @@ This states the input keys and values are from a different domain to the output 
 \subsubsection{Google File System}
 The Google File System, GFS, provides the distributed file system which MapReduce operates with \cite{mapreduce}, but was developed outside of MapReduce to address issues found with previous distributed file systems \cite{gfs}.
 
-A GFS cluster is split into a single $master$ and multiple $chunkservers$ and is accessed by multiple $clients$ \cite{gfs}. Each machine within the cluster uses commo
+The GFS was designed to meet three major points identified with existing distributed file systems \cite{gfs}:
+\begin{enumerate}
+	\item Component failures are the norm, rather than the exception
+	\item Files are huge by traditional standards
+	\item Files are mutated by appending new data
+\end{enumerate}
+
+As hardware failures are common, the design of the GFS incorporates this, and the system is monitoring itself continually to detect, tolerate, and recover promptly from component failures on a routine basis \cite{gfs}. In addition to this, the system used by Google makes use of inexpensive hardware due to the frequent failures experienced, and as such is a more cost-effective solution than using more expensive tailored hardware.
+
+A GFS cluster is split into a single $master$ and multiple $chunkservers$ and is accessed by multiple $clients$ \cite{gfs}. Files stored in the GFS are split into chunks, which are stored across the cluster on the hard disks located on each chunkserver. By default, each chunk is replicated in the file system three times for reliability of access to data within file system.
+
+Files are stored into the GFS in chunks of size 64MB. This size was chosen to reduce the need to interact with master to find the location of chunks to read data from, and write data to. The larger chunk size also reduces the quantity of metadata stored on the master, which increases the performance of the master as the metadata can be stored in memory, reducing lookup times \cite{gfs}.
+
+The master node maintains the metadata for the file system. This includes the locations of chunks across the file system, and which chunks compose the files stored. The master node communicates with each chunkserver frequently, and if it does not receive a response, the chunkserver is deemed to have failed and any chunks which are then under replicated in the file system are re-replicated to ensure that the minimum number of replications for each chunk are observed.
+
+
 
 \subsection{Hadoop}
 Hadoop\footnote{\url{http://hadoop.apache.org/}} is framework for performing distributed computing. It is a free implementation of the MapReduce framework developed at Google.
