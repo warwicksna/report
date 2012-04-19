@@ -33,9 +33,13 @@ For development purposes single-node cluster \cite{nollsingle}
 \subsection{Multi-Node Cluster}
 At request, a nine machine Hadoop cluster was set up for use during this project in the department of computer science. This cluster composed a master head-node, {\tt hadoopmaster}, and eight slave-nodes, {\tt hadoop\{0-7\}}. 
 
-Being the master, {\tt hadoopmaster} runs the NameNode, JobTracker and SecondaryNameNode processes. Each of the slave-nodes run the DataNode and TaskTracker processes.
+Being the master node, {\tt hadoopmaster} runs the NameNode, JobTracker and SecondaryNameNode processes. A dedicated master node was implemented, firstly for performance, so that the node running the NameNode, JobTracker and SecondaryNameNode were not also running on the same machine as a DataNode or TaskTracker. Secondly, it allows inherent horizontal scalability in the cluster itself, as more slave nodes can be trivially added into the cluster without requiring any complex modifications to the configuration of the cluster. 
 
-HERE WILL BE SOME TECHNICAL SPECS ABOUT THE HADOOP CLUSTER IN THE DEPARTMENT
+The {\tt hadoopmaster} node operates using a quad-core processor running at 2.66GHz, 4GB of RAM, and a 500GB SATA hard drive. The master generally has better hardware than each of the slave-nodes because it is responsible for controlling the entire cluster.
+
+Each of the slave-nodes run the DataNode and TaskTracker processes. Each slave-node operates using a dual-core processor running at 2.4GHz, 2GB of RAM, and a 250 SATA hard drive.
+
+The nodes communicate with each other over gigabit Ethernet, with a dedicated switch, so that external network traffic to the cluster does not interfere with network traffic from within the cluster. The hardware configuration means the HDFS has a configured capacity of 1.46TB.
 
 We did not have direct access to the Hadoop cluster, and were required to {\tt ssh} to a machine located within the department, before {\tt ssh}ing from this machine into the Hadoop cluster. This added an extra level of complexity to access the Hadoop cluster , yet was resolved though use of ssh-keys to allow this \emph{machine-in-the-middle} to send and receive files from hadoopmaster with requiring a password.
 
@@ -80,4 +84,4 @@ hs_err_pid25782.log
 attempt_201204171536_0005_m_000005_0: # [ timer expired, abort... ]
 \end{lstlisting}
 
-The approach we took to remedy this was to remove {\tt hadoop3} from operating within the cluster. As {\tt hadoop3} was also a DataNode, the HDFS needed to re-replicate the data held on {\tt hadoop3} across the other seven nodes before they could continue operating as the cluster.
+The approach we took to remedy this was to remove {\tt hadoop3} from operating within the cluster. As {\tt hadoop3} was also a DataNode, the HDFS needed to re-replicate the data held on {\tt hadoop3} across the other seven nodes before they could continue operating as the cluster. This resulting in the cluster now being composed of one master node, and seven slave nodes.
