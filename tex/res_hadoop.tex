@@ -30,10 +30,20 @@ reduce  (k2, list(v2))  -> list(v2)
 This states the input keys and values are from a different domain to the output keys and values, which also means that the types used can differ.
 
 \subsubsection{Google File System}
-\cite{gfs}
+The Google File System, GFS, provides the distributed file system which MapReduce operates with \cite{mapreduce}, but was developed outside of MapReduce to address issues found with previous distributed file systems \cite{gfs}.
+
+A GFS cluster is split into a single $master$ and multiple $chunkservers$ and is accessed by multiple $clients$ \cite{gfs}. Each machine within the cluster uses commo
 
 \subsection{Hadoop}
-Hadoop is framework for performing distributed computing. It is a free implementation of Google's MapReduce framework and Google File System papers.
+Hadoop\footnote{\url{http://hadoop.apache.org/}} is framework for performing distributed computing. It is a free implementation of the MapReduce framework developed at Google.
 
 \subsubsection{Hadoop Distributed File System}
-Hadoop also provides a the Hadoop Distributed File System, HDFS. The HDFS 
+Hadoop also provides a the Hadoop Distributed File System, HDFS. The HDFS is a free implementation of the Google File System, and is designed to be used with Hadoop itself, though can also be used a distributed file system by itself \cite{hdfs}.
+
+The HDFS operates in a similar approach to the operation of Hadoop and the Google File System. There exists a master node, called the NameNode, and many slave nodes, called DataNodes. The NameNode co-ordinates the access of files stored in the HDFS, and also manages the file system namespace. There is usually a DataNode present on each physical node within the cluster. It is the DataNode which control the storage of files on the storage system present on the node, and also controls the reading and writing of files to the HDFS from a user.
+
+The HDFS ensures data integrity through replication of data across different nodes within the cluster. A replication factor is set for the cluster, generally at least 3, which causes all data within the HDFS to be replicated at least that many times. Data within the HDFS is split into blocks, with a large file being represented by many smaller blocks, and it is these blocks which are replicated across the HDFS.
+
+In case of a problem with the HDFS, such as a partial network failure, or hard disk failure, each DataNode is required to periodically message the NameNode which contains a report on all data blocks stored by that DataNode. If there is a failure of some kind, then the NameNode either receives an incomplete message or no message at all. This informs the NameNode that there is a problem with the HDFS and takes appropriate action, including re-replicating the lost data from other DataNodes to new DataNodes.
+
+The HDFS also provides another service called the SecondaryNameNode. The SecondaryNameNode is not a direct failover service to the NameNode. Instead, the SecondaryNameNode takes periodic checkpoints of the state of the NameNode, so that in case of the NameNode failing, a recent copy of the state of the HDFS can be loaded when the NameNode is restarted, which should result in minimal problems with resuming the HDFS.
