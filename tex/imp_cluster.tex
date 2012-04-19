@@ -41,7 +41,9 @@ Each of the slave-nodes run the DataNode and TaskTracker processes. Each slave-n
 
 The nodes communicate with each other over gigabit Ethernet, with a dedicated switch, so that external network traffic to the cluster does not interfere with network traffic from within the cluster. The hardware configuration means the HDFS has a configured capacity of 1.46TB.
 
-We did not have direct access to the Hadoop cluster, and were required to {\tt ssh} to a machine located within the department, before {\tt ssh}ing from this machine into the Hadoop cluster. This added an extra level of complexity to access the Hadoop cluster , yet was resolved though use of ssh-keys to allow this \emph{machine-in-the-middle} to send and receive files from hadoopmaster with requiring a password.
+We did not have direct access to the Hadoop cluster, and were required to {\tt ssh} to a machine located within the department, before {\tt ssh}ing from this machine into the Hadoop cluster. This added an extra level of complexity to access the Hadoop cluster, yet was resolved though use of ssh-keys to allow this \emph{machine-in-the-middle} to send and receive files from hadoopmaster with requiring a password.
+
+The cluster was set up to meet the requirements of Hadoop and Giraph, and as such was configured to use Hadoop 0.20.205.0, Java JDK 1.7, Maven 3, and Giraph 0.2.
 
 \subsubsection{Issues}
 One major issue which surfaced when we gained access to the Hadoop cluster in the department of computer science, relating to using Giraph with more than one worker. When a Giraph job is submitted to the cluster using more than one worker, each node which gets used by the job starts a listener which receives messages sent. However, whilst Hadoop jobs submitted to the cluster were able to make use of all nodes within the cluster, Giraph jobs were only able to use one worker, and therefore one node, otherwise an error similar to Listing \ref{lst:girapherror}.
