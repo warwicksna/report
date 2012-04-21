@@ -1,18 +1,19 @@
 \section{Data Sets}
-This section should include details about the results of running the algorithms we implemented on each of the datasets we used
+\label{sec:results_datasets}
+This section details results we observe about various datasets. We have performed analysis on the Twitter datasets which were collected on the English Defence League and Unite Against Fascism.
 
-\subsection{EDL}
+The Stanford Network Analysis Project website, which hosts various datasets we are performing analysis on, provides statistics about each dataset available, including the number of triangles within the dataset (assuming the network is undirected), and the average clustering coefficient. The average clustering coefficient is the network local clustering coefficient.
+
+\subsection{English Defence League}
 simple enough to do
 
-\subsection{UAF}
+\subsection{Unite Against Fascism}
 simple enough to do
 
 \subsection{Enron}
 One dataset which we needed to check the performance of DSNAT with was the Enron email network\footnote{\url{http://snap.stanford.edu/data/email-Enron.html}}. This is a dataset containing nodes representing email addresses, and connections existing between the nodes if at least one email was sent between them. The dataset contains 36,692 nodes and 367,662 edges.
 
-The SNAP website which hosts the Enron dataset provides statistics about each dataset available, including the number of triangles within the dataset (assuming the network is undirected), and the average clustering coefficient.
-
-For the Enron dataset, SNAP lists the number of triangles existing within the network as 727,044 and the average clustering coefficient as 0.4970. After analysis of the network, it became clear the the average clustering coefficient was the network local clustering coefficient.
+For the Enron dataset, SNAP lists the number of triangles existing within the network as 727,044 and the average clustering coefficient as 0.4970. 
 
 \subsubsection{3-Clique}
 As stated previously, the identification of 3-cliques within a graph is also known as triangle identification. Using the triangle identification algorithm, we were able to mutate the network such that the only nodes and edges remaining within the graph were those nodes constructing at least one triangle two other nodes.
@@ -100,8 +101,40 @@ Node ID & PageRank \\
 \label{tab:enronpagerank}
 \end{table}
 
+\subsection{Amazon Product Co-Purchasing}
+The Amazon product co-purchasing network\footnote{\url{http://snap.stanford.edu/data/amazon0302.html}} is data collected from the crawling of the Amazon website. It is based on the \emph{Customers Who Bought This Iterm Also Bought} feature of the Amazon website. A node within the network represents a product on sale, and a directed edge between nodes represents that the product has been co-purchased with the product the edge connects to. The data was collected in March 2003 \cite{snap}.
+
+The datasets contains 262111 nodes and 1234877 edges, and is listed with an average clustering coefficient of 0.4240 and 717719 triangles present.
+
+\subsection{Wikipedia Talk}
+\url{http://snap.stanford.edu/data/wiki-Talk.html}
+
+\subsection{Patent citation}
+\url{http://snap.stanford.edu/data/cit-Patents.html}
+
 \subsection{LiveJournal}
-needs the cluster working
+needs the cluster working. I think possibly too big
 
 \subsection{Twitter}
 needs the cluster working. This is probably too big for the cluster.
+
+
+
+
+% 7 workers, different graph sizes
+
+% enron - 36,692	- 367,662
+% 58.955
+% 58.401
+% 57.209
+
+% amazon - 262,111 - 1,234,877
+% 137.001
+% 134.949
+% 138.012
+
+% wikitalk - 2,394,385 - 5,021,410
+% 585.326
+% 636.433
+
+% patents - 3,774,768 - 16,518,948
