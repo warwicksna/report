@@ -1,5 +1,14 @@
 \subsection{Community Detection}
-An important aspect of social network analysis is the detection of communities within a graph.
+An important aspect of social network analysis is the detection of communities within a graph. The identifying of communities within a social network can help to identify group dynamics of the network. 
+
+A famous example of this is the friendship network within Zachary's karate club \cite{zachary77}, which subsequently split into the two groups shown in Figure \ref{fig:karate}. The identification of two clusters, which cleanly divided the network into the two groups the karate club actually split into, shows the usefulness of being able to identify connections between groups of highly interlinked individuals.
+
+\begin{figure}%
+\centering
+\includegraphics[width=0.5\columnwidth]{./img/karate}%
+\caption{Clusters found within Zachary's karate club \cite{zachary77,comellas10}}%
+\label{fig:karate}%
+\end{figure}
 
 \subsubsection{Clustering}
 Within social networks, there are distinct regions of vertices with many connections passing between them, and a much smaller number connected to other vertices outside of this region. These regions are termed as \emph{clusters}.
