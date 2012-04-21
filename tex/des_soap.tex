@@ -1,6 +1,6 @@
 \subsection{SOAP}
 
-An important part of our project was connecting our code running on the Hadoop cluster to the C# visualiser created by last year's project group. Therefore, we had to define a means of communicating between these different modules -- as these modules would be running on different machines, this interface had to be exposed as a web service. We chose to implement this communication interface in SOAP; the reason for this choice is detailed below.
+An important part of our project was connecting our code running on the Hadoop cluster to the C\# visualiser created by last year's project group. Therefore, we had to define a means of communicating between these different modules -- as these modules would be running on different machines, this interface had to be exposed as a web service. We chose to implement this communication interface in SOAP; the reason for this choice is detailed below.
 
 \subsubsection{Choice of SOAP over REST}
 
@@ -41,7 +41,7 @@ For these reasons, we chose to use SOAP as the communications protocol.
 
 The SOAP communication module followed a standard client-server model. The SOAP server (written in Python) would run on the same machine as the Hadoop head node. Python's subprocess module, which lets shell commands be executed from within Python scripts, would be used to allow the SOAP server to control the Hadoop cluster.
 
-Two SOAP clients were written. One was a command line client, also written in Python. The second was the C#-based visualiser written by last year's project group, which would be modified to send SOAP commands.
+Two SOAP clients were written. One was a command line client, also written in Python. The second was the C\#-based visualiser written by last year's project group, which would be modified to send SOAP commands.
 
 During the implementation of the server, one major change to the design proved neccesary; this was modifying it so that it worked in a multi-threaded manner, with one Hadoop task being ran per thread. The reason for this change is detailed in the implementation section below.
 

@@ -11,7 +11,7 @@ Mention more complicated models, three states etc
 \subsubsection{Independent Cascade}
  In the independent cascade model, whenever a node becomes converted, it has one chance to convert each of its neighbours. Every edge (A -> B) is assigned a weight between 0 and 1, which represents the probability that node A can convert node B, or vice versa.
 
-Assume a node n has a set of x neighbours n_0,n_1,n_2...n_x each with edge weights e_0,e_1,e_2...e+x. When n is converted, each neighbour n_m has a e_m chance to become converted.
+Assume a node n has a set of x neighbours n\_0,n\_1,n\_2...n\_x each with edge weights e\_0,e\_1,e\_2...e+x. When n is converted, each neighbour n\_m has a e\_m chance to become converted.
 
 This can be expressed in pseudocode as follows:
 
@@ -82,18 +82,18 @@ Of course, this method relies on a fast method of working out the expected numbe
 
 The paper [Influence Propagation in Adversarial Social Network—Impact of Space and Time] looks in depth at this situation, and applies it to the spread of radical and counter-radical ideas through the Muslim community.
 
-They observe that the key reason that the standard influence propogation model cannot capture the nature of adverserial networks is as follows. Observe the network described in fig???. Node_2 is initially converted to idea A, and node_4 is converted to idea B. All other nodes are unconverted. At some point, node_9, which is a bottleneck between the two sides of the graph, may be converted to one idea or the other. Once this happens -- assume that it is converted to idea A -- there will be no chance that it will ever be converted to idea B. For that reason, there is no way that idea B can ``pass through'' node_9 and so no way that nodes 10 to 14 will ever be converted to idea B. The standard influence models have no way to capture this situation.
+They observe that the key reason that the standard influence propogation model cannot capture the nature of adverserial networks is as follows. Observe the network described in fig???. Node\_2 is initially converted to idea A, and node\_4 is converted to idea B. All other nodes are unconverted. At some point, node\_9, which is a bottleneck between the two sides of the graph, may be converted to one idea or the other. Once this happens -- assume that it is converted to idea A -- there will be no chance that it will ever be converted to idea B. For that reason, there is no way that idea B can ``pass through'' node\_9 and so no way that nodes 10 to 14 will ever be converted to idea B. The standard influence models have no way to capture this situation.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.5\textwidth]{./img/adverserial_network.png}
+\includegraphics[width=0.5\textwidth]{./img/adversial_network.png}
 \caption{Adverserial network}
 \label{fig:adverserial_network}
 \end{figure}
 
 Other real-life applications of this concept include marketing -- promoting your product while a rival company is promoting a competing product -- or preventing the spread of misinformation. A recent example was the Kony 2012 campaign, a viral video spread by a non-profit activist organisation to highlight the issue of child soldiers in Uganda. The video spread very rapidly via online social networks; however, this soon led to people questioning the aims and methods of the campaigning organisation. This led to a counter-campaign that also spread virally, via social media. (Of course, which party provided misinformation in this scenario depends on individual perceptions).
 
-[Limiting the Spread of Misinformation in Social Networks] looks more in depth at the problem of countering mis-information. They quantify this situation as a ``Multi-Campaign Independent Cascade Model'', where two campains, C and L, spread through a network. Each campaign has an initial seed set of nodes, A_C/A_L. As with the independent cascade model, when a node is converted, it has one chance to convert each of its neighbours. The probability that a node n converts its neighbour o is given by p_C_n_o / p_L_n_o, depending on which campaign the node was converted to. Note that in the general case, their may be different probabilities for the two campaigns (representing the situation where one campaign is more ``infectious'' than the other). Unlike in the independent cascade model, when an unconverted node has multiple converted neighbours, the order of ``conversion attempts'' matters; eg, campaign C may succeed in converting a node before campaign L has had the chance to convert it. Their model assumes that one campaign always precedes the other in such situations, ie, that campaign always gets the ``first chance''.
+[Limiting the Spread of Misinformation in Social Networks] looks more in depth at the problem of countering mis-information. They quantify this situation as a ``Multi-Campaign Independent Cascade Model'', where two campains, C and L, spread through a network. Each campaign has an initial seed set of nodes, A\_C/A\_L. As with the independent cascade model, when a node is converted, it has one chance to convert each of its neighbours. The probability that a node n converts its neighbour o is given by p\_C\_n\_o / p\_L\_n\_o, depending on which campaign the node was converted to. Note that in the general case, their may be different probabilities for the two campaigns (representing the situation where one campaign is more ``infectious'' than the other). Unlike in the independent cascade model, when an unconverted node has multiple converted neighbours, the order of ``conversion attempts'' matters; eg, campaign C may succeed in converting a node before campaign L has had the chance to convert it. Their model assumes that one campaign always precedes the other in such situations, ie, that campaign always gets the ``first chance''.
 
 They also used a more specific model, the ``Campaign Oblivious Independent Cascade''. This is a special case of the multi-campaign model, where the conversion probabilities are the same for both campaigns.
 
