@@ -1,14 +1,14 @@
-\chapter{Influence Manipulation}
+\section{Influence Manipulation}
 
-\section{Recommender Systems}
+\subsection{Recommender Systems}
 
 Although relatively little publicly available research exists on the topic of manipulating social networks, there is a wealth of information on attack and defence of recommender systems. Recommender systems are a tool used to tackle the problem of information overload; where more content exists than a user has time to evaluate. As the name suggests, they do so by performing an initial evaluation on behalf of the user, whittling the quantity of presented content down to a level the user can cope with. Amazon and Twitter them to recommend products and followers respectively. They are fundamentally similar to social networks in the underlying graph structure, the attempt to model a real-world phenomena, and the clear incentives various parties have to manipulate them.
 
-\subsection{Attacker Goals}
+\subsubsection{Attacker Goals}
 
 Collaborative Recommendation: A Robustness Analysis defines two simple intents an attacker may have: `nuking' an item (decreasing its rating / the frequency with which it is recommended) and `pushing' an item (increasing its rating). `Vandalising’; making an entire system function poorly, is discussed in another paper. Every one of these intents corresponds to something one may wish to achieve in a real influence network; altering an entity's influence or disrupting an entire network.
 
-\subsection{k-Nearest-Neighbour}
+\subsubsection{k-Nearest-Neighbour}
 
 The actual attacks used to achieve a given goal vary greatly depending on the implementation of the target system, but the base components remain the same. Early recommender systems such as Tapestry used a variation of the k-Nearest-Neighbour algorithm (see page x) to identify like-minded people to new users, and uses this as a basis for their recommendations.  
 
@@ -21,21 +21,21 @@ pu,i = ru +       ∑v∈Uu,i [wu,v (rv,i − rv )]
 \end{align*}
 This is by design not dissimilar to the reputation and influence systems underlying the networks that we want to tackle. The item-item algorithm’s fundamental difference is that it directly calculates the distance between items rather than between users. “People who liked X also liked Y”
 
-\subsection{Attacks}
+\subsubsection{Attacks}
 
 The paper `Shilling Recommender Systems for Fun and Profit' considers attacks in terms of their intent, targets, required knowledge and cost. There is a cost per shill whether they are an undercover agent, the product of a persona management system or simply a solved captcha (the latter being the only part of account-creation on a website that can't be automated, and costing \$1.39/1000 from deathbycaptcha.com ). The simplest push/nuke attacks revolve around gaining as many neighbours as possible, then rating the target item. The simple but ineffective approach to the linking stage taken by the `RandomBot' is to assign a random rating to all the items in the database. The `AverageBot' attack instead assigns to each item the average rating it's received so far. This has a lower cost at the expense of a greater knowledge requirement. Even on a network like Twitter where most data is publicly available, there is a cost associated with acquiring and processing it. Toward Trustworthy Recommender Systems: An Analysis of Attack Models and Algorithm Robustness introduces two additional, more implementation specific attacks. The bandwagon attack achieves a high level of association for a low cost by rating a small number of frequently and consistently rated items (eg bestselling novels).  The segment attack is simply a refinement that only attempts to promote items to those already disposed to buying them. +love/hate, reverse bandwagon
 
 These attacks provide us with a number of starting techniques, as well as an insight into something
 
-\subsection{Defences}
+\subsubsection{Defences}
 
 The defences are also relevant. It’s entirely plausible that as these attacks are turned towards infiltrating and manipulating social networks, parties with a vested interest in protecting the network’s integrity will look at the compatriot countermeasures; attack detection and attack mitigation. Shill detection algorithms are already in use on Twitter to detect and remove the original shills; spambots. It may be well beyond the scope of this project, but that doesn’t diminish the value of a design informed by an understanding of future problems.
 
-\subsection{Mitigation}
+\subsubsection{Mitigation}
 
 One mitigation that is at least conceptually simple  is to use a hybrid model where a significant portion of the model isn’t taken from user data. For example, semantically enhanced collaborative modelling uses text-mining techniques to create a similarity measure entirely independent of user input. From the perspective of a persona management system, all target systems use a hybrid of malleable online input and untouchable real-world interactions. Physically deployed undercover operatives have almost the inverse restriction; excessive manipulation of online systems may raise suspicion, something distinctly more perilous for those physically present.
 
-\subsection{Detection}
+\subsubsection{Detection}
 Attacks may be detected using simple metrics such as analysing user’s rating deviation and profile length; the randomBot attack has a clear footprint in this regard. Perhaps in recognition of the inherent inaccuracy of such measures, once a profile is classified as `suspicious' its ratings are simply ignored, rather than it being booted off the system as might happen to a hacker on an attack aware application.
 +rating deviation from main agreement
 +they act in groups
