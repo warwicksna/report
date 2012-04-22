@@ -183,16 +183,19 @@ The Amazon product co-purchasing network\footnote{\url{http://snap.stanford.edu/
 The datasets contains 262,111 nodes and 1,234,877 edges, and is listed with an average clustering coefficient of 0.4240 and 717,719 triangles present.
 
 \subsection{Wikipedia Talk}
-The Wikipedia Talk network\url{http://snap.stanford.edu/data/wiki-Talk.html} contains 2,394,385 nodes and 5,021,410 edges. There are 9,203,519 triangles present within the network, and the network as an average clustering coefficient of 0.1958.
+The Wikipedia Talk network\footnote{\url{http://snap.stanford.edu/data/wiki-Talk.html}} contains 2,394,385 nodes and 5,021,410 edges. There are 9,203,519 triangles present within the network, and the network has an average clustering coefficient of 0.1958.
 
 \subsection{Patent citation}
-The Patent citation network\url{http://snap.stanford.edu/data/cit-Patents.html} contains 3,774,768 nodes and 16,518,948 edges. There are 7,515,023 triangles present within the network, and the network as an average clustering coefficient of 0.0919.
+The Patent citation network\footnote{\url{http://snap.stanford.edu/data/cit-Patents.html}} contains 3,774,768 nodes and 16,518,948 edges. There are 7,515,023 triangles present within the network, and the network has an average clustering coefficient of 0.0919.
 
 \subsection{LiveJournal}
-\url{http://snap.stanford.edu/data/soc-LiveJournal1.html}
+The LiveJournal social network\footnote{\url{http://snap.stanford.edu/data/soc-LiveJournal1.html}} contains 4,847,571 nodes and 68,993,773 edges. There are 285730264 triangles present within the network, and the network has an average clustering coefficient of 0.3123.
+
+Unfortunately, this dataset is too large to be analysed on the Hadoop cluster we have access to, so no analysis was able to be performed.
 
 \subsection{Twitter}
 The large Twitter dataset available indirectly from the SNAP website\footnote{\url{http://snap.stanford.edu/data/twitter7.html}}\footnote{\url{http://an.kaist.ac.kr/traces/WWW2010.html}} consists of 41.7 million nodes and 1.47 billion edges. However, since the LiveJournal dataset was too large to process on the cluster we had available, it was decided not to attempt to process the social network presented.
 
 \subsection{Conclusions}
-We have shown that the system we have produced has been able to process social networks of a much larger size than possible 
+We have shown that the system we have produced has been able to process social networks of a much larger size than possible using the previous SNAT tool developed last year.
+
