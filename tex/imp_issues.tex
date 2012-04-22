@@ -1,4 +1,23 @@
 \subsection{Issues}
 Difficulties have been found using Giraph at most stages of development. Giraph has had substantial development during the time frame of the project, which results in changes to the API in many areas, however few changes were made to the classes which were used from the API. We have used version 0.2 of Giraph for our development, however even since choosing this version to base all our development from, more development has occurred to Giraph. We have chosen not to use a newer version of Giraph to avoid introducing any bugs into our code caused by any changes to existing features.
 
-Another issue which we found with Giraph is the actual process of designing and implementing algorithms for the Giraph paradigm. SHOULD EXPLAIN WHAT ALGORITHMS WERE HARD
+Another issue which we found with Giraph is the actual process of designing and implementing algorithms for the Giraph paradigm. One problem, which is present in nearly all uses of distributed computing, is how a global data structure is decomposed across all nodes involved with the computation. With Giraph however, there is no inherent global data structure. The process of writing Giraph programs involves only considering what happens at each vertex within a graph, which makes problems such as the \emph{all pairs shortest paths} problem much more difficult to implement, as this requires knowledge of more of the overall graph structure than just what occurs at each vertex. If we had been able to implement the algorithms for solving this problem, then we would have been able to implement a few more algorithms which build upon the results, such as betweeness centrality.
+
+Another area of the Hadoop/Giraph infrastructure which we had unexpected difficulties with was related to what data structures could be sent across the network. For the triangle detection algorithm, and subsequent algorithms based on the results of this, we needed to send an array of \verb/LongWritable/ objects in messages between vertices. Java primitives are not used because at each superstep, Giraph writes to the disk to create a checkpoint in case of error. With the single-node setup described above, we used a \verb/LongWritable[]/ object as the data structure to be sent and received by each vertex. This worked as intended, producing the correct results, however when the algorithms were run on the dedicated Hadoop cluster, the programs would not run and crash. From reading the Hadoop Javadocs\footnote{\url{http://hadoop.apache.org/common/docs/current/api/org/apache/hadoop/io/ArrayWritable.html}}, it became clear that instead of a \verb/LongWritable[]/ object being used, a new class \verb/LongArrayWritable/ would need to be implemented, as shown in Listing \ref{lst:longarraywritable}. After implementing this new class, and refactoring code to make use of it, the algorithms successfully completed on the cluster.
+
+\lstset{language=Java,caption={The LongArrayWritable class},label=lst:longarraywritable,tabsize=2,breaklines=true,breakatwhitespace=true,frame=single}
+\begin{lstlisting}[float]
+import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.ArrayWritable;
+
+public class LongArrayWritable extends ArrayWritable {
+
+        public LongArrayWritable() {
+                super(LongWritable.class);
+        }
+
+        public LongArrayWritable(LongWritable[] values) {
+                super(LongWritable.class, values);
+        }
+}
+\end{lstlisting}
