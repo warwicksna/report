@@ -5,10 +5,75 @@ This section details results we observe about various datasets. We have performe
 The Stanford Network Analysis Project website, which hosts various datasets we are performing analysis on, provides statistics about each dataset available, including the number of triangles within the dataset (assuming the network is undirected), and the average clustering coefficient. The average clustering coefficient is the network local clustering coefficient.
 
 \subsection{English Defence League}
-simple enough to do
+With the data collected on the English Defence League, we applied some of the algorithms implemented to perform analysis.
+
+\subsubsection{PageRank}
+
+\begin{table}%
+\centering
+\begin{tabular}{|l|l|}
+\hline
+Twitter Name & PageRank \\
+\hline
+edlsupportgroup & 0.08416403924447517 \\
+TwitPic & 0.05975756896253487 \\
+noaheverett & 0.058158047141795156 \\
+everythingEDL & 0.0257624790515872 \\
+Official_EDL & 0.019653741734420287 \\
+hopenothate & 0.016939681748134754 \\
+TommyRobinson3 & 0.016757784171303376 \\
+leicspolice & 0.015009582286344358 \\
+jihadwatchRS & 0.011358838738844794 \\
+OneMillionUtd & 0.010758557526296803 \\
+british_freedom & 0.010247425883370982 \\
+USoBritain & 0.008615666297945848 \\
+EDLGommy & 0.008447834177284598 \\
+edlnews & 0.0082414322437749 \\
+SuptPayneWMP & 0.007883869657789162 \\
+KateUSoB & 0.007613706376677299 \\
+Englandstruth & 0.007590315713051853 \\
+PboroCops & 0.007534644943547635 \\
+exposetweets & 0.007522329904304726 \\
+MuslimCouncil & 0.007313457877227599 \\
+\hline
+\end{tabular}
+\caption{PageRank on EDL data}
+\label{}
+\end{table}
+
+\begin{table}%
+\begin{tabular}{|l|l|}
+\hline
+Twitter Name & PageRank \\
+\hline
+edlsupportgroup & 0.09027442551864633 \\
+TwitPic & 0.05159443925208596 \\
+noaheverett & 0.050126221757179935 \\
+everythingEDL & 0.02798669165838786 \\
+Official_EDL & 0.025266481999928907 \\
+leicspolice & 0.020755126860433737 \\
+TommyRobinson3 & 0.019016391652185494 \\
+hopenothate & 0.014987830036646874 \\
+edlnews & 0.012970290691972114 \\
+jihadwatchRS & 0.012497551750545299 \\
+brianoflondon & 0.011623243499760285 \\
+MuslimCouncil & 0.011357910646713614 \\
+british_freedom & 0.011315839428723318 \\
+Englandstruth & 0.011155872770274453 \\
+SuptPayneWMP & 0.011037133218573704 \\
+EDLGommy & 0.009545490480397533 \\
+PboroCops & 0.009501841973798724 \\
+ChrisWebbo & 0.009457741742444896 \\
+snidey_UK & 0.008122928964687613 \\
+OneMillionUtd & 0.007613901445608443 \\
+\hline
+\end{tabular}
+\caption{PageRank on EDL considering edges as tweets}
+\label{}
+\end{table}
 
 \subsection{Unite Against Fascism}
-simple enough to do
+The analysis performed on this data is similar to the analysis performed on the data collected about EDL.
 
 \subsection{Enron}
 One dataset which we needed to check the performance of DSNAT with was the Enron email network\footnote{\url{http://snap.stanford.edu/data/email-Enron.html}}. This is a dataset containing nodes representing email addresses, and connections existing between the nodes if at least one email was sent between them. The dataset contains 36,692 nodes and 367,662 edges.
