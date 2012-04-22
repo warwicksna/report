@@ -1,4 +1,4 @@
-\subsection{Influence Propogation}
+\section{Influence Propogation}
 
  Influence propogation algorithms attempt to model the spread of ideas (Rogers 2003), viruses (Anderson and May 1991), word-of-mouth recommendations (Goldenberg, Libai and Muller 2001), viral marketing campaigns (Kempe, Kleinberg and Tardos 2003) or other transmissable entities, through a social network.
 
@@ -8,7 +8,7 @@ Influence propogation algorithms make the following assumptions about the social
 
 Mention more complicated models, three states etc
 
-\subsubsection{Independent Cascade}
+\subsection{Independent Cascade}
  In the independent cascade model, whenever a node becomes converted, it has one chance to convert each of its neighbours. Every edge (A -> B) is assigned a weight between 0 and 1, which represents the probability that node A can convert node B, or vice versa.
 
 Assume a node n has a set of x neighbours n\_0,n\_1,n\_2...n\_x each with edge weights e\_0,e\_1,e\_2...e+x. When n is converted, each neighbour n\_m has a e\_m chance to become converted.
@@ -26,7 +26,7 @@ while recently-converted-nodes is non-empty {
   }
 }
 
-\subsubsection{Linear Threshold}
+\subsection{Linear Threshold}
  In the linear threshold model, every node has a threshold value t. When the number of converted neighbours is greater than t, the node becomes converted. Again, edges can be weighted, in which case the condition for conversion is:
 
 Maths: sum for all neighbours(if neighbour is converted(0,1) * edge weight)
@@ -49,10 +49,10 @@ do {
   }
 } while changed-nodes > 0
 
-\subsubsection{Decreasing Cascade Model}
+\subsection{Decreasing Cascade Model}
 
 
-\subsubsection{Influence Maximisation Problem}
+\subsection{Influence Maximisation Problem}
 
 [Maximizing the Spread of Influence through a Social Network]
 
@@ -76,7 +76,7 @@ Nemhauser, Wolsey and Fisher showed that a greedy-hill climbing algorithm can be
 
 Of course, this method relies on a fast method of working out the expected number of nodes that will be converted by a seed set. There is currently no simple means of calculating this value, so in practice a Monte Carlo method is used; ie, running several iterations of the model and taking an average of the final number of converted nodes. This is computationally expensive, though some work has been done to improve the performance. [CITE??]
 
-\subsubsection{Adversarial Social Networks}
+\subsection{Adversarial Social Networks}
 
  There are limitations to the two-state models described above. For example, they cannot represent any scenario where two competing ideas spread through a network. An alternative model for such situations allows nodes to be in one of 3 states; "unconverted", "converted to idea A", or "converted to idea B". In this case, A and B represent opposing beliefs.
 
