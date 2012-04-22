@@ -36,6 +36,8 @@
 \DeclareGraphicsRule{*}{mps}{*}{}
 \fi
 
+\usepackage[final]{pdfpages}
+
 % Options
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{3}
@@ -77,6 +79,10 @@
 \bibliography{./bib/matt}
 
 % Appendix
+\appendix
+\chapter{Minutes of Meetings}
+\label{sec:minutes}
+\includepdf[pages=-]{./pdf/minutes}
 
 % End document
 \end{document}
