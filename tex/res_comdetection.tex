@@ -29,7 +29,7 @@ Partitioning of a graph differs from clustering slightly. To partition a graph, 
 
 The process of graph partitioning is to divide a graph into smaller parts, such that the number of connections between these smaller parts is as few as possible. The partitions produced are non-overlapping, of a given size, and of a given number.
 
-Graph partitioning is known to be a difficult and complex problem to solve. For simplicity, assume that we are to partition a graph into two partitions. To naively \emph{brute force} all permutations to find the ``best'' partition, which minimises the number of connections between the two partitions, soon becomes unfeasible for anything but the smallest graphs, due to the number of ways of partitioning \emph{n} verticies into two groups \emph{$n_1$} and \emph{$n_2$}. This is $\frac{n!}{n_1!n_2!}$ permutations, and with application of Stirling's formula, can we rewritten as \cite{newman10}:
+Graph partitioning is known to be a difficult and complex problem to solve. For simplicity, assume that we are to partition a graph into two partitions. To naively \emph{brute force} all permutations to find the ``best'' partition, which minimises the number of connections between the two partitions, soon becomes unfeasible for anything but the smallest graphs, due to the number of ways of partitioning \emph{n} vertices into two groups \emph{$n_1$} and \emph{$n_2$}. This is $\frac{n!}{n_1!n_2!}$ permutations, and with application of Stirling's formula, can we rewritten as \cite{newman10}:
 
 \begin{equation}
 \frac{n!}{n_1!n_2!} \simeq \frac{\sqrt{2\pi n}(n/e)^n}{\sqrt{2\pi n_1}(n_1/e)^{n_1} \sqrt{2\pi n_2}(n_2/e)^{n_2}} = \frac{n^{n+1/2}}{n_1^{n_1+1/2} n_2^{n_2+1/2}} 
