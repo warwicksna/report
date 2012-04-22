@@ -68,3 +68,20 @@ Equation \ref{eq:closenesscentrality3} produces results more consistent with oth
 Within a social network, a person with a high closeness centrality, defined by equation \ref{eq:closenesscentrality3}, could find that their opinions reach others in the community faster than someone with a lower closeness centrality \cite{newman10}.
 
 \subsubsection{Betweeness Centrality}
+Betweeness centrality is different measure of calculating centrality. Instead of being concerned with the quantity, or quality, of links, betweeness centrality measures the extent to which a vertex lies on paths between other vertices.
+
+\begin{figure}%
+\centering
+\includegraphics[width=0.4\columnwidth]{./img/betweenesscentrality}%
+\caption{A low degree vertex with high betweeness \cite{newman10}}%
+\label{fig:betweenesscentrality}%
+\end{figure}
+
+Betweeness centrality for a vertex $i$ is mathematically defined as the sum of the number of shortest paths, $n_{st}^{i}$, from vertex $s$ to vertex $t$ which pass through $i$, divided by the total number of shortest paths from $s$ to $t$:
+
+\begin{equation}
+x_i = \sum_{st} \frac{n_{st}^{i}}{g_{st}}
+\label{eq:betweenesscentrality}
+\end{equation}
+
+Figure \ref{fig:betweenesscentrality} shows a sketch of a network which contains two distinct groups connected to each other via vertex A. All paths between the two groups must pass through vertex A, so it has a high betweeness even though its degree is low \cite{newman10}. With this example as well, it is quite likely that vertex A would score poorly with other measures of centrality, however due it forming the bridge between the two groups, vertex A is quite likely to be quite influential in controlling the flow of information between the two groups.
