@@ -123,12 +123,8 @@ This represents the fact that node 4 had been converted, and that 3 and 5 were n
 
 The actual algorithm worked as follows:
 
-<<<<<<< HEAD
-Input(key:integer, values:list(integers)
-
-=======
 \begin{verbatim}
->>>>>>> 3d9df737700e8e15c62408683c86197d44a58336
+Input(key:integer, values:list(integers)
 node1converted? = false
 for each value in values {
   node1 = key
@@ -182,6 +178,7 @@ The map step simply parsed the input file, setting the key to be the first integ
 
 The reduce step worked as follows:
 
+\begin{verbatim}
 Input: key:integer values:list(text)
 
 node1isOn = false
@@ -210,3 +207,4 @@ if node1isOn && influence >= threshold {
 } else {
   # nothing happens, so just copy over previous values
 }
+\end{verbatim}
