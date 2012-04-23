@@ -1,18 +1,96 @@
 \section{Data Sets}
-This section should include details about the results of running the algorithms we implemented on each of the datasets we used
+\label{sec:results_datasets}
+This section details results we observe about various datasets. We have performed analysis on the Twitter datasets which were collected on the English Defence League and Unite Against Fascism.
 
-\subsection{EDL}
-simple enough to do
+The Stanford Network Analysis Project website, which hosts various datasets we are performing analysis on, provides statistics about each dataset available, including the number of triangles within the dataset (assuming the network is undirected), and the average clustering coefficient. The average clustering coefficient is the network local clustering coefficient.
 
-\subsection{UAF}
-simple enough to do
+\subsection{English Defence League}
+With the data collected on the English Defence League, we applied some of the algorithms implemented to perform analysis.
+
+\subsubsection{PageRank}
+There is a bias present within the results of the performing the PageRank algorithm on the data collected relating to the EDL. As can be seen in both tables \ref{tab:edlpagerank} and \ref{tab:edltweetpagerank}, the Twitter account with the highest PageRank is the edlsupportgroup. This is unsurprising given that the edlsupportgroup account was chosen as the root node for the data collecting.
+
+The most surprising outcome from performing PageRank is that TwitPic\footnote{\url{http://twitpic.com/}} and TwitPic's founder Noah Everett are ranked second and third. TwitPic is a service to share photos and videos using Twitter, so it is likely that many of the accounts of which data was collected make use of TwitPic resulting in it's high placement.
+
+The majority of the accounts listed in tables \ref{tab:edlpagerank} and \ref{tab:edltweetpagerank} are however related to the EDL, with an approximate equal number for and against the EDL.
+
+\begin{table}%
+\centering
+\begin{tabular}{|l|l|}
+\hline
+Twitter Name & PageRank \\
+\hline
+edlsupportgroup & 0.08416403924447517 \\
+TwitPic & 0.05975756896253487 \\
+noaheverett & 0.058158047141795156 \\
+everythingEDL & 0.0257624790515872 \\
+Official\_EDL & 0.019653741734420287 \\
+hopenothate & 0.016939681748134754 \\
+TommyRobinson3 & 0.016757784171303376 \\
+leicspolice & 0.015009582286344358 \\
+jihadwatchRS & 0.011358838738844794 \\
+OneMillionUtd & 0.010758557526296803 \\
+british\_freedom & 0.010247425883370982 \\
+USoBritain & 0.008615666297945848 \\
+EDLGommy & 0.008447834177284598 \\
+edlnews & 0.0082414322437749 \\
+SuptPayneWMP & 0.007883869657789162 \\
+KateUSoB & 0.007613706376677299 \\
+Englandstruth & 0.007590315713051853 \\
+PboroCops & 0.007534644943547635 \\
+exposetweets & 0.007522329904304726 \\
+MuslimCouncil & 0.007313457877227599 \\
+\hline
+\end{tabular}
+\caption{PageRank on EDL data}
+\label{tab:edlpagerank}
+\end{table}
+
+\begin{table}%
+\centering
+\begin{tabular}{|l|l|}
+\hline
+Twitter Name & PageRank \\
+\hline
+edlsupportgroup & 0.09027442551864633 \\
+TwitPic & 0.05159443925208596 \\
+noaheverett & 0.050126221757179935 \\
+everythingEDL & 0.02798669165838786 \\
+Official\_EDL & 0.025266481999928907 \\
+leicspolice & 0.020755126860433737 \\
+TommyRobinson3 & 0.019016391652185494 \\
+hopenothate & 0.014987830036646874 \\
+edlnews & 0.012970290691972114 \\
+jihadwatchRS & 0.012497551750545299 \\
+brianoflondon & 0.011623243499760285 \\
+MuslimCouncil & 0.011357910646713614 \\
+british\_freedom & 0.011315839428723318 \\
+Englandstruth & 0.011155872770274453 \\
+SuptPayneWMP & 0.011037133218573704 \\
+EDLGommy & 0.009545490480397533 \\
+PboroCops & 0.009501841973798724 \\
+ChrisWebbo & 0.009457741742444896 \\
+snidey\_UK & 0.008122928964687613 \\
+OneMillionUtd & 0.007613901445608443 \\
+\hline
+\end{tabular}
+\caption{PageRank on EDL considering edges as tweets}
+\label{tab:edltweetpagerank}
+\end{table}
+
+\subsubsection{Clustering Coefficients}
+Due to the approach of collecting the data, we felt that the results of the clustering coefficients would be quite heavily biased. 
+
+\subsection{Unite Against Fascism}
+The analysis performed on this data is similar to the analysis performed on the data collected about EDL.
+
+\subsubsection{Clustering Coefficients}
+As the data collected about the UAF was collected in an identical manner to the EDL, we again felt that the results of the clustering coefficients would again be quite biased.
 
 \subsection{Enron}
 One dataset which we needed to check the performance of DSNAT with was the Enron email network\footnote{\url{http://snap.stanford.edu/data/email-Enron.html}}. This is a dataset containing nodes representing email addresses, and connections existing between the nodes if at least one email was sent between them. The dataset contains 36,692 nodes and 367,662 edges.
 
-The SNAP website which hosts the Enron dataset provides statistics about each dataset available, including the number of triangles within the dataset (assuming the network is undirected), and the average clustering coefficient.
-
-For the Enron dataset, SNAP lists the number of triangles existing within the network as 727,044 and the average clustering coefficient as 0.4970. After analysis of the network, it became clear the the average clustering coefficient was the network local clustering coefficient.
+For the Enron dataset, SNAP lists the number of triangles existing within the network as 727,044 and the average clustering coefficient as 0.4970. 
 
 \subsubsection{3-Clique}
 As stated previously, the identification of 3-cliques within a graph is also known as triangle identification. Using the triangle identification algorithm, we were able to mutate the network such that the only nodes and edges remaining within the graph were those nodes constructing at least one triangle two other nodes.
@@ -53,12 +131,11 @@ Node ID & Number of Triangles \\
 \label{tab:enrontriangles}
 \end{table}
 
-\subsubsection{Local Clustering Coefficient}
+\subsubsection{Clustering Coefficients}
 There are 12499 nodes with a local clustering coefficient of 1, which indicates that the direct neighbours of these nodes are also themselves direct neighbours of each other.
 
 There are also 12240 nodes which have a local clustering coefficient of 0, which indicates that nearly one third of the nodes within the network do not form any triangles, and as such are likely to be email addresses external to Enron.
 
-\subsubsection{Network Local Clustering Coefficient}
 The network local clustering coefficient is the average of all local clustering coefficients. For the Enron network, DSNAT returns the result of performing the network local clustering coefficient algorithm as: {\tt 0.49698255959950327}.
 
 This value is near identical to the average clustering coefficient provided by with the dataset by SNAP, so shows that our tool, and these implemented algorithms are working correctly.
@@ -100,8 +177,25 @@ Node ID & PageRank \\
 \label{tab:enronpagerank}
 \end{table}
 
+\subsection{Amazon Product Co-Purchasing}
+The Amazon product co-purchasing network\footnote{\url{http://snap.stanford.edu/data/amazon0302.html}} is data collected from the crawling of the Amazon website. It is based on the \emph{Customers Who Bought This Iterm Also Bought} feature of the Amazon website. A node within the network represents a product on sale, and a directed edge between nodes represents that the product has been co-purchased with the product the edge connects to. The data was collected in March 2003 \cite{snap}.
+
+The datasets contains 262,111 nodes and 1,234,877 edges, and is listed with an average clustering coefficient of 0.4240 and 717,719 triangles present.
+
+\subsection{Wikipedia Talk}
+The Wikipedia Talk network\footnote{\url{http://snap.stanford.edu/data/wiki-Talk.html}} contains 2,394,385 nodes and 5,021,410 edges. There are 9,203,519 triangles present within the network, and the network has an average clustering coefficient of 0.1958.
+
+\subsection{Patent citation}
+The Patent citation network\footnote{\url{http://snap.stanford.edu/data/cit-Patents.html}} contains 3,774,768 nodes and 16,518,948 edges. There are 7,515,023 triangles present within the network, and the network has an average clustering coefficient of 0.0919.
+
 \subsection{LiveJournal}
-needs the cluster working
+The LiveJournal social network\footnote{\url{http://snap.stanford.edu/data/soc-LiveJournal1.html}} contains 4,847,571 nodes and 68,993,773 edges. There are 285730264 triangles present within the network, and the network has an average clustering coefficient of 0.3123.
+
+Unfortunately, this dataset is too large to be analysed on the Hadoop cluster we have access to, so no analysis was able to be performed.
 
 \subsection{Twitter}
-needs the cluster working. This is probably too big for the cluster.
+The large Twitter dataset available indirectly from the SNAP website\footnote{\url{http://snap.stanford.edu/data/twitter7.html}}\footnote{\url{http://an.kaist.ac.kr/traces/WWW2010.html}} consists of 41.7 million nodes and 1.47 billion edges. However, since the LiveJournal dataset was too large to process on the cluster we had available, it was decided not to attempt to process the social network presented.
+
+\subsection{Conclusions}
+We have shown that the system we have produced has been able to process social networks of a much larger size than possible using the previous SNAT tool developed last year.
+

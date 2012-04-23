@@ -1,14 +1,14 @@
-\subsection{SOAP}
+\section{SOAP}
 
-An important part of our project was connecting our code running on the Hadoop cluster to the C# visualiser created by last year's project group. Therefore, we had to define a means of communicating between these different modules -- as these modules would be running on different machines, this interface had to be exposed as a web service. We chose to implement this communication interface in SOAP; the reason for this choice is detailed below.
+An important part of our project was connecting our code running on the Hadoop cluster to the C\# visualiser created by last year's project group. Therefore, we had to define a means of communicating between these different modules -- as these modules would be running on different machines, this interface had to be exposed as a web service. We chose to implement this communication interface in SOAP; the reason for this choice is detailed below.
 
-\subsubsection{Choice of SOAP over REST}
+\subsection{Choice of SOAP over REST}
 
 [http://www.infoq.com/articles/rest-soap-when-to-use-each]
 
 The two leading candidates for the communication interface were REST and SOAP. These are usually compared side by side, although strictly speaking SOAP is a communications protocol wheras REST is more of an architectural pattern that sits on top of HTTP.
 
-\paragraph{Advantages of REST}
+\subsubsection{Advantages of REST}
 
 REST, short for REpresentational State Transfer, is an architectural pattern for using HTTP as a web service. The motivation behind REST is that HTTP already contains a rich vocabulary for manipulating resources -- GET, POST, PUT and so on -- and thus, the logic goes, avoid reimplementing these commands in a complicated new protocol such as SOAP.
 
@@ -20,7 +20,7 @@ The benefits of REST, as defined by [ajaxonomy] and [infoQ], are:
 - It is closer to the philosopy of the web as originally defined by it's creator, Tim Berners-Lee.
 - It is able to make use of the built-in capabilities provided by the HTTP protocol.
 
-\paragraph{Advantages of SOAP}
+\subsubsection{Advantages of SOAP}
 
 SOAP, short for Simple Object Access Protocol, is a protocol designed for exchanging structured data via XML. Normally the SOAP framework will abstract away the XML from the end user, using a remote procedure call (RPC) -based interface. An RPC interface is exposed to the application programmer in a simple way; they define a function or method on the server side, and then call that function on the client side. Creating and parsing XML messages is handled by the SOAP library used.
 
@@ -35,19 +35,19 @@ The benefits of SOAP [same sources as above], are:
 
 For these reasons, we chose to use SOAP as the communications protocol.
 
-\subsubsection{Architecture Overview}
+\subsection{Architecture Overview}
 
 [Insert Diagram Here]
 
 The SOAP communication module followed a standard client-server model. The SOAP server (written in Python) would run on the same machine as the Hadoop head node. Python's subprocess module, which lets shell commands be executed from within Python scripts, would be used to allow the SOAP server to control the Hadoop cluster.
 
-Two SOAP clients were written. One was a command line client, also written in Python. The second was the C#-based visualiser written by last year's project group, which would be modified to send SOAP commands.
+Two SOAP clients were written. One was a command line client, also written in Python. The second was the C\#-based visualiser written by last year's project group, which would be modified to send SOAP commands.
 
 During the implementation of the server, one major change to the design proved neccesary; this was modifying it so that it worked in a multi-threaded manner, with one Hadoop task being ran per thread. The reason for this change is detailed in the implementation section below.
 
 Other changes that were made during the design phase included sending large files as base 64-encoding strings, rather than byte arrays, and giving the server the ability to execute algorithms as Python scripts as well as JAR files.
 
-\subsubsection{Message Structure}
+\subsection{Message Structure}
 
 We decided that the API needed to support the following commands:
 

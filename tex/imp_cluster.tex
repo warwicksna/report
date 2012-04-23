@@ -11,7 +11,7 @@ Giraph has a few extra requirements of its own. It requires specific versions of
 Giraph also requires Maven 3\footnote{\url{http://maven.apache.org/}} to be installed to compile the Giraph source code into a usable JAR for submitting jobs with to Hadoop.
 
 \subsection{Single-Node Cluster}
-For development purposes single-node cluster \cite{nollsingle}
+For development purposes single-node clusters were created, using a guide written by \citeauthor{nollsingle} in \cite{nollsingle}. Figure \ref{fig:singlenode} shows the structure of a single-node cluster. All processes for Hadoop are required to be running on this single node, and as such hampers performance.
 
 \begin{figure}[htbp]
   \centering
@@ -20,15 +20,7 @@ For development purposes single-node cluster \cite{nollsingle}
   \label{fig:singlenode}
 \end{figure}
 
-\subsection{Two-Node Cluster}
-\cite{nollmulti}
-
-\begin{figure}[htbp]
-  \centering
-    \includegraphics{./img/twonode}
-  \caption{Two-nodes Hadoop cluster \cite{nollmulti}.}
-  \label{fig:twonode}
-\end{figure}
+As a Hadoop cluster is trivially scalable, the performance of this single-node cluster is unimportant as if the program runs and produces the correct output for a small input, it should also run and produce the correct output on a much large cluster with a much larger input.
 
 \subsection{Multi-Node Cluster}
 At request, a nine machine Hadoop cluster was set up for use during this project in the department of computer science. This cluster composed a master head-node, {\tt hadoopmaster}, and eight slave-nodes, {\tt hadoop\{0-7\}}. 
