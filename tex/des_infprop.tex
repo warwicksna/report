@@ -123,12 +123,9 @@ This represents the fact that node 4 had been converted, and that 3 and 5 were n
 
 The actual algorithm worked as follows:
 
-<<<<<<< HEAD
+\begin{verbatim}
 Input(key:integer, values:list(integers)
 
-=======
-\begin{verbatim}
->>>>>>> 3d9df737700e8e15c62408683c86197d44a58336
 node1converted? = false
 for each value in values {
   node1 = key
@@ -196,17 +193,17 @@ for value in values {
   } else if data represents edge {
     neighbours.add(data[0])
     if data[1] == 1 {
-      influence++ # count converted neighbours
+      influence++ \# count converted neighbours
     }
   }
 }
 
-if node1isOn && influence >= threshold {
+if node1isOn \&\& influence >= threshold {
   changedNodes++
-  write(key, -1) # mark this node as converted
+  write(key, -1) \# mark this node as converted
   for neighbour in neighbours {
-    write(neighbour, ``key 1'') # mark each neighbours edge so the neighbour's influence will increase on the next reduce step
+    write(neighbour, ``key 1'') \# mark each neighbours edge so the neighbour's influence will increase on the next reduce step
   }
 } else {
-  # nothing happens, so just copy over previous values
+  \# nothing happens, so just copy over previous values
 }
