@@ -1,8 +1,37 @@
 \section{Data Acquisition}
 
 \subsection{Twitter}
-We scraped Twitter for data on the EDL and UAF
+Our requirements were as follows:
+\begin{itemize}
+\item sufficient data per item to construct a graph
+\item time information
+\item sufficient number of nodes to illustrate the cluster’s usefulness
+\item modern, real-world data
+\end{itemize}
 
+The social networking site Twitter met all these requirements. As an added bonus, it had information on two groups our customer has an interest in; the English Defence League and Unite Against Fascism. Twitter is easily mapped onto a directed graph, as it uses an asymmetric following system where user X can follow user Y without user Y having to follow user X. In addition to collecting the following/followers lists for each user we store the messages they broadcast; their `tweets'. Tweets may be addressed to particular users, and can thus be modelled as edges themselves. In addition to normal, typed tweets there are  `retweets' where the user has essentially endorsed another user’s tweet by repeating it themselves. Along with the text content of a tweet comes a significant amount of metadata such as its timestamp, a unique id, who it’s addressed to and sometimes geolocational data. It’s worth noting that there is much less information available on followers; there is no way to directly tell when a user followed another, or whether a user used to follow another.
+
+\subsubsection{Twitter API}
+Twitter provides two main interfaces for developers wishing to harvest data from it; a Representational State Transfer (REST) API and a streaming API. REST is a stateless protocol similar in style to the ubiquitous HTTP/1.1. The REST API is heavily rate limited; according to the documentation non authenticated calls are limited to 150 requests per hour per IP, and OAuth-authenticated requests are limited to 350 per hour per account. Each of the methods have strict limits on the amount of data they can return; the `statuses/user\_timeline' will only return the 3,200 most recent tweets of a user, and no more than 200 per hour. This places a hard limit of 200x350/3200 = 20 users per hour.
+
+The initial plan was to use the streaming API since it has higher throughput more generous limits and is thus more suited to the quantity of data we wanted to obtain. However, after significant delays and repeated failures to get added to the whitelist we resorted to using the REST API with OAuth for the increased limit.
+
+As a result of the rate limits it will need to be run for in excess of several days to obtain a substantial amount of data, making it unsuitable for use on our desktop computers. We needed a stand alone script that could be deployed anywhere with minimal setup. SQLite was selected as a lightweight database solution that was easily deployed and moved.
+
+\subsubsection{Target Identification Algorithm}
+We considered two approaches to identifying members of the target groups; manually identifying a central node and mapping outward from there, or mapping all users who use associated hashtags such as \#UAF. However, preliminary research revealed that many tags have multiple meanings (uaf = ugly as f***). Between tag overloading and news agencies using the \#EDL tag on stories about the english defence league, tags would not have been a substantive foundation for the basic mapping algorithm. Instead, we let the operator specify a central node (easily found with Google) and the algorithm performs a breadth-first-search from there:
+
+\begin{verbatim}
+queue.add(startingUser)
+while(True)
+         target = queue.pop()
+         for each user follower/following of target
+                 queue.add(user)
+         write target’s tweets/followers/following to db
+         write program state to db
+\end{verbatim}
+
+Given the low rate at which we could accumulate data, we decided to store all of it to allow for further, unforeseen uses. Simple scripts could then be used to extrapolate graphs in graphml format for our own use, and in MySQL suitable for use in last year’s visualiser.
 \subsection{Enron}
 
 \subsection{Stanford Large Network Dataset Collection}
