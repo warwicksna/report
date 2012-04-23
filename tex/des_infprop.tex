@@ -20,6 +20,7 @@ The input to this task was a file representing a graph in trivial graph format (
 
 Example TGF graph:
 
+\begin{verbatim}
 1 A false
 2 B false
 3 C false
@@ -35,11 +36,13 @@ Example TGF graph:
 1 3 0.07440361004495522
 2 5 0.13402102761559026
 1 4 0.15267731629694137
+\end{verbatim}
 
 The first five lines represent the nodes of the graph, in the format: [node id] [node name] [converted at start?]. This graph has 5 nodes, and only node D is set to be converted at the start. The next ten lines represent edges, in the format [node 1] [node 2] [edge weight].
 
 The dice rolling step was then straightforward to implement as a single Hadoop task. All the work was implemented in the map step; the basic algorithm looked like this:
 
+\begin{verbatim}
 for each key, value {
   # key is a line number and can be discarded, we only care about the value
 
@@ -60,11 +63,13 @@ for each key, value {
     }
   }
 }
+\end{verbatim}
 
 The reduce step merely implements the identity function and copies over the data from the map step.
 
 The output of this task will then look something like:
 
+\begin{verbatim}
 4 0
 1 2
 2 1
@@ -72,6 +77,7 @@ The output of this task will then look something like:
 4 3
 4 5
 5 4
+\end{verbatim}
 
 This might look like a strange way of representing a graph, but it was the most straightforward way to represent a graph using only key/value pairs of integers, and in a way that allows Hadoop to run a connected components algorithm on it.
 
@@ -79,8 +85,10 @@ Lines that end in zero (or a negative number) represent converted nodes. The lin
 
 Edges are recorded in the form:
 
+\begin{verbatim}
 [node1id] [node2id]
-[node2id node1id] 
+[node2id node1id]
+\end{verbatim}
 
 Note that edges are recorded in both directions. The reason for this is explained in the next section.
 
@@ -105,14 +113,17 @@ This information consisted of:
 
 For example, node number 4 in the above graph corresponded to the following key-value pairs:
 
+\begin{verbatim}
 4 0
 4 3
 4 5
+\end{verbatim}
 
 This represents the fact that node 4 had been converted, and that 3 and 5 were neighbouring nodes.
 
 The actual algorithm worked as follows:
 
+\begin{verbatim}
 node1converted? = false
 for each value in values {
   node1 = key
@@ -137,7 +148,8 @@ if node1isconverted {
     for neighbour in neighbours {
       write(node1, neighbours)
     }            
-} 
+}
+\end{verbatim}
 
 (neighbour, -node1) is recorded for each converted neighbour. The presence of [nodeId] [negativeNumber] indicates that particular node has been converted, and inverting the negative number tells us which node converted it.
 
