@@ -15,6 +15,7 @@ Assume a node n has a set of x neighbours n\_0,n\_1,n\_2...n\_x each with edge w
 
 This can be expressed in pseudocode as follows:
 
+\begin{verbatim}
 recently-converted-nodes = a queue of the initially converted nodes
 while recently-converted-nodes is non-empty {
   node = recently-converted-nodes.next()
@@ -25,6 +26,7 @@ while recently-converted-nodes is non-empty {
     }
   }
 }
+\end{verbatim}
 
 \subsection{Linear Threshold}
  In the linear threshold model, every node has a threshold value t. When the number of converted neighbours is greater than t, the node becomes converted. Again, edges can be weighted, in which case the condition for conversion is:
@@ -33,6 +35,7 @@ Maths: sum for all neighbours(if neighbour is converted(0,1) * edge weight)
 
 That is, nodes are converted when a threshold of their neighbours are converted. In pseudocode:
 
+\begin{verbatim}
 do {
   changed-nodes = 0
   for each node in unconverted-nodes {
@@ -48,6 +51,7 @@ do {
     } 
   }
 } while changed-nodes > 0
+\end{verbatim}
 
 \subsection{Decreasing Cascade Model}
 

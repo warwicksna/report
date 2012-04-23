@@ -15,10 +15,15 @@ REST, short for REpresentational State Transfer, is an architectural pattern for
 [http://www.ajaxonomy.com/2008/xml/web-services-part-1-soap-vs-rest]
 
 The benefits of REST, as defined by [ajaxonomy] and [infoQ], are:
-- It is language and platform agnostic.
-- It is simpler than SOAP, as it does not require an additional messaging layer.
-- It is closer to the philosopy of the web as originally defined by it's creator, Tim Berners-Lee.
-- It is able to make use of the built-in capabilities provided by the HTTP protocol.
+\begin{itemize}
+\item It is language and platform agnostic.
+\item It is simpler than SOAP, as it does not require an additional messaging
+layer.
+\item It is closer to the philosopy of the web as originally defined by it's
+creator, Tim Berners-Lee.
+\item It is able to make use of the built-in capabilities provided by the HTTP
+protocol.
+\end{itemize}
 
 \subsubsection{Advantages of SOAP}
 
@@ -27,11 +32,15 @@ SOAP, short for Simple Object Access Protocol, is a protocol designed for exchan
 Unlike REST, SOAP can run on top of any transport layer -- this may be HTTP or something else.
 
 The benefits of SOAP [same sources as above], are:
-- Unlike REST, it enables the developer to define their own vocabulary of verbs to suit the target domain.
-- It is language, platform *and* transport agnostic.
-- It is designed to handle distributed computing environments.
-- It is the predominant standard for web services, meaning there is a greater level of support in different programming languages.
-- It features built-in error handling.
+\begin{itemize}
+\item Unlike REST, it enables the developer to define their own vocabulary of
+verbs to suit the target domain.
+\item It is language, platform *and* transport agnostic.
+\item It is designed to handle distributed computing environments.
+\item It is the predominant standard for web services, meaning there is a
+greater level of support in different programming languages.
+\item It features built-in error handling.
+\end{itemize}
 
 For these reasons, we chose to use SOAP as the communications protocol.
 
@@ -51,39 +60,93 @@ Other changes that were made during the design phase included sending large file
 
 We decided that the API needed to support the following commands:
 
-Name: upload\_data\_set
-Arguments: data\_set\_name (string), data\_set (string)
-Returns: String
-Description: Takes an data\_set (as a base 64-encoded string), and writes it to a file in the snat\_data\_sets directory on HDFS. Returns success/failure message.
+\begin{itemize}
+    \item {\tt upload\_data\_set}
 
-Name: upload\_algorithm
-Arguments: algorithm\_name (string), class\_name (string), jar\_file (string)
-Returns: String
-Description: Takes an jar file (as a base 64-encoded string), and writes it to a file in the algorithms directory (on the regular file system). It also writes to a text file that keeps of a record of all the uploaded algorithms. Returns success/failure message. (Note: although the SOAP server can execute algorithms as either JAR files or Python scripts, currently only JAR files can be uploaded).
+    \begin{description}        
+        \item[Arguments] data\_set\_name (string), data\_set (string)
+        
+        \item[Returns] String
+        
+        \item[Description] Takes an data\_set (as a base 64-encoded string), and
+writes it to a file in the snat\_data\_sets directory on HDFS. Returns
+success/failure message.
+    \end{description}
+    
+    \item {\tt upload\_algorithm}
 
-Name: get\_algorithms
-Arguments: None
-Returns: List[String]
-Description: Returns a list of all the algorithms contained in the algorithms directory.
+    \begin{description}        
+        \item[Arguments] algorithm\_name (string), class\_name (string),
+jar\_file (string)
+        
+        \item[Returns] String
+        
+        \item[Description] Takes an jar file (as a base 64-encoded string), and
+writes it to a file in the algorithms directory (on the regular file system). It
+also writes to a text file that keeps of a record of all the uploaded
+algorithms. Returns success/failure message. (Note: although the SOAP server can
+execute algorithms as either JAR files or Python scripts, currently only JAR
+files can be uploaded).
+    \end{description}
+    
+    \item {\tt get\_algorithms}
 
-Name: get\_data\_sets
-Arguments: None
-Returns: List[String]
-Description: Returns a list of all the data sets contained in the snat\_datasets directory.
+    \begin{description}        
+        \item[Arguments] None
+        
+        \item[Returns] List[String]
+        
+        \item[Description] Returns a list of all the algorithms contained in the
+algorithms directory.
+    \end{description}
+    
+    \item {\tt get\_data\_sets}
 
-Name: execute\_algorithm
-Arguments: algorithm\_name (string), data\_set\_name (string), num\_nodes (integer), command\_line\_args
-Returns: Integer
-Description: Looks up the algorithm named algorithm\_name. If it references a JAR file, run a Hadoop job with that JAR. If it references a Python script, run that script. All jobs are executed in background threads; returns an integer identifying the thread.
+    \begin{description}        
+        \item[Arguments] None
+        
+        \item[Returns] List[String]
+        
+        \item[Description] Returns a list of all the data sets contained in the
+snat\_datasets directory.
+    \end{description}
+    
+    \item {\tt execute\_algorithm}
 
-Name: get\_results
-Arguments: thread\_id (integer)
-Returns: String
-Description: Takes a thread\_id referencing a Hadoop job running in the background. If the job has terminated, returns the output as a base 64-encoded string.
+    \begin{description}        
+        \item[Arguments] algorithm\_name (string), data\_set\_name (string),
+num\_nodes (integer), command\_line\_args
+        
+        \item[Returns] Integer
+        
+        \item[Description] Looks up the algorithm named algorithm\_name. If it
+references a JAR file, run a Hadoop job with that JAR. If it references a Python
+script, run that script. All jobs are executed in background threads; returns an
+integer identifying the thread.
+    \end{description}
+    
+    \item {\tt get\_results}
 
-Name: show\_statys
-Arguments: required\_data (string)
-Returns: String
-Description: Currently, takes a port number for one of the Hadoop logging pages running on localhost, and returns the contents of that page.
+    \begin{description}        
+        \item[Arguments] thread\_id (integer)
+        
+        \item[Returns] String
+        
+        \item[Description] Takes a thread\_id referencing a Hadoop job running
+in the background. If the job has terminated, returns the output as a base
+64-encoded string.
+    \end{description}
+    
+    \item {\tt show\_statys}
+
+    \begin{description}        
+        \item[Arguments] required\_data (string)
+        
+        \item[Returns] String
+        
+        \item[Description] Currently, takes a port number for one of the Hadoop
+logging pages running on localhost, and returns the contents of that page.
+    \end{description}
+\end{itemize}
 
 

@@ -9,6 +9,7 @@
 *.lot
 *.log
 *.out
+*.tex~
 *.txt
 *.toc
 report.fdb_latexmk

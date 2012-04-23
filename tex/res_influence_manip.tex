@@ -19,7 +19,10 @@ pu,i = ru +       ∑v∈Uu,i [wu,v (rv,i − rv )]
 \begin{align*}
 ∑v∈Uu,i |wu,v |
 \end{align*}
-This is by design not dissimilar to the reputation and influence systems underlying the networks that we want to tackle. The item-item algorithm’s fundamental difference is that it directly calculates the distance between items rather than between users. “People who liked X also liked Y”
+This is by design not dissimilar to the reputation and influence systems
+underlying the networks that we want to tackle. The item-item algorithm's
+fundamental difference is that it directly calculates the distance between items
+rather than between users. ``People who liked X also liked Y''
 
 \subsubsection{Attacks}
 
@@ -29,14 +32,34 @@ These attacks provide us with a number of starting techniques, as well as an ins
 
 \subsubsection{Defences}
 
-The defences are also relevant. It’s entirely plausible that as these attacks are turned towards infiltrating and manipulating social networks, parties with a vested interest in protecting the network’s integrity will look at the compatriot countermeasures; attack detection and attack mitigation. Shill detection algorithms are already in use on Twitter to detect and remove the original shills; spambots. It may be well beyond the scope of this project, but that doesn’t diminish the value of a design informed by an understanding of future problems.
+The defences are also relevant. It's entirely plausible that as these attacks
+are turned towards infiltrating and manipulating social networks, parties with a
+vested interest in protecting the network's integrity will look at the
+compatriot countermeasures; attack detection and attack mitigation. Shill
+detection algorithms are already in use on Twitter to detect and remove the
+original shills; spambots. It may be well beyond the scope of this project, but
+that doesn't diminish the value of a design informed by an understanding of
+future problems.
 
 \subsubsection{Mitigation}
 
-One mitigation that is at least conceptually simple  is to use a hybrid model where a significant portion of the model isn’t taken from user data. For example, semantically enhanced collaborative modelling uses text-mining techniques to create a similarity measure entirely independent of user input. From the perspective of a persona management system, all target systems use a hybrid of malleable online input and untouchable real-world interactions. Physically deployed undercover operatives have almost the inverse restriction; excessive manipulation of online systems may raise suspicion, something distinctly more perilous for those physically present.
+One mitigation that is at least conceptually simple  is to use a hybrid model
+where a significant portion of the model isn't taken from user data. For
+example, semantically enhanced collaborative modelling uses text-mining
+techniques to create a similarity measure entirely independent of user input.
+From the perspective of a persona management system, all target systems use a
+hybrid of malleable online input and untouchable real-world interactions.
+Physically deployed undercover operatives have almost the inverse restriction;
+excessive manipulation of online systems may raise suspicion, something
+distinctly more perilous for those physically present.
 
 \subsubsection{Detection}
-Attacks may be detected using simple metrics such as analysing user’s rating deviation and profile length; the randomBot attack has a clear footprint in this regard. Perhaps in recognition of the inherent inaccuracy of such measures, once a profile is classified as `suspicious' its ratings are simply ignored, rather than it being booted off the system as might happen to a hacker on an attack aware application.
+Attacks may be detected using simple metrics such as analysing user's rating
+deviation and profile length; the randomBot attack has a clear footprint in this
+regard. Perhaps in recognition of the inherent inaccuracy of such measures, once
+a profile is classified as ``suspicious'' its ratings are simply ignored, rather
+than it being booted off the system as might happen to a hacker on an attack
+aware application.
 +rating deviation from main agreement
 +they act in groups
 
