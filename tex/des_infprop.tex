@@ -141,7 +141,11 @@ if node1isconverted {
 
 (neighbour, -node1) is recorded for each converted neighbour. The presence of [nodeId] [negativeNumber] indicates that particular node has been converted, and inverting the negative number tells us which node converted it.
 
-\subsubsection{Alternatives}
+changedNodes is a counter, a global variable shared across Hadoop nodes. This counter is used to check for the termination condition; if changedNodes remains zero after an iteration, then execution halts.
+
+A Ruby script was written to run and coordinate the different Hadoop tasks.
+
+\paragraph{Alternatives}
 
 [http://blog.piccolboni.info/2010/07/map-reduce-algorithm-for-connected.html] One alternative way to implement the connected components task was using the PRAM algorithm, as described in [cite]. 
 
