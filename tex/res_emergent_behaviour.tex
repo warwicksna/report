@@ -1,61 +1,60 @@
 \section{Emergent Behaviour}
 
-The purpose of this component of the project is to observe and
-describe how networks converge and to look at how robust these
-networks are in the presence of infiltrators.  More specifically,
+The purpose of this component of the project is to examine and
+describe how networks of agents converge and cooperate, and to look at measuring the robustness of this cooperation of such
+networks in the presence of infiltrators.  More specifically,
 we will be looking at networks which use a tag-based approach to
-cooperation and the infiltrators will be self-interested agents
+cooperation based on the work done by Riolo, Cohen, Axelrod (RCA) \cite{rca}.
+The infiltrators will be self-interested agents, agents
 which do not follow the social norms of the network.  In our case,
 these self-interested agents could be thought of as law-enforcement
-individuals.  In general, the presence of self-interested agents
-have a negative affect on the cooperation within such a network.
-Therefore, we will look at methods to preserve the cooperation rates
-in networks where self-interested agents are present.
+individuals, who may be interested in joining such a network but not cooperate.
+In general the presence of self-interested agents
+have a negative affect on the cooperation within such a network \cite{aamas2008}.
+We will therefore look at methods to preserve the high rates of cooperation
+in these networks when self-interested agents are present.
 
 \subsection{Existing Research}
 
-We are extending the work of Griffiths and Luck \cite{aamas2010} on tag-based
-cooperation in a network in the presence of self-interested agents.
-This work employs an image-scoring mechanism, network rewiring, and
-a learning-based approach to evolution.
-
-The work by Griffiths and Luck extends previous work on tag-based
-cooperation, especially Riolo, Cohen, and Axelrod \cite{rca}; and Hales
-and Edmonds \cite{he}.
+The work will be based on a number of existing pieces of research on tag-based cooperation within a network of agents in the presence of self-interested agents.
 
 \subsection{RCA Tag-based Cooperation}
 
-Tag-based cooperation was introduced (Riolo, Cohen and Axelrod,
-2001) to observe the nature and method that cooperation in a network
-emerges.
+Tag-based cooperation was introduced to observe the nature and method that cooperation in a network
+emerges \cite{rca}.
+The purpose of this research was to observe how cooperation can be achieved in a network where there is no direct reciprocity.
 
 The cooperation approach described by RCA takes place in a population
 of agents.  Each agent is assigned a single tag and a single tolerance
-value.  Both the tag and tolerance are selected randomly from a
-uniform distribution between 0 and 1.
-The tag is a cultural artefact, a form of a public identifier.
+value.  Both the tag, $\tau$, and tolerance, $T$, are selected randomly from a
+uniform distribution between $0$ and $1$.
+The tag is a cultural artefact---a form of a public identifier.
 The tolerance is used to determine the willingness of an agent to cooperate.
 
 The approach described by RCA is generational.  Each generation is
 divided into two phases: a donation phase and a reproduction phase.
-The donation phase occurs first, which allows every agent to perform
-a number of donations.  After the donation phase, the reproduction
-phase allows agents to reproduce based on their relative success.
+The donation phase occurs first and allows every agent to perform
+a number of donations.  After the donation phase the reproduction
+phase allows agents to reproduce based on the relative success of each agent---more successful agents will produce a larger amount of offspring.
 
 During the donation phase, each agent in the population is selected
 to make a number of donations.  The number of donations each agent
 is selected to make is known as the number of interactions pairings
-per generation, P.  When an agent has been selected for donation,
-they pick an agent at random to which they have the opportunity to
-donate.  In the RCA approach, an agent will donate to the random
+per generation, $P$.  When an agent has been selected for donation
+an agent is picked at random to which they have the opportunity to
+donate.  In the RCA approach an agent will donate to the random
 agent if the difference between the two agents' tags is less than
-the tolerance of the donator.  If an agent chooses to donate, they
-will incur a small cost, c, and provide a benefit, b, to the receiving
+the tolerance of the donator, using the formula presented in \ref{fig:rca-donation-eqn}.  If an agent chooses to donate, they
+will incur a small cost, $c$, and provide a benefit, $b$, to the receiving
 agent.
 
-\begin{align*}
-    |\tau_A - \tau_B| < T_A
-\end{align*}
+\begin{figure}[htbp]
+	\begin{equation*}
+    	|\tau_A - \tau_B| < T_A
+	\end{equation*}
+	\caption{Equation for determining if an agent will donate}
+	\label{fig:rca-donation-eqn}
+\end{figure}
 
 The cooperation of a population of agents is measured by the donation rate in each generation.
 
@@ -63,11 +62,11 @@ Once every agent has been given an opportunity to donate $P$ times,
 the reproduction phase takes place.  During the reproduction phase,
 each agent reproduces in accordance with their relative success.
 The most successful agents produce more offspring than the less
-successful agents.  Each agent compares itself to a random agent.
-If the agent is less successful than the random agent, then its
+successful agents.  Each agent compares itself to a randomly selected agent.
+If the agent is less successful than the randomly selected agent then its
 offspring derives from the random agent.  If the agent is more
 successful than the random agent, then its offspring derives from
-iteself.  The offspring takes the tag and tolerance values of the
+itself.  The offspring takes the tag and tolerance values of the
 more successful agent.  There is a small chance that the tag and
 tolerance values could be mutated.  If the tag is mutated, the
 offspring will receive a new tag taken randomly from the uniform
@@ -78,8 +77,8 @@ tolerance value.
 Once the donation and reproduction phases for a given generation
 have occurred, the process is repeated on the new population.
 
-RCA noted that the donation rate quickly stabilises after around
-100 generations.  Occasionally, an agent gets a tolerance value
+In experiments, RCA observed that the donation rate quickly stabilises after around
+$100$ generations.  Occasionally, an agent gets a tolerance value
 that is much smaller than the average tolerance as the result of a
 mutation.  This mutation allows the agent to become more successful
 as they are less likely to donate.  The impact of this reduces the
@@ -96,58 +95,60 @@ choose the number of interaction pairings per generation, $P$, to
 be at least $3$, the cost of donation to be $0.1$, and the benefit
 of receiving a donation to be $1$.
 
+While RCA chose to use a generational approach where every agent produces offspring,
+an alternative approach based around a learning interpretation was mentioned but not implemented.
+
 \subsection{Learning-Interpretation of Reproduction}
 
-Hales and Edmonds (2003) extended the notion of tag-based cooperation by RCA
-by introducing the notion of a {\emph learning} interpretation instead of a {\emph reproduction} interpretation.
+Hales and Edmonds (HE) applied the learning interpretation presented by RCA \cite{he}.
 
-The learning interpretation differs from the {\emph reproduction} interpretation of RCA
-in that offspring are not produced in the reproduction phase.
-Instead, when an agent is comparing itself to a more successful agent,
-they will adopt that agents' tags and tolerances.
-This means that the population of agents remains the same,
-just the tag and tolerances of an agent change over generations.
-Hales and Edmonds showed that the cooperation was not altered by adopting this approach.
+The learning interpretation differs from the {\emph reproduction} based interpretation of RCA
+in that no offspring are not produced in the reproduction phase.
+Instead, if during the reproduction phase an agent compares itself to a randomly selected agent which is more successful than itself, the agent will adopt the randomly selected agents' tag and tolerance values.
+This means that the population of agents remains the same but the tag and tolerances of the agents change in each generation.
+HE demonstrated that the rate of cooperation was not altered by adopting this approach.
 
-Hales and Edmonds also changed the notion of the tag so that
-the tag represented the neighbourhood of an agent.
+Another change HE made was to make a tag represent the neighbourhood of the agent.
 When a new tag is learnt from another agent or through mutation,
-the agent in effect rewires its neighbourhood to remove connections to those agents with its old tag,
-and forging connections to agents with the same new tag.
-In Hales and Edmonds' approach, donations are only permitted between agents in the same neighbourhood.
+this new tag effectively causes the agent to rewire itself in a network so as to remove connections to those agents with its old tag,
+and forge connections to agents that share the same new tag.
+In the HE approach, donations are only permitted between agents in the same neighbourhood.
+Using this interpretation, a tag could be thought of as a gang sign, and agents would only have a chance to cooperate with those agents in the same gang.
 
 \subsection{Image Scoring}
 
-Griffiths (2008) extended the cooperation approach of RCA,
-using the learning interpretation of HE, by connecting agents
-in a graph.
-All agents are connected in a graph with a random network topology.
-Agents are only able to donate to agents to which they are connected.
+In 2008, the notion of tag-based cooperation was altered to observe how cooperation changes in the presence of self-interested agents \cite{aamas2008}.
+The basic approach of RCA was combined with the learning interpretation of HE.
+In addition, all the agents were connected in a graph with a random network topology.
+Agents were only able to donate to the agents to which they are connected.
 
 This model was used to observe the effect of self-interested agents (cheaters)
 on the donation rate.
-A cheater is an agent that never chooses to donate, despite the tags and tolerance values.
-As such, a cheater is likely to be very successful as they
-receive the benefits of donation without incurring the costs.
+In this case, a cheater is an agent that always refuses to donate to other agents, despite the tag and tolerance values.
+As such a cheater is likely to be very successful, as they receive the benefits of donation without incurring the costs.
 It was shown that the presence of just a small amount of cheaters in the network
 caused a large reduction in the overall rates of cooperation.
 
-To address this problem, image scoring was introduced.
-In image scoring, each agent can observe the interation pairings of its neighbours.
-Therefore,
-and agent can keep track of the times when a neighbour chooses to donate and refuses to donate.
-These observations for each neighbour are stored in a queue data structure.
+In order to address this problem, an image scoring mechanism was introduced.
+Every agent observes the interaction pairings of its neighbours.
+Each agent keeps track of the times when a neighbouring agent chooses or refuses to make a donation.
+The observations for each neighbour are stored in a queue data structure.
 When an agent is selected to make a donation, they will consider the observations of their local network
 when donating in addition to their tag and tolerance values.
 
-This approach to ranking a neighbourhood is chosen
-due to the lack of direct reciprocity.
+This approach to ranking a neighbourhood is chosen due to the lack of direct reciprocity.
 Direct reciprocity is when, by donating to another agent, it is likely that the other agent will in future donate to you.
-It is therefore important to consider the neighbourhood to which an agent belongs when they make a donation.
+In these such networks however, direct reciprocity does not occur,
+it was therefore considered important to take into account the neighbourhood to which an agent belongs when they make a donation.
+The choice of an agent to donate is determined by the equation \ref{fig:aamas-2008-donation-eqn}.
 
+\begin{figure}[htbp]
 \begin{align*}
     T_A' = T_A + \left(T_A \times \frac{\sum_{i = 1}^{n}\delta_i}{n}\right)
 \end{align*}
+\caption{Equation to determine if an agent is ready to donate, augmented with neighbourhood assessment}
+\label{fig:aamas-2008-donation-eqn}
+\end{figure}
 
 Until each agent has recorded enough observations,
 the basic tag and tolerance approach described by RCA is used.
