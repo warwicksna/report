@@ -1,18 +1,18 @@
 \subsection{Influence Propogation}
 
-The influence propogation algorithm studied were conceptually simple. However, implementing them in a distributed computing environment like Hadoop proved complex. One major reason for this was that graph algorithms are inherently hard to parallelize. 
+The influence propagation algorithm studied were conceptually simple. However, implementing them in a distributed computing environment like Hadoop proved complex. One major reason for this was that graph algorithms are inherently hard to parallelize. 
 
-Hadoop works best for ``embarrisingly parallel'' problems, that is, tasks which can be broken up into subtasks where there is little dependencies between individual tasks. Graph problems such as influence propogation are inherently about dependencies, as graphs express the relationships between different pieces of data. At some point any graph processing algorithm run in a distributed environment must parition the graph into portions to be run on each indiviual node, and then decide how to communicate between these nodes without causing too slow a bottleneck.
+Hadoop works best for ``embarrassingly parallel'' problems, that is, tasks which can be broken up into subtasks where there is little dependencies between individual tasks. Graph problems such as influence propagation are inherently about dependencies, as graphs express the relationships between different pieces of data. At some point any graph processing algorithm run in a distributed environment must partition the graph into portions to be run on each individual node, and then decide how to communicate between these nodes without causing too slow a bottleneck.
 
-The Pregel framework is one solution to the problem of running graph algorithms on top of Hadoop. As we had used already Pregel for some graph processing problems, we decided to implement the influence propogation algorithms in vanilla Hadoop, to explore the difficulty of implementing graph algorithms without a specialised framework.
+The Pregel framework is one solution to the problem of running graph algorithms on top of Hadoop. As we had used already Pregel for some graph processing problems, we decided to implement the influence propagation algorithms in vanilla Hadoop, to explore the difficulty of implementing graph algorithms without a specialised framework.
 
 \subsubsection{Independent Cascade}
 
 The first step towards implementing the independent cascade algorithm on Hadoop was realising that it was best implemented as multiple tasks, rather than a single task.
 
-Specifically, a simple way of implementing independent cascade is to first ``roll all the dice'' -- that is, decide if influence would succesfully pass between each pair of connected nodes -- and then run a standard connected components algorithm.
+Specifically, a simple way of implementing independent cascade is to first ``roll all the dice'' -- that is, decide if influence would successfully pass between each pair of connected nodes -- and then run a standard connected components algorithm.
 
-Therefore, the algorithm was split into two tasks, one to handle the ``dice rolling'', one to handle the connected components. The first task would be run once, wheras the second task would be run iteratively, with the output of one step being fed into the next step. More details can be found below.
+Therefore, the algorithm was split into two tasks, one to handle the ``dice rolling'', one to handle the connected components. The first task would be run once, whereas the second task would be run iteratively, with the output of one step being fed into the next step. More details can be found below.
 
 \paragraph{Dice Rolling}
 
