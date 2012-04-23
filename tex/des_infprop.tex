@@ -2,7 +2,7 @@
 
 The influence propogation algorithm studied were conceptually simple. However, implementing them in a distributed computing environment like Hadoop proved complex. One major reason for this was that graph algorithms are inherently hard to parallelize. 
 
-Hadoop works best for ``embarrisingly parallel'' problems, that is, tasks which can be broken up into subtasks where there is little dependencies between individual tasks. Graph problems such as influence propogation are inherently about dependencies, as graphs express the relationships between different pieces of data. At some point any graph processing algorithm run in a distributed environment must parition the graph into portions to be run on each indiviual node, and then decide how to communicate between these nodes without causing too slow a bottleneck.
+Hadoop works best for ``embarrasingly parallel'' problems, that is, tasks which can be broken up into subtasks where there is little dependencies between individual tasks. Graph problems such as influence propogation are inherently about dependencies, as graphs express the relationships between different pieces of data. At some point any graph processing algorithm run in a distributed environment must parition the graph into portions to be run on each indiviual node, and then decide how to communicate between these nodes without causing too slow a bottleneck.
 
 The Pregel framework is one solution to the problem of running graph algorithms on top of Hadoop. As we had used already Pregel for some graph processing problems, we decided to implement the influence propogation algorithms in vanilla Hadoop, to explore the difficulty of implementing graph algorithms without a specialised framework.
 
@@ -113,6 +113,8 @@ This represents the fact that node 4 had been converted, and that 3 and 5 were n
 
 The actual algorithm worked as follows:
 
+Input(key:integer, values:list(integers)
+
 node1converted? = false
 for each value in values {
   node1 = key
@@ -147,7 +149,49 @@ A Ruby script was written to run and coordinate the different Hadoop tasks.
 
 \paragraph{Alternatives}
 
-[http://blog.piccolboni.info/2010/07/map-reduce-algorithm-for-connected.html] One alternative way to implement the connected components task was using the PRAM algorithm, as described in [cite]. 
+[http://blog.piccolboni.info/2010/07/map-reduce-algorithm-for-connected.html] One alternative way to implement the connected components task was using the PRAM algorithm, as described in [cite]. In theory this allows the connected components of a graph to be found in less iterations.
 
 \subsection{Linear Threshold}
 
+The Linear Threshold implementation follows the same basic pattern as the Independent Cascade implementation, though it only requires one task, which is performed iteratively. Each iteration corresponds to one iteration of the LT algorithm; that is, it counts all the converted neihbours of each unconverted node, and if it is greater than the node's threshold value, the node becomes converted.
+
+Once again, the trickiest part of the algorithm proved to be representing the state of the algorithm in a concise form that could handle both edges and nodes. The data format worked as follows:
+
+Nodes were represented by [nodeId] [threshold]. If the threshold was equal to -1, this represented a node that had already been converted (and so we no longger cared what the threshold value was).
+
+Edges are represented by [node1id] [node2id] [node2converted?]. Once again, edges were recorded in both directions, to ensure that each node would have all the neccesary information at the reduce step.
+
+The algorithm then worked as follows:
+
+The map step simply parsed the input file, setting the key to be the first integer on each line and the value to be the rest. As the value was therefore a Text object, further parsing had to be done in the reduce step. Checking whether this had a noticable effect on performance could be a future avenue for exploration.
+
+The reduce step worked as follows:
+
+Input: key:integer values:list(text)
+
+node1isOn = false
+influence = 0
+
+for value in values {
+  data = parse(value)
+  if data represents node {
+    if data[0] == -1 {
+      node1isOn = true
+    }
+  } else if data represents edge {
+    neighbours.add(data[0])
+    if data[1] == 1 {
+      influence++ # count converted neighbours
+    }
+  }
+}
+
+if node1isOn && influence >= threshold {
+  changedNodes++
+  write(key, -1) # mark this node as converted
+  for neighbour in neighbours {
+    write(neighbour, ``key 1'') # mark each neighbours edge so the neighbour's influence will increase on the next reduce step
+  }
+} else {
+  # nothing happens, so just copy over previous values
+}
