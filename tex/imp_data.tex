@@ -1,0 +1,24 @@
+\subsection{Data Acquisition}
+
+As mentioned in the design, we opted to authenticate our requests with OAuth to take advantage of the more generous limits. Using OAuth entails creating a digital signature for every request so that Twitter's servers can verify that the request hasn't been tampered with while in flight. From the client's perspective it provides no assurance that the response from the server hasn't been altered. As such, I suspect that it is more about ensuring that developers take responsibility for the requests their applications make, for fear of having their access tokens revoked. Twitter holds its own web interface a lower standard of security; it doesn't use HTTPS by default.
+
+Neither Perl nor Python have a core library for using OAuth, and after a few hours attempting to install a third-party library on Joshua I decided to implement the OAuth signing procedure myself, in the interest of keeping the code portable. This ruled out Perl, since it does not support the HMAC-SHA1 algorithm in the core modules. Python, however, did so we now have the `api' function which given a method and some arguments will sign them. The application id and the account id are both hard-coded but would be trivial to alter.
+
+Upon running this script, it quickly became evident that the Twitter servers were prone to throwing an eclectic range of errors including codes `500 Internal Server Error', `502 Bad Gateway' and ‘503 Service Unavailable'. Adding an exponential backoff to deal with these errors as they occurred helped, but as some of them only happened once every few days they caused serious data loss. As such, the script was adjusted to regularly store its internal state alongside the data it harvests, and thus be able to resume after errors with minimal data loss.
+
+At one point the server returned corrupted data for a user's tweets without throwing an error. As tweets are placed into the database verbatim, this didn't trigger any errors and caused trouble later. The script now validates that all responses are valid json, which should mitigate any recurrences.
+
+As the number of fully-mapped nodes approached 3000, file I/O errors began appearing on the client side. Investigation suggested that this was an issue with Joshua, rather than SQLite:
+
+The theoretical maximum number of rows in a table is 264 (18446744073709551616 or about 1.8e+19). This limit is unreachable since the maximum database size of 14 terabytes will be reached first.
+https://www.sqlite.org/limits.html
+
+Implementation of the conversion scripts went smoothly, though the initial attempts didn't scale well. This was fixed by using native data structures in lieu of repeated JSON parsing, and writing the output to disc in a streaming manner. The final scripts are as follows:
+\begin{itemize}
+\item generateGraphml.py generates a directed graph in graphml, using ‘following' as outgoing edges and ‘followers' as incoming edges.
+\item generateGraphmlLimited.py is an improved version of generateGraphml that ignores leaf nodes, and scales much better.
+\item generateGraphmlTweets.py is based on generateGraphmlLimited but also considers directed tweets and retweets as outgoing edges.
+\item tweetsToSQL.py converts tweets into the SQL format suitable to be played back over time in the previous year's interface.
+\end{itemize}
+
+It was observed that in practise the Twitter API's rate limit is 350 requests per hour per account per IP, so the tool can be used to harvest information on multiple different groups simultaneously without altering the user/application id, just by running it on computers with distinct external IP addresses.
