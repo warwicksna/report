@@ -110,35 +110,3 @@ However, as with the two-state influence models, the function g can be shown to 
 
 Although this is a polynomial-time algorithm, the datasets used for practical social network analysis may be extremely large, making even this algorithm unworkable in practice. Some alternative heuristics are therefore possible. These include the ``degree centrality heuristic'' (ie, choosing the nodes with the most incident edges), the ``early infectees heuristic'' (ie, choosing the nodes that are expected to be infected by the rival campaign early on), and the ``largest infectees heuristic'' (ie, choosing the nodes that are expected to infect the highest number of other nodes). By evaluating these heuristics via Monte Carlo simulations, it can be shown that the largest infectees heuristic is the most effective, approaching the performance of the greedy algorithm. The early infectees heuristic proved to be the least effective approach.
 
-
-Cascading influence in blogs
-http://cs.stanford.edu/people/jure/pubs/blogs-sdm07.pdf
-- links between blogs
-- 45k blogs and 2.2m posts
-- is it bursty and/or periodic? does interest die off linearly or exponentially?
-- popularity drops off in a power law
-- size distribution of cascades follows a Zipfian distribution
-- human networks tend to follow a power law distribution
-- analyses cascade shapes
-
-What stops social epidemics?
-- existence of ``epidemic threshold'', critical value of transmissability
-- large degree of heterogenity speeds up epidemics (Superspreading and the effect of individual variation on disease emergence.)
-
-Digg
-- spread of interest (votes) for a story through a users' friends
-- not epidemic, why? network structure, 
-- no increased chance to convert with multiple converted neighbours (friend saturation model)
-- scale free number of fans
-- only one epidemic story, michael jackson
-- decreasing cascade model
-
-A simple model of global cascades on
-random networks
-``These phenomena are all examples of what economists call
-information cascades (ref. 4; but which are herein called simply
-cascades), during which individuals in a population exhibit
-herd-like behavior because they are making decisions based on
-the actions of other individuals rather than relying on their own
-information about the problem.''
-
