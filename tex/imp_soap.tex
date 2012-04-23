@@ -1,5 +1,19 @@
 \section{SOAP}
 
-\subsection{}
+\subsection{Choice of Language/Library}
 
+We initially planned to use Java for the SOAP server. Java has a robust SOAP implementation in the form of the Apache Axis2 project. [http://axis.apache.org/axis2/java/core/index.html]. However, this project was highly configurable at the expense of simplicity. For example, the project features five different methods to deploy SOAP services.
 
+We therefore decided to implement the SOAP server in Python, using the rpclib library for the server, and the suds library for the client. This allowed both the server and the client to be implemented within a single Python script each, leading to easier development and deployment.
+
+\subsection{Implementation}
+
+Implementing read-only commands such as show\_status, get\_data\_sets, and get\_algorithms proved straightforward. show\_status merely echoed the data from one of Hadoop's built-in logging pages, get\_data\_sets returned the content of the snat\_datasets folder on HDFS, and get\_algorithms returned the algorithm names from a predefined algorithms.txt file.
+
+One issue that arose with the implementation of upload\_algorithm and upload\_data\_set was the best way to send large files over SOAP. The recommended way was to use the class rpclib.model.binary.ByteArray, which sends raw binary data. However, in practice there were issues retrieving the correct data as it was sent. We therefore instead chose to send data using base64 encoded strings.
+
+The subprocess library was used to enable shell commands to be ran from Python, allowing the SOAP server to control the Hadoop cluster. The original design had execute\_algorithm run the required jobs and then return the results directly. However, for long running Hadoop jobs, the SOAP socket would close before any data could be sent. Reconfiguring the client and server to have a longer timeout period did not fix the problem.
+
+Instead, it was decided to run Hadoop jobs via background threads. This was implemented as a dynamically-sized thread pool, where a new thread would be added for each job. execute\_algorithm would no longer return results directly, but would return an integer corresponding to the id of the thread running that particular job.
+
+A new api call, get\_results, was added. If the relevant job had terminated, this call would return the results from that job. If not, an error message would be returned.
