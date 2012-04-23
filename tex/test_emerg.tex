@@ -1,0 +1,19 @@
+\section{Emergent Behaviours}
+
+In order to validate the results, we compared the results we obtained against the results presented in the papers by Griffiths and Luck. We consistently found that the donation rate followed the same trends as the original papers, however we noticed that in our implementation the donation rate was higher in all the experiments.
+
+In the following experiments, the donation rate was averaged over 10 runs, each with 1000 generations.
+
+The first test we performed was to test the basic RCA algorithm against the modified one presented in Griffiths 2008. We based our experiments off the same experiments presented in the paper, each of which plot donation rate against: context influence (figure ), rewire proportion (figure ), population size (figure ), interaction pairings per generation (figure ) and neighbourhood size (figure ).
+
+The donation rate against context influence shows that the donation rate increases with context influence, and closely mirrors the values for donation rate presented in the original paper. These results can be seen in figure .
+
+In a population of 10\% cheaters, the rewire proportion exhibited a similar effect on the donation rate as was presented in the original paper, as shown in figure . It can be seen in the graph that with the random rewire strategy, the rewire proportion has no effect on the donation rate. The random replace worst, individual replace worst and group replace worst exhibit a similar behaviour, when the rewire proportion is 0, the donation rate is the same as the random rewire strategy but when the rewire proportion is increased, the donation rate jumps higher. As presented in the original paper, when the rewire proportion nears 1, the donation rate begins to drop again.
+
+The graph of population size against donation rate, figure , shows that the population size makes no difference to the overall donation rate.
+
+The number of interaction pairings per generation also has little effect on the donation rate as shown in figure .
+
+From the graph that shows the neighbourhood size against donation rate, figure , it can be seen that the donation rate is fairly similar for small neighbourhoods, but there is a drop in the donation rate when the neighbourhood size reaches 50.
+
+From these results, we can see that the implementation performs similarly to that of the original papers.
