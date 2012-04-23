@@ -13,3 +13,4 @@
 *.toc
 report.fdb_latexmk
 report.pdf
+go.sh
