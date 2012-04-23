@@ -51,6 +51,9 @@ do {
 
 \subsection{Decreasing Cascade Model}
 
+The decreasing cascade model fits situations where nodes are less likely to be influenced with each conversion attempt. One real world example was [cite:digg], where it was found that a standard independent cascade model did not fit the spread of stories through the social news site Digg. The decreasing cascade model proved to be a much better fit for the data; one possible conclusion from this is that if users do not ``digg'' (vote for) a story the first time they are exposed to it, they are unlikely to do so on subsequent exposures.
+
+The decreasing cascade model works similarly to the independent cascade model, but after a failed conversion attempt, the unconverted node becomes more difficult to convert in future. In the most basic example, the probability of future conversions becomes 0 after 1 failed conversion attempt.
 
 \subsection{Influence Maximisation Problem}
 
@@ -103,16 +106,6 @@ However, as with the two-state influence models, the function g can be shown to 
 
 Although this is a polynomial-time algorithm, the datasets used for practical social network analysis may be extremely large, making even this algorithm unworkable in practice. Some alternative heuristics are therefore possible. These include the ``degree centrality heuristic'' (ie, choosing the nodes with the most incident edges), the ``early infectees heuristic'' (ie, choosing the nodes that are expected to be infected by the rival campaign early on), and the ``largest infectees heuristic'' (ie, choosing the nodes that are expected to infect the highest number of other nodes). By evaluating these heuristics via Monte Carlo simulations, it can be shown that the largest infectees heuristic is the most effective, approaching the performance of the greedy algorithm. The early infectees heuristic proved to be the least effective approach.
 
-
-
-
-- Influence Maximisation Problem
--- limited budget of initially converted nodes
--- constrained optimisation problem
--- algorithm: non-negative, monotone, submodular
--- greedy algorithm
-
-- attempt to find most influential nodes in a network
 
 Cascading influence in blogs
 http://cs.stanford.edu/people/jure/pubs/blogs-sdm07.pdf
