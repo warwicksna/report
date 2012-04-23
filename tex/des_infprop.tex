@@ -193,18 +193,18 @@ for value in values {
   } else if data represents edge {
     neighbours.add(data[0])
     if data[1] == 1 {
-      influence++ # count converted neighbours
+      influence++ \# count converted neighbours
     }
   }
 }
 
-if node1isOn && influence >= threshold {
+if node1isOn \&\& influence >= threshold {
   changedNodes++
-  write(key, -1) # mark this node as converted
+  write(key, -1) \# mark this node as converted
   for neighbour in neighbours {
-    write(neighbour, ``key 1'') # mark each neighbours edge so the neighbour's influence will increase on the next reduce step
+    write(neighbour, ``key 1'') \# mark each neighbours edge so the neighbour's influence will increase on the next reduce step
   }
 } else {
-  # nothing happens, so just copy over previous values
+  \# nothing happens, so just copy over previous values
 }
 \end{verbatim}
