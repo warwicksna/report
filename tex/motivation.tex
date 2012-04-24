@@ -5,13 +5,13 @@ Crimes are frequently committed by a network of individuals, be they loose-knit,
 tight-knit, grassroots clusters or hierarchical supply chains. Aspects of the
 relationships and power structures that compose these networks are betrayed in
 the resulting address books and digital social networks, which the police can
-frequently gain access to. However, this information has been distorted,
+frequently gain access to. However, this information has been distorted, almost
 flattened; a deep relationship may appear as a series of unrelated entries in an
 addressbook. While direct detective-work is invaluable for making these
 connections, the ever-increasing quantity of data to be processed is rendering
-this approach less effective . By modelling these networks as graphs, and
+this approach less effective. By modelling these networks as graphs, and
 through the application of various algorithms, we can attempt to recover some of
-this lost data. This will provide information about both individual users and
+this `lost' data. This will provide information about both individual users and
 the overall network; cluster identification may detect distinct groups within a
 single network and the influence and centrality of individual people can
 likewise be calculated. At its simplest this information could help inform
@@ -20,28 +20,23 @@ apprehending, and where in the network to introduce undercover agents to
 maximise their influence. 
 
 \subsection{Scale}
-Owing to the computational complexity of these algorithms, existing tools have
+As a consequence of the computational complexity of these algorithms, existing tools have
 serious scalability issues. The advent of social networking sites has led to
 sprawling networks with vast quantities of low-grade information that needs to
 be heavily processed to extract anything of value. We have tackled this by
 distributing the workload across clusters. Clusters are networks of computers
 typically built with commodity-grade components, rendering them cheap and
-scalable.
-+some more on clusters
+scalable relative to traditional supercomputers.
 
 \subsection{Relevance}
-Lacking access to any police datasets we chose to use publicly available data
-from the `microblogging' site Twitter. Twitter is used by two groups the police
+We chose to use publicly available data from the `microblogging' site Twitter, 
+as we lacked access to any police datasets. Twitter is used by two groups the police
 are interested in; the `English Defence League' (EDL) and `Unite Against Facism'
 (UAF). Previous projects used Enron's emails. Times have changed since then;
 emails only make up a fraction of a user's interactions and social networks have
 a far higher degree. We demonstrate these techniques on modern, relevant
-networks.
+networks, exploiting the poor operational security exhibited our targets.
 
-\begin{description}
-\item[Advantage] poor operational security
-\item[Disadvantage] HBGary / Anonymous
-\end{description}
 
 \subsection{Alternative Applications: Marketing}
 Modelling influence manipulation and the like is also a core requirement of
@@ -58,10 +53,9 @@ systems'; software that enables a single operator to control large numbers of
 fake online identities, massively increasing their voice and influence over
 discussions. Manual identification of influence relationships simply doesn't
 scale to this level.
+
 http://www.faqs.org/patents/app/20090313274
 
-\begin{itemize}
-\item specific example use-case
-\end{itemize}
+
 % \input{./tex/res_hadoop}
 
