@@ -22,3 +22,14 @@ Implementation of the conversion scripts went smoothly, though the initial attem
 \end{itemize}
 
 It was observed that in practise the Twitter API's rate limit is 350 requests per hour per account per IP, so the tool can be used to harvest information on multiple different groups simultaneously without altering the user/application id, just by running it on computers with distinct external IP addresses.
+
+\subsubsection{Reflection}
+One observed issue was that all metrics of importance are biased towards the root node. This is an artifact of the breadth-first search algorithm, and as such is hard to deal with. Removing the root node entirely from the final graph may help fix the obvious metrics, but the graph will still be distorted. Mapping the entirety of twitter would fix this issue but is infeasible give the rate-limits, and using hashtags would have produced inferior results.
+
+The other major issue - the failure to accrue more than 3000 fully mapped nodes on a particular target - was ultimately a consequence of the extremely late start.  It takes around a week of uninterrupted harvesting to get that much data, so the problem didn\'t become apparent until late on, by which point we were committed to using SQLite and had insufficient time to re-write or request a different server. It was fortunate that 3000 nodes was sufficient to demonstrate the lack of scalability of the old visualiser.
+
+A more permanent solution would be to obtain access to the streaming API, and construct code for fault tolerance from the ground up; performing extensive validation of all data received and verifying that it is stored correctly. A heavyweight alternative to SQLite should be used provided that it can be hosted locally; introducing a second network connection would needlessly introduce further possibilities for failure. After extensive testing with fault-insertion this could then be left to run for several months, and obtain a huge quantity of data. A possible extension would be to modify the algorithm to use a hybrid of the breadth-first-search and hashtag approaches.
+
+Though the graphml generation scripts scale linearly, they are hindered by writing to disk being slow, and graphml being a verbose format. Thus the two ways to improve their speed would be to use the recipient program\'s API to construct the graph rather than writing it to disk, and using a more concise format than graphml. However, both of these would severely limit their compatibility.
+
+A simple extension would be to assign variable weights to edges based on the number of tweets and follows reinforcing them.
