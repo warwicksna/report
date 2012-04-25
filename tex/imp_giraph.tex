@@ -91,8 +91,18 @@ Listing \ref{lst:json} represents the graph shown in Figure \ref{fig:json}. The 
   \label{fig:json}
 \end{figure}
 
-Listings \ref{lst:giraphvertexinput}-\ref{lst:giraphvertexwriter} show example implementations of the classes VertexInputFormat, VertexReader, VertexOutputFormat and VertexWriter found in Listing \ref{lst:giraphstructure}. The VertexInputFormat and VertexOutputFormat classes are opposite in how they operate. The VertexInputFormat class found in Listing \ref{lst:giraphvertexinput} 
-
+Listings \ref{lst:giraphvertexinput}-\ref{lst:giraphvertexwriter} show example
+implementations of the classes VertexInputFormat, VertexReader,
+VertexOutputFormat and VertexWriter found in Listing \ref{lst:giraphstructure}.
+The VertexInputFormat and VertexOutputFormat classes are opposite in how they
+operate. The VertexInputFormat class found in Listing
+\ref{lst:giraphvertexinput} splits the input graph into partitions for each
+Giraph worker to process on. Each of these partitions then uses the
+VertexReader in Listing \ref{lst:giraphvertexreader} to parse the input graph
+and load it into memory for the worker to execute the algorithm on. Once all
+vertices have voted to halt, the reverse happens. The VertexOutputFormat class
+is called by each worker to create a VertexWriter which writes the output from
+each worker to a file.
 
 \lstset{language=Java,caption={Giraph example VertexInputFormat \cite{giraphexample} },label=lst:giraphvertexinput,tabsize=2,breaklines=true,breakatwhitespace=true,frame=single}
 \begin{lstlisting}[float]
@@ -200,3 +210,28 @@ public static class SimpleShortestPathsVertexWriter extends
     }
 }
 \end{lstlisting}
+
+Hadoop, and by extension Giraph, writes the output of jobs into a user
+specified output directory, and then into a series of files within this
+directory which contain the output. With Giraph, there is an output file for
+each worker which is used for the execution of the program, and these following
+a naming scheme such as {\tt part-m-00001} up to the number of workers used.
+
+As explained previously, the \verb/compute()/ method is where the
+implementation of algorithms are located. Extra methods can be produced in
+addition to the \verb/compute()/ method, but the \verb/compute()/ method must
+be implemented for the program to run.
+
+Finally, the \verb/run()/ and \verb/main()/ methods control the execution of
+the job. The \verb/main()/ method is simply a passthrough method to the
+\verb/run()/ method. It is present because of how Giraph jobs are submitted to
+Hadoop for execution, and passes runtime arguments onto the \verb/run()/
+method. The \verb/run()/ method sets and maintains the configuration of the job
+during execution through the \verb/GiraphJob/ class. The\verb/GiraphJob/ class
+allows configuration of settings to use each of the classes described in
+Listings \ref{lst:giraphvertexinput}-\ref{lst:giraphvertexwriter}. In addition
+to these, it allows the \verb/Vertex/ class to be set, as well as the input and
+outpout locations of where the program should read and write to. It also allows
+the number of Giraph workers to be set, which specifies how many workers are
+required for the job to execute.
+
