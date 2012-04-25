@@ -12,15 +12,14 @@ Collaborative Recommendation: A Robustness Analysis defines two simple intents a
 
 \subsubsection{k-Nearest-Neighbour}
 
-The actual attacks used to achieve a given goal vary greatly depending on the implementation of the target system, but the base components remain the same. Early recommender systems such as Tapestry used a variation of the k-Nearest-Neighbour algorithm (see page x) to identify like-minded people to new users, and uses this as a basis for their recommendations.  
+The actual attacks used to achieve a given goal vary greatly depending on the implementation of the target system, but the base components remain the same. Early recommender systems such as Tapestry used a variation of the k-Nearest-Neighbour algorithm to identify like-minded people to new users, and uses this as a basis for their recommendations:  
 
 \begin{equation*}
-pu,i = ru + \Sigma v \in Uu,i [wu,v (rv,i − rv)]
+p_{u, i} = \bar{r_u} + \frac{\Sigma_{v \in U_{u, i} [w_{u, v}(r_{v, i} - \bar{r_v})]}}{\Sigma_{v\in U_{u, i} \left| w_{u, v} \right |}}
 \end{equation*}
 
-\begin{equation*}
-\Sigma v \in Uu,i \left\|wu,v \right\|
-\end{equation*}
+This calculates the user $u$'s predicted rating for item $i$. $\bar{r_u}$ is the user's average rating over all items, $w_{u, v}$ is a measure of the similarity between users u and v, and $U_{u, i}$ is u's neigbourhood for item i. The final result is thus the user's average rating, modified by the rating others gave it, weighted by their how similar their taste is to the user.
+
 This is by design not dissimilar to the reputation and influence systems
 underlying the networks that we want to tackle. The item-item algorithm's
 fundamental difference is that it directly calculates the distance between items

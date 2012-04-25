@@ -159,13 +159,10 @@ with small percentage of cheaters, could be achieved.
 
 \subsection{Network Rewiring}
 
-In order to further increase cooperation
-in the presence of cheaters, network rewiring was introduced (Griffiths and Luck, 2010).
-This allows an agent to rewire their connections to other agents,
-in effect changing the neighbourhood of an agent.
-The purpose of this is to allow an agent to remove connections
-to agents which are unlikely to donate and forge connections to agents
-which are more likely to donate.
+In order to further increase cooperation in the presence of cheaters,
+the ability for agents to rewire their connections was introduced \cite{aamas2010}.
+This allows an agent to rewire their connections to other agents, in effect changing the neighbourhood of an agent.
+The reasoning behind this was to allow an agent to drop connections to the agents in their neighbourhood which are unlikely to donate, and replace these with connections to new agents which are more likely to donate.
 
 Each agent which learnt during the learning phase,
 is given an opportunity to rewire their own connections.
@@ -178,7 +175,7 @@ There are two parameters that are used to control the rewiring phase:
 the rewire proportion and the rewire strategy.
 The rewire proportion is a percentage which is used to determine the number of
 neighbours removed or added during a rewiring.
-Whent the rewire proportion is zero, then no rewiring takes place.
+When the rewire proportion is zero, then no rewiring takes place.
 When the rewire proportion is one, then all of an agents connections will be dropped and replaced with new connections.
 There is a single rewire proportion value for all agents, which remains constant throughout the whole simulation.
 
@@ -233,11 +230,10 @@ rewire proportion on the donation rate, Griffiths and Luck performed a number
 of experiments.
 
 It was found that the random rewiring strategy performed better than the RCA
-approach, but worse than the RCA approach augmented with context assessment
-(Griffiths, 2008). It was found that all the other rewiring strategies resulted
+approach, but worse than the RCA approach augmented with context assessment. It was found that all the other rewiring strategies resulted
 in a better donation rate than either of the RCA approaches. It was found that
 rewiring was poorest when the rewiring proportion was close to zero or one.
-It was found that the random replace worst rewwiring strategy performed poorly
+It was found that the random replace worst rewiring strategy performed poorly
 when the rewiring proportion was greater than around $0.6$. It was found that
 the individual and group replace worst rewiring strategies performed similarly
 and had the best results when the rewire proportion was between $0.4$ and $0.8$.
