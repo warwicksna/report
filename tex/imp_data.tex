@@ -8,7 +8,7 @@ Upon running this script, it quickly became evident that the Twitter servers wer
 
 At one point the server returned corrupted data for a user's tweets without throwing an error. As tweets are placed into the database verbatim, this didn't trigger any errors and caused trouble later. The script now validates that all responses are valid json, which should mitigate any recurrences.
 
-As the number of fully-mapped nodes approached 3000, file I/O errors began appearing on the client side. Investigation suggested that this was an issue with Joshua, rather than SQLite:
+As expected, the script mapped around 20 users per hour. As the number of fully-mapped nodes approached 3000, file I/O errors began appearing on the client side. Investigation suggested that this was an issue with Joshua, rather than SQLite:
 
 The theoretical maximum number of rows in a table is 264 (18446744073709551616 or about 1.8e+19). This limit is unreachable since the maximum database size of 14 terabytes will be reached first.
 https://www.sqlite.org/limits.html
