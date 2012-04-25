@@ -1,5 +1,7 @@
 \section{Influence Manipulation}
 
+todo: check KNN + biblio
+
 \subsection{Recommender Systems}
 
 Although relatively little publicly available research exists on the topic of manipulating social networks, there is a wealth of information on attack and defence of recommender systems. Recommender systems are a tool used to tackle the problem of information overload; where more content exists than a user has time to evaluate. As the name suggests, they do so by performing an initial evaluation on behalf of the user, whittling the quantity of presented content down to a level the user can cope with. Amazon and Twitter them to recommend products and followers respectively. They are fundamentally similar to social networks in the underlying graph structure, the attempt to model a real-world phenomena, and the clear incentives various parties have to manipulate them.
@@ -26,14 +28,9 @@ rather than between users. ``People who liked X also liked Y''
 
 \subsubsection{Attacks}
 
-The paper `Shilling Recommender Systems for Fun and Profit' considers attacks in terms of their intent, targets, required knowledge and cost. There is a cost per shill whether they are an undercover agent, the product of a persona management system or simply a solved captcha (the latter being the only part of account-creation on a website that can't be automated, and costing \$1.39/1000 from deathbycaptcha.com ). The simplest push/nuke attacks revolve around gaining as many neighbours as possible, then rating the target item. The simple but ineffective approach to the linking stage taken by the `RandomBot' is to assign a random rating to all the items in the database. The `AverageBot' attack instead assigns to each item the average rating it's received so far. This has a lower cost at the expense of a greater knowledge requirement. Even on a network like Twitter where most data is publicly available, there is a cost associated with acquiring and processing it. Toward Trustworthy Recommender Systems: An Analysis of Attack Models and Algorithm Robustness introduces two additional, more implementation specific attacks. The bandwagon attack achieves a high level of association for a low cost by rating a small number of frequently and consistently rated items (e.g. bestselling novels).  The segment attack is simply a refinement that only attempts to promote items to those already disposed to buying them.
+The paper `Shilling Recommender Systems for Fun and Profit' considers attacks in terms of their intent, targets, required knowledge and cost. There is a cost per shill whether they are an undercover agent, the product of a persona management system or simply a solved captcha (the latter being the only part of account-creation on a website that can't be automated, and costing \$1.39/1000 from deathbycaptcha.com ). The simplest push/nuke attacks revolve around gaining as many neighbours as possible, then rating the target item. The simple but ineffective approach to the linking stage taken by the `RandomBot' is to assign a random rating to all the items in the database. The `AverageBot' attack instead assigns to each item the average rating it's received so far. This has a lower cost at the expense of a greater knowledge requirement. Even on a network like Twitter where most data is publicly available, there is a cost associated with acquiring and processing it. Toward Trustworthy Recommender Systems: An Analysis of Attack Models and Algorithm Robustness introduces two additional, more implementation specific attacks. The bandwagon attack achieves a high level of association for a low cost by rating a small number of frequently and consistently rated items (e.g. bestselling novels).  The segment attack is simply a refinement that only attempts to promote items to those already disposed to buying them. Other attacks include the self-explanatory 'reverse bandwagon' and 'love/hate' techniques.
 
-\begin{itemize}
-	\item +love/hate
-	\item reverse bandwagon
-\end{itemize}
-
-These attacks provide us with a number of starting techniques, as well as an insight into something
+These attacks provide us with a number of starting techniques, as well as an insight into the relationship between knowledge and cost requirements. A hybrid persona/person approach may prove necessary.
 
 \subsubsection{Defences}
 
@@ -49,7 +46,7 @@ future problems.
 \subsubsection{Mitigation}
 
 One mitigation that is at least conceptually simple  is to use a hybrid model
-where a significant portion of the model isn't taken from user data. For
+where a significant portion of the model isn\'t taken from user data. For
 example, semantically enhanced collaborative modelling uses text-mining
 techniques to create a similarity measure entirely independent of user input.
 From the perspective of a persona management system, all target systems use a
@@ -64,12 +61,7 @@ deviation and profile length; the randomBot attack has a clear footprint in this
 regard. Perhaps in recognition of the inherent inaccuracy of such measures, once
 a profile is classified as ``suspicious'' its ratings are simply ignored, rather
 than it being booted off the system as might happen to a hacker on an attack
-aware application.
-
-\begin{itemize}
-	\item rating deviation from main agreement
-	\item they act in groups
-\end{itemize}
+aware application. Groups of shills may also betray themselves by acting in unison. Interactions on social networks are stored indefinitely, so even now the utmost care must be taken to avoid these signature patterns.
 
 
 \url{http://blog.mozilla.org/webappsec/2011/02/02/attack-aware-applications/}
