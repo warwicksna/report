@@ -47,12 +47,24 @@ Files are stored into the GFS in chunks of size 64MB. This size was chosen to re
 
 The master node maintains the metadata for the file system. This includes the locations of chunks across the file system, and which chunks compose the files stored. The master node communicates with each chunkserver frequently, and if it does not receive a response, the chunkserver is deemed to have failed and any chunks which are then under replicated in the file system are re-replicated to ensure that the minimum number of replications for each chunk are observed.
 
-
-
 \subsection{Hadoop}
-Hadoop\footnote{\url{http://hadoop.apache.org/}} is framework for performing distributed computing. It is a free implementation of the MapReduce framework developed at Google.
+Hadoop\footnote{\url{http://hadoop.apache.org/}} is framework for performing
+distributed computing. It is a free implementation of the MapReduce framework
+developed at Google, and is also a top-level project hosted by Apache.
+
+Hadoop has diversified itself from its conception, and is now composed of three
+subprojects, Hadoop Common, Haddop Distributed File System, and Hadoop
+MapReduce. Hadoop Common providse common utilities which support the other
+Hadoop subprojects. The Hadoop Distributed File System is described in more
+detail in Section \ref{sec:hdfs}
+
+Hadoop MapReduce is the subproject by which Hadoop itself more known for. It
+provides functionality similar to the MapReduce framework developed by Google,
+where there exists a $Map$ and a $Reduce$ function which process data across a
+cluster.
 
 \subsubsection{Hadoop Distributed File System}
+\label{sec:hdfs}
 Hadoop also provides a the Hadoop Distributed File System, HDFS. The HDFS is a free implementation of the Google File System, and is designed to be used with Hadoop itself, though can also be used a distributed file system by itself \cite{hdfs}.
 
 The HDFS operates in a similar approach to the operation of Hadoop and the Google File System. There exists a master node, called the NameNode, and many slave nodes, called DataNodes. The NameNode co-ordinates the access of files stored in the HDFS, and also manages the file system namespace. There is usually a DataNode present on each physical node within the cluster. It is the DataNode which control the storage of files on the storage system present on the node, and also controls the reading and writing of files to the HDFS from a user.
