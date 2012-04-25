@@ -15,11 +15,7 @@ Collaborative Recommendation: A Robustness Analysis defines two simple intents a
 The actual attacks used to achieve a given goal vary greatly depending on the implementation of the target system, but the base components remain the same. Early recommender systems such as Tapestry used a variation of the k-Nearest-Neighbour algorithm (see page x) to identify like-minded people to new users, and uses this as a basis for their recommendations.  
 
 \begin{equation*}
-pu,i = ru + \Sigma v \in Uu,i [wu,v (rv,i − rv)]
-\end{equation*}
-
-\begin{equation*}
-\Sigma v \in Uu,i \left\|wu,v \right\|
+p_{u, i} = \bar{r_u} + \frac{\Sigma_{v \in U_{u, i} [w_{u, v}(r_{v, i} - \bar{r_v})]}}{\Sigma_{v\in U_{u, i} \left| w_{u, v} \right |}}
 \end{equation*}
 This is by design not dissimilar to the reputation and influence systems
 underlying the networks that we want to tackle. The item-item algorithm's
