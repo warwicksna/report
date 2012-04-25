@@ -36,3 +36,11 @@ We will make use of each of the datasets from Section \ref{sec:results_datasets}
 Figure \ref{fig:inputsize-benchmark} shows the results of running the PageRank on different size inputs. Figure \ref{fig:inputsize-vertices-benchmark} and Figure \ref{fig:inputsize-edges-benchmark} show that as the size of the input graphs are increased, then the cost to compute the PageRank values increases proportionally with the size of the input. For this benchmark, the PageRank algorithm was set to finish after 30 supersteps so that the dynamics of the networks were not influencing the runtime of PageRank too greatly.
 
 \subsection{Conclusions}
+We have shown that for current state of the cluster, with seven slave nodes
+executing algorithms that the optimum running time for algorithms is achieved
+when all seven of the slave nodes are used with one worker task assigned to
+each. As the cluster grows, then it is quite likely that the optimum number of
+workers will equal the size of the cluster. We have also shown that the system
+is able to cope with a wide range of input sizes of graphs, which do noticeably
+increase the running time of the algorithms, but with an increase in the size
+of the cluster
