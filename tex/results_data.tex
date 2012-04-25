@@ -185,7 +185,7 @@ The datasets contains 262,111 nodes and 1,234,877 edges, and is listed with an a
 \subsection{Wikipedia Talk}
 The Wikipedia Talk network\footnote{\url{http://snap.stanford.edu/data/wiki-Talk.html}} contains 2,394,385 nodes and 5,021,410 edges. There are 9,203,519 triangles present within the network, and the network has an average clustering coefficient of 0.1958.
 
-\subsection{Patent citation}
+\subsection{Patent Citation}
 The Patent citation network\footnote{\url{http://snap.stanford.edu/data/cit-Patents.html}} contains 3,774,768 nodes and 16,518,948 edges. There are 7,515,023 triangles present within the network, and the network has an average clustering coefficient of 0.0919.
 
 \subsection{LiveJournal}
@@ -197,5 +197,24 @@ Unfortunately, this dataset is too large to be analysed on the Hadoop cluster we
 The large Twitter dataset available indirectly from the SNAP website\footnote{\url{http://snap.stanford.edu/data/twitter7.html}}\footnote{\url{http://an.kaist.ac.kr/traces/WWW2010.html}} consists of 41.7 million nodes and 1.47 billion edges. However, since the LiveJournal dataset was too large to process on the cluster we had available, it was decided not to attempt to process the social network presented.
 
 \subsection{Conclusions}
-We have shown that the system we have produced has been able to process social networks of a much larger size than possible using the previous SNAT tool developed last year.
+We have shown that the system we have produced has been able to process social
+networks of a much larger size than possible using the previous SNAT tool
+developed last year. The actual results from the datasets not directly related
+to the intended use of our tool are meaningful to us in anyway, other than
+confirming that the tool is working correctly.
 
+It is a shame that the LiveJournal dataset was too large to process, and
+similarly so with the large Twitter dataset. These networks represented large
+social networks, of which identifying clusters and users of importance would
+have been interesting and insightful.
+
+However, due to the approach undertaken in implementing a distributed social
+network analysis tool, we know that with a large cluster analysis of these
+networks is possible. A larger cluster would also be beneficial with the
+analysis of the smaller networks. Executing the PageRank algorithm on the
+Patent Citation network took on average twenty-five minutes to complete, which
+contrasts with the forty seconds for PageRank to complete on the Enron dataset.
+
+A larger cluster will allow processing of larger datasets, whilst at the same
+time, it will also decrease the running time of performing algorithms on
+smaller datasets.
