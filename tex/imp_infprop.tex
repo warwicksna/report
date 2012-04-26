@@ -193,3 +193,130 @@ if node1isOn \&\& influence >= threshold {
 }
 \end{verbatim}
 
+\subsection{Graph Generation}
+
+As per the paper [CITE], influence can spread more easily in scale-free networks. Therefore we decided to test the influence propogation algorithms by running them on several scale-free networks with different scaling factors.
+
+A scale-free network is one where the degree distribution of nodes follows a power law, ie, the fraction P(n) of nodes in the network having n connections to other nodes is:
+
+\begin{verbatim}
+P(n) =~ ck^(-y)
+\end{verbatim}
+
+Where c is a normalisation constant and y is a parameter with a range typically between 2 and 3.
+
+A Ruby script was written to generate such scale free graphs. We begin with a script that would generate random graphs, using the following snippet of code:
+
+\begin{verbatim}
+
+def generate(num_nodes, links_per_node, num_influenced, filename)
+
+  nodes.times do |i|
+    puts i
+    Node.new
+  end
+
+  (nodes * links_per_node / 2).times do |i|
+    Node.add_edge
+  end
+
+end
+\end{verbatim}
+
+Where the add\_edge function looked as follows:
+
+\begin{verbatim}
+  def self.add_edge()
+    while true
+      node1, node2 = @@nodes.sample, @@nodes.sample
+      n1,n2 = node1.node_id, node2.node_id
+
+      next if n1 == n2
+      edge = if n1 < n2
+               [n1,n2]
+             else
+               [n2,n1]
+             end
+
+      weight = rand * 0.2
+      edge.push weight
+
+      if @@edges.any? {|n1,n2,weight| n1 == edge[0] && n2 == edge[1]}
+        next
+      else
+        @@edges.push(edge)
+        node1.neighbours += 1
+        node2.neighbours += 1
+        break
+      end
+    end
+  end
+
+\end{verbatim}
+
+The function selects two random nodes. If the nodes are already linked, or are actually the same node, then the function tries again until they are not. When a suitable pair of nodes is found, the corresponding edge is added to the list of edges.
+
+To generate scale free graphs, we needed to alter this code so that each node would have a maximum number of neighbours, depending on its position. This value is given by the power\_law function, which takes the node's position, and two additional parameters which correspond to c and y in the above formula. As these parameters are passed to the script on startup, graphs can be generated with varying parameters.
+
+
+\begin{verbatim}
+def generate(nodes, max_edges_per_node, scale_factor, num_influenced)
+
+  nodes.times do |i|
+    Node.new
+  end
+
+  Node.nodes.each_with_index do |node,i|
+    max_neighbours = power_law(i,max_edges_per_node,scale_factor)
+
+    begin
+      while node.neighbours < max_neighbours
+        Node.add_edge(node, max_edges_per_node, scale_factor)
+      end
+    rescue Exception => e
+      break
+    end
+  end
+
+  num_influenced.times {Node.nodes.sample.influenced = true}
+
+  write_graph
+end
+
+def self.add_edge(node1, max_edges_per_node, scale_factor)
+  100.times do
+    node2 = @@unlinked_nodes.sample
+    n1,n2 = node1.node_id, node2.node_id
+     next if n1 == n2
+    if node2.neighbours >= power_law(n2,max_edges_per_node,scale_factor)
+      @@unlinked_nodes.delete_if {|n| n.node_id == n2}
+      next
+    end
+     edge = if n1 < n2
+             [n1,n2]
+           else
+             [n2,n1]
+           end
+     weight = rand * 0.2
+    edge.push weight
+     if node1.neighbours_array[n2]
+      next
+    else
+      @@edges.push(edge)
+      node1.neighbours += 1
+      node1.neighbours_array[n2]=true
+      node2.neighbours += 1
+      node2.neighbours_array[n1]=true
+       return
+    end
+  end
+   throw "Graph full!"
+end
+
+\end{verbatim}
+
+The main difference is that if adding an edge would take a node beyond it's maximum number of neighbours, that edge is not added, and a new edge is found. When it becomes too difficult to find valid edges -- ie, when most nodes have reached their allocation of neighbours -- then the algorithm terminates. This means that some nodes will have less than the maximum allocation of neighbours, though in practice such nodes are very few.
+
+In addition, the previous implementation searched the entire list of edges for a duplicate before adding a new edge. This implementation mantains a list of neighbours for each node and checks that instead, causing a great increase in performance.
+
+To test the algorithm, 7 graphs were generated, each containing 10,000 nodes and 50,000 edges. The only difference between the graphs was the skew of their distributions; ie, in the first graph, every node had exactly 10 edges; in the last graph, the first 500 nodes had an average of 143 neigbours each, the next 1000 nodes had an average of 19 neighbours each, and the last 8500 nodes had only one edge each. The other graphs all fell somewhere between these extremes.
