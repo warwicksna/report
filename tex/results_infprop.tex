@@ -1,6 +1,6 @@
 \section{Influence Propogation Results}
 
-We ran the independent cascade algorithm on seven randomly generated graphs. The graphs were generated using the scale-free generator, with different parameters passed each time. The values used were as follows:
+We ran the independent cascade algorithm on seven randomly generated graphs. The graphs were generated using the scale-free generator, with different parameters passed each time. The parameters used were are shown in \ref{tab:ic_graphs}.
 
 \begin{table}
 \centering
@@ -21,15 +21,15 @@ Max Neighbours & Scale Factor \\
 \label{tab:ic_graphs}
 \end{table}
 
-Each graph contained 10,000 nodes. ``Max neighbours'' is the maximum number of neighbours held by any single node, eg, in the last graph, there exists a node with 279 neighbours. ``Scale factor'' was chosen by trial and error, to ensure that each graph contained 50,000 (+- 500) edges. Each graph had 5 initially converted nodes.
+Each graph contained 10,000 nodes. ``Max neighbours'' is the maximum number of neighbours held by any single node, eg, in the last graph listed in the table, one node had 279 neighbours. ``Scale factor'' was chosen by trial and error, to ensure that each graph contained 50,000 (+- 500) edges. Each graph had 5 initially converted nodes.
 
 As the average degree distribution was approximately equal for all the graphs, spread of influence through the graph would be more dependent on the network structure.
 
-\ref{tab:ic_results} shows the raw results of this experiment. Note that independent cascade ran iteratively, so the results show the number of converted nodes after each iteration.
+\ref{tab:ic_results10} to \ref{tab:ic_results279} show the raw results of this experiment. Note that independent cascade ran iteratively, so the results show the number of converted nodes after each iteration. Each graph is referred to by its max neighbours parameter, eg, IC10 refers to the first graph listed in \ref{tab:ic_graphs}.
 
 \begin{table}
 \centering
-\begin{tabular}{|l|l|l|}
+\begin{tabular}{|l||l|l|}
 \hline
 Max Neighbours & Iteration & Converted Nodes \\
 \hline
@@ -39,6 +39,17 @@ Max Neighbours & Iteration & Converted Nodes \\
 10 & 3 & 10 \\
 10 & 4 & 10 \\
 \hline
+\end{tabular}
+\caption{Independent Cascade: Results for IC10.}
+\label{tab:ic_results10}
+\end{table}
+
+\begin{table}
+\centering
+\begin{tabular}{|l||l|l|}
+\hline
+Max Neighbours & Iteration & Converted Nodes \\
+\hline
 11 & 0 & 5 \\
 11 & 1 & 9 \\
 11 & 2 & 12 \\
@@ -47,6 +58,17 @@ Max Neighbours & Iteration & Converted Nodes \\
 11 & 5 & 15 \\
 11 & 6 & 15 \\
 11 & 7 & 15 \\
+\hline
+\end{tabular}
+\caption{Independent Cascade: Results for IC11.}
+\label{tab:ic_results11}
+\end{table}
+
+\begin{table}
+\centering
+\begin{tabular}{|l||l|l|}
+\hline
+Max Neighbours & Iteration & Converted Nodes \\
 \hline
 12 & 0 & 5 \\
 12 & 1 & 12 \\
@@ -70,6 +92,17 @@ Max Neighbours & Iteration & Converted Nodes \\
 12 & 19 & 96 \\
 12 & 20 & 96 \\
 \hline
+\end{tabular}
+\caption{Independent Cascade: Results for IC12.}
+\label{tab:ic_results12}
+\end{table}
+
+\begin{table}
+\centering
+\begin{tabular}{|l||l|l|}
+\hline
+Max Neighbours & Iteration & Converted Nodes \\
+\hline
 17 & 0 & 5 \\
 17 & 1 & 17 \\
 17 & 2 & 31 \\
@@ -82,6 +115,17 @@ Max Neighbours & Iteration & Converted Nodes \\
 17 & 9 & 92 \\
 17 & 10 & 92 \\
 17 & 11 & 92 \\
+\hline
+\end{tabular}
+\caption{Independent Cascade: Results for IC17.}
+\label{tab:ic_results17}
+\end{table}
+
+\begin{table}
+\centering
+\begin{tabular}{|l||l|l|}
+\hline
+Max Neighbours & Iteration & Converted Nodes \\
 \hline
 33 & 0 & 5 \\
 33 & 1 & 10 \\
@@ -126,6 +170,17 @@ Max Neighbours & Iteration & Converted Nodes \\
 33 & 40 & 3806 \\
 33 & 41 & 3806 \\
 \hline
+\end{tabular}
+\caption{Independent Cascade: Results for IC33.}
+\label{tab:ic_results33}
+\end{table}
+
+\begin{table}
+\centering
+\begin{tabular}{|l||l|l|}
+\hline
+Max Neighbours & Iteration & Converted Nodes \\
+\hline
 98 & 0 & 5 \\
 98 & 1 & 17 \\
 98 & 2 & 68 \\
@@ -139,6 +194,18 @@ Max Neighbours & Iteration & Converted Nodes \\
 98 & 10 & 3166 \\
 98 & 11 & 3166 \\
 \hline
+\end{tabular}
+\caption{Independent Cascade: Results for IC98.}
+\label{tab:ic_results98}
+\end{table}
+
+
+\begin{table}
+\centering
+\begin{tabular}{|l||l|l|}
+\hline
+Max Neighbours & Iteration & Converted Nodes \\
+\hline
 279 & 0 & 5 \\
 279 & 1 & 16 \\
 279 & 2 & 205 \\
@@ -150,13 +217,13 @@ Max Neighbours & Iteration & Converted Nodes \\
 279 & 8 & 2107 \\
 \hline
 \end{tabular}
-\caption{Independent Cascade: Results.}
-\label{tab:ic_results}
+\caption{Independent Cascade: Results for IC279.}
+\label{tab:ic_results279}
 \end{table}
 
 \subsection{Graphs}
 
-Each graph plots the number of converted nodes against the number of iterations. Each graph is referred to by it's max neighbours parameter, eg, IC10 refers to the first graph listed in \ref{tab:ic_graphs}.
+Each graph plots the number of converted nodes against the number of iterations. 
 
 \begin{figure}[htbp]%
 \centering
