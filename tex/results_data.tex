@@ -288,17 +288,58 @@ The Amazon product co-purchasing network\footnote{\url{http://snap.stanford.edu/
 
 The datasets contains 262,111 nodes and 1,234,877 edges, and is listed with an average clustering coefficient of 0.4240 and 717,719 triangles present.
 
+\subsubsection{PageRank}
+
+\subsubsection{Vertex Degrees}
+
 \subsection{Wikipedia Talk}
 The Wikipedia Talk network\footnote{\url{http://snap.stanford.edu/data/wiki-Talk.html}} contains 2,394,385 nodes and 5,021,410 edges. There are 9,203,519 triangles present within the network, and the network has an average clustering coefficient of 0.1958.
+
+\subsubsection{PageRank}
+
+\subsubsection{Vertex Degrees}
 
 \subsection{Patent Citation}
 The Patent citation network\footnote{\url{http://snap.stanford.edu/data/cit-Patents.html}} contains 3,774,768 nodes and 16,518,948 edges. There are 7,515,023 triangles present within the network, and the network has an average clustering coefficient of 0.0919.
 
+\subsubsection{PageRank}
+
+\begin{table}%
+\begin{tabular}{|l|l|}
+\hline
+\hline
+4237224 & 2.4890060240975007E-5 \\
+3813316 & 2.154212981534069E-5 \\
+3932805 & 1.2391955911526967E-5 \\
+4395486 & 1.1161868281599083E-5 \\
+4298685 & 1.0276200370604275E-5 \\
+4683195 & 1.0267036400471796E-5 \\
+3778614 & 9.558281303049814E-6 \\
+4683202 & 9.36024255530041E-6 \\
+4358535 & 8.708264966788E-6 \\
+3950357 & 8.707317765944523E-6 \\
+3789832 & 7.824135128325006E-6 \\
+4196265 & 7.4890674305812076E-6 \\
+4064521 & 7.458897929020249E-6 \\
+3988545 & 7.20869336958276E-6 \\
+3763480 & 7.072167214787706E-6 \\
+4021726 & 6.992826128596397E-6 \\
+3856513 & 6.899726306781281E-6 \\
+3747120 & 6.767632714954929E-6 \\
+3702886 & 6.693466783697207E-6 \\
+2768114 & 6.473626268751898E-6 \\
+\hline
+\end{tabular}
+\caption{Highest PageRank values for Patent Citation network}
+\label{tab:patentspr}
+\end{table}
+
+\subsubsection{Vertex Degrees}
+
 \subsection{LiveJournal}
 The LiveJournal social network\footnote{\url{http://snap.stanford.edu/data/soc-LiveJournal1.html}} contains 4,847,571 nodes and 68,993,773 edges. There are 285730264 triangles present within the network, and the network has an average clustering coefficient of 0.3123.
 
-Unfortunately, this dataset is too large to be analysed on the Hadoop cluster we
-have access to, so no extra analysis was able to be performed.
+Unfortunately, this dataset is too large to be analysed on the Hadoop cluster we have access to, so no extra analysis was able to be performed.
 
 \subsection{Twitter}
 The large Twitter dataset available indirectly from the SNAP website\footnote{\url{http://snap.stanford.edu/data/twitter7.html}}\footnote{\url{http://an.kaist.ac.kr/traces/WWW2010.html}} consists of 41.7 million nodes and 1.47 billion edges. However, since the LiveJournal dataset was too large to process on the cluster we had available, it was decided not to attempt to process the social network presented.
