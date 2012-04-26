@@ -87,26 +87,26 @@ As the EDL dataset is directed, we analyse both the in-degree and out-degree of 
 \hline
 Twitter Name & In-Degree \\
 \hline
-220331507 & 1559 \\
-410224577 & 496 \\
-374712154 & 468 \\
-201247027 & 426 \\
-15610459 & 209 \\
-332320606 & 205 \\
-265287278 & 194 \\
-256943061 & 161 \\
-142082006 & 138 \\
-353657708 & 131 \\
-12925072 & 130 \\
-234309657 & 124 \\
-199808054 & 91 \\
-245761263 & 84 \\
-440109993 & 79 \\
-46760864 & 79 \\
-19985444 & 78 \\
-13058232 & 76 \\
-279714026 & 76 \\
-227954333 & 75 \\
+edlsupportgroup & 1559 \\
+Official\_EDL & 496 \\
+TommyRobinson3 & 468 \\
+everythingEDL & 426 \\
+british\_freedom & 209 \\
+edlnews & 205 \\
+Englandstruth & 194 \\
+EDLNottingham & 161 \\
+Nationalist\_UK & 138 \\
+markylyons & 131 \\
+TwitPic & 130 \\
+EDLGommy & 124 \\
+mountforrest & 91 \\
+snidey\_UK & 84 \\
+suzycasuals & 79 \\
+hopenothate & 79 \\
+jihadwatchRS & 78 \\
+noaheverett & 76 \\
+NO2EU4UK & 76 \\
+UniteAgainstMDL & 75 \\
 \hline
 \end{tabular}
 \caption{In-Degrees for EDL dataset}
@@ -119,26 +119,26 @@ Twitter Name & In-Degree \\
 \hline
 Twitter Name & Out-Degree \\
 \hline
-353657708 & 204 \\
-199808054 & 133 \\
-495874697 & 128 \\
-264238936 & 93 \\
-142082006 & 92 \\
-373843347 & 87 \\
-245905821 & 83 \\
-47223385 & 80 \\
-392058404 & 77 \\
-185624680 & 75 \\
-94855635 & 72 \\
-21142055 & 68 \\
-279714026 & 67 \\
-409492198 & 65 \\
-55935057 & 63 \\
-415038513 & 49 \\
-448017421 & 49 \\
-19485684 & 48 \\
-509439451 & 47 \\
-479074142 & 44 \\
+markylyons & 204 \\
+mountforrest & 133 \\
+kingSTARdavid & 128 \\
+olwentheblogger & 93 \\
+Nationalist\_UK & 92 \\
+ErinAngelConnor & 87 \\
+Nemesisrepubllc & 83 \\
+jezzasexiles & 80 \\
+sirchipbutty & 77 \\
+leestevens1987 & 75 \\
+TimEDL & 72 \\
+richiec86 & 68 \\
+NO2EU4UK & 67 \\
+bigmickeyEDL & 65 \\
+Ironwand & 63 \\
+INDUSTRIALfolk & 49 \\
+everythingedI & 49 \\
+atticvs & 48 \\
+M10Perryboy & 47 \\
+ManFromReality & 44 \\
 \hline
 \end{tabular}
 \caption{Out-Degrees for EDL dataset}
@@ -151,14 +151,144 @@ Due to the approach of collecting the data, we felt that the results of the clus
 As expected the results of the network local clustering coefficient algorithm is quite high, with a value of \verb/0.68038719629578/ which indicates that the nodes within the network cluster together. This is unsurprising given the method used to collect data.
 
 \subsection{Unite Against Fascism}
-The analysis performed on this data is similar to the analysis performed on the data collected about EDL.
+The analysis performed on this data is similar to the analysis performed on the data collected about EDL. 
 
 \subsubsection{PageRank}
+Again, we have run the PageRank algorithm on both the network structure, and also the structure after considering edges as tweets. Tables \ref{tab:uafpagerank} and \ref{tab:uaftweetpagerank} show the results of this. There are few differences between the two results, unlike with the EDL data where there was a more noticeable difference. Whether this is due to the larger dataset, or just due to how the data was collected is unknown.
+
+\begin{table}%
+\centering
+\begin{tabular}{|l|l|}
+\hline
+Twitter Name & PageRank \\
+\hline
+uaf & 0.06755953210537731 \\
+hopenothate & 0.013540958645205433 \\
+PennyRed & 0.010325829992646673 \\
+STWuk & 0.008325244316633566 \\
+socialistworker & 0.008055156480675034 \\
+lmhrnational & 0.007211652192218275 \\
+jeremycorbyn & 0.006007108015834818 \\
+leninology & 0.005904932987841927 \\
+pcs\_union & 0.005721022268343613 \\
+TUCcuts & 0.005057234774047982 \\
+solomonsmfield & 0.004781008606058315 \\
+RedPeppermag & 0.004451042602813854 \\
+successwalls & 0.004433498637154117 \\
+stebax & 0.004108130813616846 \\
+edactivistnet & 0.004060136095291972 \\
+mdbergfeld & 0.0038365589532517713 \\
+everythingEDL & 0.003791772379920953 \\
+AdamBienkov & 0.003775175284242799 \\
+GuyAitchison & 0.0033005826068107074 \\
+132883862 & 0.0029371420558601704 \\
+\hline
+\end{tabular}
+\caption{PageRank on UAF}
+\label{tab:uafpagerank}
+\end{table}
+
+\begin{table}%
+\centering
+\begin{tabular}{|l|l|}
+\hline
+Twitter Name & PageRank \\
+\hline
+uaf & 0.059860582165571614 \\
+hopenothate & 0.01231077423514115 \\
+PennyRed & 0.010078474542571738 \\
+STWuk & 0.007565427885639142 \\
+socialistworker & 0.007536671766468688 \\
+lmhrnational & 0.00634925921388839 \\
+jeremycorbyn & 0.005861776459271149 \\
+leninology & 0.005572098254088899 \\
+pcs\_union & 0.005554416330795791 \\
+bat020 & 0.004755016224004177 \\
+TUCcuts & 0.004616342695438768 \\
+solomonsmfield & 0.004401490506679636 \\
+stebax & 0.004317824593548642 \\
+AdamBienkov & 0.0042886646499828126 \\
+everythingEDL & 0.004255541038677486 \\
+RedPeppermag & 0.00407216770253133 \\
+GuyAitchison & 0.00392592164938968 \\
+mdbergfeld & 0.0038003853197652857 \\
+edactivistnet & 0.0036028458473956124 \\
+davidwearing & 0.0035662115177339288 \\
+\hline
+\end{tabular}
+\caption{PageRank on UAF considering edges as tweets}
+\label{tab:uaftweetpagerank}
+\end{table}
 
 \subsubsection{Vertex Degrees}
+Table \ref{tab:uafin} shows the results of analysing the number of connections incoming on each node within the UAF dataset. The top three users are the same as the PageRank results, the first of which is the root node selected for starting the data collection, which shows that these users are quite important within the network surrounding the UAF
+
+\begin{table}%
+\centering
+\begin{tabular}{|l|l|}
+\hline
+Twitter Name & In-Degree \\
+\hline
+uaf & 2979 \\
+hopenothate & 878 \\
+PennyRed & 737 \\
+socialistworker & 611 \\
+STWuk & 584 \\
+jeremycorbyn & 486 \\
+lmhrnational & 433 \\
+pcs\_union & 432 \\
+TUCcuts & 409 \\
+leninology & 408 \\
+RedPeppermag & 332 \\
+solomonsmfield & 317 \\
+everythingEDL & 310 \\
+mdbergfeld & 295 \\
+edactivistnet & 288 \\
+successwalls & 273 \\
+stebax & 268 \\
+GuyAitchison & 257 \\
+AdamBienkov & 246 \\
+strike2012 & 235 \\
+\hline
+\end{tabular}
+\caption{In-Degrees for UAF dataset}
+\label{tab:uafin}
+\end{table}
+
+\begin{table}%
+\centering
+\begin{tabular}{|l|l|}
+\hline
+Twitter Name & Out-Degree \\
+\hline
+uaf & 2980 \\
+BurntheBankers & 362 \\
+hopenothate & 356 \\
+strike2012 & 247 \\
+tedsplitter & 236 \\
+HolyCowSauces & 211 \\
+stebax & 202 \\
+broadleft & 200 \\
+Brat13 & 198 \\
+Jet739 & 189 \\
+PeoplesBookshop & 180 \\
+successwalls & 172 \\
+nansen & 170 \\
+jrf\_uk & 169 \\
+benfolley & 169 \\
+MarkRowe10 & 167 \\
+DarrellGoodliff & 166 \\
+socialistworker & 166 \\
+SocRes & 165 \\
+StartupPro & 165 \\
+\hline
+\end{tabular}
+\caption{Out-Degrees for UAF dataset}
+\label{tab:uafout}
+\end{table}
 
 \subsubsection{Clustering Coefficients}
-As the data collected about the UAF was collected in an identical manner to the EDL, we again felt that the results of the clustering coefficients would again be quite biased.
+As the data collected about the UAF was collected in an identical manner to the EDL, we again felt that the results of the clustering coefficients would again be quite biased. The network local clustering coefficient produced for the network is \verb/0.5129725994363714/ which shows there is less clustering occurring than with the EDL data, but is still quite high.
 
 \subsection{Enron}
 One dataset which we needed to check the performance of DSNAT with was the Enron email network\footnote{\url{http://snap.stanford.edu/data/email-Enron.html}}. This is a dataset containing nodes representing email addresses, and connections existing between the nodes if at least one email was sent between them. The dataset contains 36,692 nodes and 367,662 edges.
@@ -327,6 +457,7 @@ Node ID & PageRank \\
 \end{table}
 
 \subsubsection{Vertex Degrees}
+The results of the calculating the in-degree and out-degree for the Amazon dataset are presented in Tables \ref{tab:amazonin} and \ref{tab:amazonout}. The results seem to indicate that node 33 is a popular item on sale at Amazon.
 
 \begin{table}%
 \centering
@@ -539,7 +670,7 @@ Node ID & PageRank \\
 \end{table}
 
 \subsubsection{Vertex Degrees}
-Table \ref{tab:patentsin} contains the vertices with the highest in-degree, and Table \ref{tab:patentsin} contains the vertices with the highest out-degree
+Table \ref{tab:patentsin} contains the vertices with the highest in-degree, and Table \ref{tab:patentsin} contains the vertices with the highest out-degree. The top few nodes from these tables do not feature highly on the results of PageRank, which indicates that the structure of this network is different to the other datasets analysed. Such a low average clustering coefficient would confirm this.
 
 \begin{table}[htbp]%
 \centering

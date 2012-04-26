@@ -29,6 +29,10 @@ reduce  (k2, list(v2))  -> list(v2)
 
 This states the input keys and values are from a different domain to the output keys and values, which also means that the types used can differ.
 
+MapReduce operates in two phases: The Map phase and the Reduce phase. Initially, the input data is split into small chunks to be assigned to the map tasks. A single map task is designated the master, with the remaining tasks designated as workers. The master assigns each map task a chunk of the input data to process, and once this has been processed, it is assigned more until all the input data has been processed. Once data from a map task has been processed, available reduce tasks then process this into the output data from the MapReduce program.
+
+The MapReduce framework is highly fault tolerant, and is able to cope with multiple worker failure and failure of the master program as well. Each worker is required to periodically communicate with the master, and if no communication is received, then the worker is marked as failed, and its work is redistributed back out to be processed again. In case of the master failing, checkpoints are made and the MapReduce program can restart from the last checkpoint recorded.
+
 \subsubsection{Google File System}
 The Google File System, GFS, provides the distributed file system which MapReduce operates with \cite{mapreduce}, but was developed outside of MapReduce to address issues found with previous distributed file systems \cite{gfs}.
 
@@ -62,6 +66,10 @@ Hadoop MapReduce is the subproject by which Hadoop itself more known for. It
 provides functionality similar to the MapReduce framework developed by Google,
 where there exists a $Map$ and a $Reduce$ function which process data across a
 cluster.
+
+Hadoop differs slightly from the approach implemented in MapReduce. With Hadoop, there is always a master controlling the cluster, called the \verb/JobTracker/. The JobTracker is responsibe for controlling each \verb/TaskTracker/ process running on nodes within the cluster. The TaskTracker process allows map and reduce tasks to be executed on a node. The JobTracker is able to coordinate with another process, the NameNode, to distribute work across the cluster so as to minimise network communication in getting the assigned data to the correct worker process.
+
+Hadoop also offers a similar fault tolerance system. The JobTracker creates checkpoints so that in case of failure, it can resume from where it was when the failure occurred. The TaskTracker processes also need to communicate with the JobTracker else they are marked as failed and their work is redistributed back out across the cluster to be executed again.
 
 \subsubsection{Hadoop Distributed File System}
 \label{sec:hdfs}

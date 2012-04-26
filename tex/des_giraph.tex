@@ -1,5 +1,12 @@
 \subsection{Giraph}
 
+\subsubsection{Vertex Degrees}
+Giraph makes computing the degrees for each vertex a near trivial operation.
+
+To compute the out-degree of each vertex, the \verb/getNumOutEdges()/ method can be called which returns the number of outgoing edges from this vertex.
+
+The computation of the in-degree for each vertex is slightly harder. As each vertex only knows about the vertices it has outgoing edges to, a message can be sent to each of these vertices. In the next superstep, each vertex sums the number of incoming messages, which is the same as the number of incoming edges for that vertex.
+
 \subsubsection{3-Cliques}
 For simplicity reasons, we are only concerning ourselves with identifying 3-cliques, or \emph{triangles}, within graphs. Also, the identification of triangles within a graph allows more interesting metrics of a graph to be computed
 
@@ -18,6 +25,9 @@ The output from this algorithm is the original graph, but with the local cluster
 Calculating network local clustering coefficient is a simple extension to the local clustering coefficient algorithm. After computing the local clustering coefficients for each vertex, these values need to be aggregated into a single value, which is then divided by the number of vertices present in the graph.
 
 Giraph makes this quite simple to achieve through use of the aggregators (Section \ref{sec:res_giraph}). A \emph{summation} aggregator can be used to receive all the local clustering coefficients from each vertex, and sum them into a single value. The sending of the local clustering coefficient to the aggregator occurs in the same superstep as the final computation of the local clustering coefficient. In the next superstep, this aggregated value can be retrieved and divided by the number of vertices present to compute the network local clustering coefficient.
+
+\subsubsection{Global Clustering Coefficient}
+The global clustering coefficient is also a simple extension from identifying triangles. After computing the number of triangles each vertex is present in within the network, a \emph{summation} aggregator can be used to compute the total number of triangles within the network. Another \emph{summation} aggregator can be used to calculate the total number of connected triples in the network. In the next superstep, the values of both of these aggregators can be divided to produce the global clustering coefficient of the network.
 
 \subsubsection{PageRank}
 Giraph itself comes included with it an implementation of the PageRank algorithm, as shown in Listing \ref{lst:giraphpagerank}. In each superstep, until termination criteria are met, each vertex sums the values of the PageRanks sent to it and applies the damping factor to produce the new PageRank for itself. This new PageRank divided by the number of outgoing edges the vertex has is sent to each vertex it connects to. With the provided Giraph implementation, the damping factor has been set to 0.85, which could be user definable, but is normally set to 0.85 \cite{brin98}. The halting criteria is also set to end the algorithm after 30 supersteps. Whilst this will produce reasonably accurate figures, a better approach is to keep the algorithm going until the PageRanks for each vertex converge to a value within some tolerance.
