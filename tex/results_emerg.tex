@@ -21,6 +21,10 @@ The results in this graph used a population size of 200 agents and employed the 
 	\label{fig:donation-rates-scale-and-small-world}
 \end{figure}
 
+We examined the topological changes caused by the rewiring of the graphs and noticed that although the initial topology was small-world and scale-free, the rewiring caused the topology to morph into a graph with a random topology within just a few generations.
+
+\subsection{Retaining Initial Topological Nature}
+
 We decided that we should look at preserving the initial topological nature of the graphs throughout the simulation, so we decided to look at alternative methods of rewiring that could manage to maintain a similar topology but preserve a donation rate as high as the current rewiring algorithms.
 
 To this end, we decided to create an algorithm that attempts to maintain the same number of small-world connections and long-distance connections during the rewiring. This was achieved by measuring the shortest path length between two neighbours after the neighbour has been removed and then attempting to find a neighbour that has a similar shortest path length to add.
