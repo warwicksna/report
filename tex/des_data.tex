@@ -28,7 +28,7 @@ while(True)
          for each user follower/following of target
                  queue.add(user)
          write target\'s tweets/followers/following to db
-         write program state to db
+         write program state to db #added later
 \end{verbatim}
 
 Given the low rate at which we could accumulate data, we decided to store all of it to allow for further, unforeseen uses. Simple scripts could then be used to extrapolate graphs in graphml format for our own use, and in MySQL suitable for use in last year\'s visualiser.
