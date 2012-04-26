@@ -79,7 +79,7 @@ OneMillionUtd & 0.007613901445608443 \\
 \end{table}
 
 \subsubsection{Vertex Degrees}
-As the EDL dataset is directed, we analyse both the in-degree and out-degree of each vertex and present the results in Tables \ref{tab:edlin} and \ref{tab:edlout}
+As the EDL dataset is directed, we analyse both the in-degree and out-degree of each vertex and present the results in Tables \ref{tab:edlin} and \ref{tab:edlout}.
 
 \begin{table}[htbp]%
 \centering
@@ -294,12 +294,110 @@ The datasets contains 262,111 nodes and 1,234,877 edges, and is listed with an a
 
 \subsubsection{PageRank}
 
+\begin{table}%
+\centering
+\begin{tabular}{|l|l|}
+\hline
+Node ID & PageRank \\
+\hline
+33 & 0.0010618685092594513 \\
+93 & 9.433466360137235E-4 \\
+8 & 8.388077903641908E-4 \\
+2501 & 7.763256290091579E-4 \\
+94 & 7.706164903522381E-4 \\
+4429 & 7.278459480171584E-4 \\
+56 & 6.682544029780468E-4 \\
+95 & 6.5894219323509E-4 \\
+151 & 6.361950187507786E-4 \\
+2353 & 6.102534786285925E-4 \\
+23 & 5.362508596015665E-4 \\
+9106 & 4.920834914975508E-4 \\
+429 & 4.7584726719609283E-4 \\
+3589 & 4.7407372658235254E-4 \\
+1241 & 4.3241445730924613E-4 \\
+481 & 4.1023531103653226E-4 \\
+449 & 3.9367244180854013E-4 \\
+13 & 3.873460347967976E-4 \\
+21 & 3.8538784530804145E-4 \\
+4931 & 3.83882192080914E-4 \\
+\hline
+\end{tabular}
+\caption{Top 20 nodes ranked by PageRank values for the Amazon dataset}
+\label{tab:amazonpr}
+\end{table}
+
 \subsubsection{Vertex Degrees}
+
+\begin{table}%
+\centering
+\begin{tabular}{|l|l|}
+\hline
+Node ID & In-Degree \\
+\hline
+14949 & 420 \\
+4429 & 404 \\
+33 & 361 \\
+10519 & 334 \\
+12771 & 330 \\
+8 & 293 \\
+297 & 280 \\
+481 & 275 \\
+5737 & 272 \\
+9106 & 227 \\
+8939 & 221 \\
+93 & 219 \\
+1241 & 218 \\
+5765 & 209 \\
+2501 & 191 \\
+99 & 188 \\
+3661 & 181 \\
+244 & 179 \\
+2353 & 179 \\
+17525 & 175 \\
+\hline
+\end{tabular}
+\caption{In-Degrees for Amazon network}
+\label{tab:amazonin}
+\end{table}
+
+\begin{table}%
+\centering
+\begin{tabular}{|l|l|}
+\hline
+Node ID & Out-Degree \\
+\hline
+99999 & 5 \\
+99998 & 5 \\
+99997 & 5 \\
+99996 & 5 \\
+99995 & 5 \\
+9999 & 5 \\
+99994 & 5 \\
+99993 & 5 \\
+99992 & 5 \\
+99991 & 5 \\
+99990 & 5 \\
+99989 & 5 \\
+99988 & 5 \\
+99987 & 5 \\
+99985 & 5 \\
+9998 & 5 \\
+99984 & 5 \\
+99983 & 5 \\
+99982 & 5 \\
+99981 & 5 \\
+\hline
+\end{tabular}
+\caption{In-Degrees for Amazon network}
+\label{tab:amazonout}
+\end{table}
+
 
 \subsection{Wikipedia Talk}
 The Wikipedia Talk network\footnote{\url{http://snap.stanford.edu/data/wiki-Talk.html}} contains 2,394,385 nodes and 5,021,410 edges. There are 9,203,519 triangles present within the network, and the network has an average clustering coefficient of 0.1958.
 
 \subsubsection{PageRank}
+Table \ref{tab:wikitalkpr} shows the top results from running the PageRank algorithm on the Wikipedia Talk network.
 
 \begin{table}%
 \centering
@@ -334,6 +432,7 @@ Node ID & PageRank \\
 \end{table}
 
 \subsubsection{Vertex Degrees}
+Tables \ref{tab:wikitalkin} and \ref{tab:wikitalkout} show the in-degrees and out-degrees for nodes within the Wikipedia Talk network. Node 33 seems to be quite important within this network as it is the most important node ranked by PageRank and by number of edges connecting to it.
 
 \begin{table}%
 \centering
