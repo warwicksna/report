@@ -14,7 +14,7 @@ The most surprising outcome from performing PageRank is that TwitPic\footnote{\u
 
 The majority of the accounts listed in tables \ref{tab:edlpagerank} and \ref{tab:edltweetpagerank} are however related to the EDL, with an approximate equal number for and against the EDL.
 
-\begin{table}%
+\begin{table}[htbp]%
 \centering
 \begin{tabular}{|l|l|}
 \hline
@@ -46,7 +46,7 @@ MuslimCouncil & 0.007313457877227599 \\
 \label{tab:edlpagerank}
 \end{table}
 
-\begin{table}%
+\begin{table}[htbp]%
 \centering
 \begin{tabular}{|l|l|}
 \hline
@@ -78,8 +78,77 @@ OneMillionUtd & 0.007613901445608443 \\
 \label{tab:edltweetpagerank}
 \end{table}
 
+\subsubsection{Vertex Degrees}
+As the EDL dataset is directed, we analyse both the in-degree and out-degree of each vertex and present the results in Tables \ref{tab:edlin} and \ref{tab:edlout}
+
+\begin{table}[htbp]%
+\centering
+\begin{tabular}{|l|l|}
+\hline
+Twitter Name & In-Degree \\
+\hline
+220331507 & 1559 \\
+410224577 & 496 \\
+374712154 & 468 \\
+201247027 & 426 \\
+15610459 & 209 \\
+332320606 & 205 \\
+265287278 & 194 \\
+256943061 & 161 \\
+142082006 & 138 \\
+353657708 & 131 \\
+12925072 & 130 \\
+234309657 & 124 \\
+199808054 & 91 \\
+245761263 & 84 \\
+440109993 & 79 \\
+46760864 & 79 \\
+19985444 & 78 \\
+13058232 & 76 \\
+279714026 & 76 \\
+227954333 & 75 \\
+\hline
+\end{tabular}
+\caption{In-Degrees for EDL dataset}
+\label{tab:edlin}
+\end{table}
+
+\begin{table}[htbp]%
+\centering
+\begin{tabular}{|l|l|}
+\hline
+Twitter Name & Out-Degree \\
+\hline
+353657708 & 204 \\
+199808054 & 133 \\
+495874697 & 128 \\
+264238936 & 93 \\
+142082006 & 92 \\
+373843347 & 87 \\
+245905821 & 83 \\
+47223385 & 80 \\
+392058404 & 77 \\
+185624680 & 75 \\
+94855635 & 72 \\
+21142055 & 68 \\
+279714026 & 67 \\
+409492198 & 65 \\
+55935057 & 63 \\
+415038513 & 49 \\
+448017421 & 49 \\
+19485684 & 48 \\
+509439451 & 47 \\
+479074142 & 44 \\
+\hline
+\end{tabular}
+\caption{Out-Degrees for EDL dataset}
+\label{tab:edlout}
+\end{table}
+
 \subsubsection{Clustering Coefficients}
 Due to the approach of collecting the data, we felt that the results of the clustering coefficients would be quite heavily biased. 
+
+As expected the results of the network local clustering coefficient algorithm is quite high, with a value of \verb/0.68038719629578/ which indicates that the nodes within the network cluster together. This is unsurprising given the method used to collect data.
 
 \subsection{Unite Against Fascism}
 The analysis performed on this data is similar to the analysis performed on the data collected about EDL.
@@ -176,6 +245,43 @@ Node ID & PageRank \\
 \caption{Top 20 nodes ranked by PageRank values}
 \label{tab:enronpagerank}
 \end{table}
+
+\subsubsection{Vertex Degrees}
+The Enron dataset is an undirected network, and as such the in-degrees will be the same as the out-degrees. Table \ref{tab:enrondegree} contains the top twenty results for nodes with the highest number of connections.
+
+\begin{table}[htbp]%
+\centering
+\begin{tabular}{|l|l|}
+\hline
+Node ID & Degree \\
+\hline
+5038 & 1383 \\
+273 & 1367 \\
+458 & 1261 \\
+140 & 1245 \\
+1028 & 1244 \\
+195 & 1143 \\
+370 & 1099 \\
+1139 & 1068 \\
+136 & 1026 \\
+566 & 924 \\
+823 & 908 \\
+292 & 834 \\
+588 & 829 \\
+76 & 815 \\
+416 & 791 \\
+286 & 711 \\
+353 & 705 \\
+734 & 686 \\
+851 & 666 \\
+1824 & 609 \\
+\hline
+\end{tabular}
+\caption{In-Degrees for EDL dataset}
+\label{tab:enrondegree}
+\end{table}
+
+Similarities can be seen with the results of the PageRank algorithm, with the top two nodes being the same, which indicates that these nodes were quite important within Enron.
 
 \subsection{Amazon Product Co-Purchasing}
 The Amazon product co-purchasing network\footnote{\url{http://snap.stanford.edu/data/amazon0302.html}} is data collected from the crawling of the Amazon website. It is based on the \emph{Customers Who Bought This Iterm Also Bought} feature of the Amazon website. A node within the network represents a product on sale, and a directed edge between nodes represents that the product has been co-purchased with the product the edge connects to. The data was collected in March 2003 \cite{snap}.
