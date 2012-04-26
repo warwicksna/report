@@ -7,17 +7,18 @@
 
 \subsection{SOAP}
 
-- Extending the showStatus method so that it does more than merely echo the logging pages. A more useful method might be able to parse these logging pages, to return a particular piece of information.
+\begin{itemize}
+	\item Extending the showStatus method so that it does more than merely echo the logging pages. A more useful method might be able to parse these logging pages, to return a particular piece of information.
+	\item Allowing algorithms to be uploaded as Python scripts (that is, Python scripts that can call Hadoop jobs). One reason this was not done was because an implementation would likely be fairly brittle and depend on scripts being written for the particular installation of Hadoop. If a robust solution could be implemented, it would be useful for anyone who wished to develop a multi-stage Hadoop task. 
+\end{itemize}
 
-- Allowing algorithms to be uploaded as Python scripts (that is, Python scripts that can call Hadoop jobs). One reason this was not done was because an implementation would likely be fairly brittle and depend on scripts being written for the particular installation of Hadoop. If a robust solution could be implemented, it would be useful for anyone who wished to develop a multi-stage Hadoop task. 
+\subsection{Influence Propagation}
 
-\subsection{Influence Propogation}
-
-- One influence propagation model that was not explored was the diminishing cascade model. As this is a realistic model for many situations -- ie, people are often unlikely to be converted to an idea after a previous failed conversion attempt. Implementing this model in Hadoop could be interesting.
-
-- Running more experiments on the implemented alorithms. Graphs with different properties would be an interesting avenue to explore, ie, varying the clustering coefficient, average node degree, or edge weighting. Some papers found there to be a ``tipping point'' in properties such as average edge weights where influence cascades suddenly turned into epidemics; it would be interesting to explore if the same held true for other properties. In [digg paper], it was found that the presence or absence of influence ``epidemics'' depended strongly on the structure of the networks.
-
-- Performance testing the implemented algorithms.
+\begin{itemize}
+	\item One influence propagation model that was not explored was the diminishing cascade model. As this is a realistic model for many situations---i.e. people are often unlikely to be converted to an idea after a previous failed conversion attempt. Implementing this model in Hadoop could be interesting.
+	\item Running more experiments on the implemented algorithms. Graphs with different properties would be an interesting avenue to explore, i.e. varying the clustering coefficient, average node degree, or edge weighting. Some papers found there to be a ``tipping point'' in properties such as average edge weights where influence cascades suddenly turned into epidemics; it would be interesting to explore if the same held true for other properties. In [digg paper], it was found that the presence or absence of influence ``epidemics'' depended strongly on the structure of the networks.
+	\item Performance testing the implemented algorithms.
+\end{itemize}
 
 \subsection{Visualiser}
 
