@@ -154,6 +154,7 @@ As expected the results of the network local clustering coefficient algorithm is
 The analysis performed on this data is similar to the analysis performed on the data collected about EDL. 
 
 \subsubsection{PageRank}
+Again, we have run the PageRank algorithm on both the network structure, and also the structure after considering edges as tweets. Tables \ref{tab:uafpagerank} and \ref{tab:uaftweetpagerank} show the results of this. There are few differences between the two results, unlike with the EDL data where there was a more noticeable difference. Whether this is due to the larger dataset, or just due to how the data was collected is unknown.
 
 \begin{table}%
 \centering
@@ -220,7 +221,7 @@ davidwearing & 0.0035662115177339288 \\
 \end{table}
 
 \subsubsection{Vertex Degrees}
-Table \ref{tab:uafin} shows the results of analysing the number of connections each node within the UAF dataset has. The top three users are the same as the PageRank results, the first of which is the root node selected for starting the data collection.
+Table \ref{tab:uafin} shows the results of analysing the number of connections incoming on each node within the UAF dataset. The top three users are the same as the PageRank results, the first of which is the root node selected for starting the data collection, which shows that these users are quite important within the network surrounding the UAF
 
 \begin{table}%
 \centering
@@ -456,6 +457,7 @@ Node ID & PageRank \\
 \end{table}
 
 \subsubsection{Vertex Degrees}
+The results of the calculating the 
 
 \begin{table}%
 \centering
@@ -668,7 +670,7 @@ Node ID & PageRank \\
 \end{table}
 
 \subsubsection{Vertex Degrees}
-Table \ref{tab:patentsin} contains the vertices with the highest in-degree, and Table \ref{tab:patentsin} contains the vertices with the highest out-degree
+Table \ref{tab:patentsin} contains the vertices with the highest in-degree, and Table \ref{tab:patentsin} contains the vertices with the highest out-degree. The top few nodes from these tables do not feature highl
 
 \begin{table}[htbp]%
 \centering
