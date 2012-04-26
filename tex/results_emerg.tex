@@ -27,12 +27,24 @@ We examined the topological changes caused by the rewiring of the graphs and not
 
 We decided that we should look at preserving the initial topological nature of the graphs throughout the simulation, so we decided to look at alternative methods of rewiring that could manage to maintain a similar topology but preserve a donation rate as high as the current rewiring algorithms.
 
-To this end, we decided to create an algorithm that attempts to maintain the same number of small-world connections and long-distance connections during the rewiring. This was achieved by measuring the shortest path length between two neighbours after the neighbour has been removed and then attempting to find a neighbour that has a similar shortest path length to add.
+To this end, we decided to create an algorithm that attempts to maintain the same number of small-world connections and long-distance connections during the rewiring. This was achieved by measuring the shortest path lengths when removing connections  and attempting to forge connections to neighbours with a similar shortest path length when rewiring an agents neighbourhood.
 
-We created two algorithms, the first would be based on the random rewiring strategy and was designed in order to test how the topology changes over time. This differs from the random rewiring strategy in two ways. When a neighbour is about to be removed, the shortest path length between the two agents is measured and stored. Next, when the agent begins to add neighbours to replace those it has removed, it will pick an agent at random and calculate the length of the shortest path between the agent and the random agent, adding a connection only if the length of the shortest path between these two agents is similar to the length of the shortest path between the agent and its neighbour which was removed.
+We created two algorithms, the first was based on the random rewiring strategy and was designed in order to test how the topology changes over time. This differs from the random rewiring strategy in two ways:
+\begin{itemize}
+	\item After agent A removes agent B from its neighbourhood, the shortest path length between these two nodes is measured (length AB).
+	\item When a randomly selected agent (C) is chosen to replace agent B in agent A's neighbourhood, the shortest path length between agent A and agent C is measured (length AC). Agent C will only be added to agent A's neighbourhood if the lengths AB and AC are similar. In the case that these lengths are different, then this is repeated with a different, randomly selected agent C.
+\end{itemize}
 
-The second algorithm is based on the group replace worst algorithm. Like the algorithm above, when a neighbour is removed, it measures the shortest path between the two agents. Unlike the above algorithm, it then uses an approach based on the group replace worst algorithm to add new nodes. It will query its best neighbours for their best neighbours and will only add a connection to these new agents if the length of the shortest path between them is similar to the length of the shortest path between the agent and its neighbour which was removed.
+The second rewiring algorithm is based on the group replace worst rewiring algorithm.
+Like the above algorithm, when a neighbour is removed, the shortest path length between the two agents is measured.
+The group replace worst algorithm is used to suggest new neighbours, but these neighbours will only be added if the shortest path length is similar to the path that was removed. Any discrepancy in the number of neighbours added and the number of neighbours removed will be made up for by adding neighbours randomly, in a similar fashion to the algorithm above.
 
-The results in figure show the impact that these new rewiring algorithms have on the donation rate. It can be seen in these graphs that the new donation rate for the random algorithm performs similarly to that of the existing random rewire algorithms. It can also been seen that the algorithm based on the group replace worst also exhibits similar behaviour to that of the existing group replace worst algorithm.
+The results in figure \ref{fig:new_rewiring_results} show the impact that these new rewiring algorithms have on the donation rate. It can be seen in these graphs that the new donation rate for the random algorithm performs similarly to that of the existing random rewire algorithms. It can also been seen that the algorithm based on the group replace worst also exhibits similar behaviour to that of the existing group replace worst algorithm.
+We found that the new rewiring algorithm based on the group replace worst rewiring algorithm manages to maintain the same small-world nature of the initial graphs.
 
-The results in figure show how the topology changes over time. These results show that the end topology is much closer in nature to the original topology than with the existing rewiring strategies.
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.7\linewidth]{img/new_rewiring_results.pdf}
+	\caption{Donation rates for new rewiring strategies}
+	\label{fig:new_rewiring_results}
+\end{figure}
