@@ -277,7 +277,7 @@ Node ID & Degree \\
 1824 & 609 \\
 \hline
 \end{tabular}
-\caption{In-Degrees for EDL dataset}
+\caption{Node degrees for the Enron dataset}
 \label{tab:enrondegree}
 \end{table}
 
@@ -302,11 +302,16 @@ The Wikipedia Talk network\footnote{\url{http://snap.stanford.edu/data/wiki-Talk
 \subsection{Patent Citation}
 The Patent citation network\footnote{\url{http://snap.stanford.edu/data/cit-Patents.html}} contains 3,774,768 nodes and 16,518,948 edges. There are 7,515,023 triangles present within the network, and the network has an average clustering coefficient of 0.0919.
 
-\subsubsection{PageRank}
+The results from the various algorithms used are near-meaningless, however they serve the purpose of showing that our tool is capable of analysing these large networks. The results are included purely for interest to the reader.
 
-\begin{table}%
+\subsubsection{PageRank}
+Table \ref{tab:patentspr} contains the largest PageRank values of the Patents Citation network.
+
+\begin{table}[htbp]%
+\centering
 \begin{tabular}{|l|l|}
 \hline
+Node ID & PageRank \\
 \hline
 4237224 & 2.4890060240975007E-5 \\
 3813316 & 2.154212981534069E-5 \\
@@ -335,6 +340,71 @@ The Patent citation network\footnote{\url{http://snap.stanford.edu/data/cit-Pate
 \end{table}
 
 \subsubsection{Vertex Degrees}
+Table \ref{tab:patentsin} contains the vertices with the highest in-degree, and Table \ref{tab:patentsin} contains the vertices with the highest out-degree
+
+\begin{table}[htbp]%
+\centering
+\begin{tabular}{|l|l|}
+\hline
+Node ID & In-Degree \\
+\hline
+4723129 & 779 \\
+4463359 & 716 \\
+4740796 & 678 \\
+4345262 & 658 \\
+4558333 & 654 \\
+4313124 & 633 \\
+4683195 & 630 \\
+4459600 & 613 \\
+4683202 & 605 \\
+3953566 & 411 \\
+4367924 & 401 \\
+3702886 & 382 \\
+4733665 & 360 \\
+3845770 & 339 \\
+5103459 & 311 \\
+4535773 & 305 \\
+4358535 & 292 \\
+4655771 & 289 \\
+4901307 & 287 \\
+3849241 & 286 \\
+\hline
+\end{tabular}
+\caption{In-Degrees for Patents Citation network}
+\label{tab:patentsin}
+\end{table}
+
+\begin{table}[htbp]%
+\centering
+\begin{tabular}{|l|l|}
+\hline
+Node ID & Out-Degree \\
+\hline
+5795784 & 770 \\
+5887243 & 745 \\
+5856194 & 737 \\
+5891229 & 626 \\
+5855655 & 626 \\
+5908495 & 624 \\
+6008268 & 623 \\
+5858586 & 623 \\
+5885337 & 621 \\
+5837429 & 612 \\
+5786132 & 611 \\
+5782963 & 606 \\
+5709955 & 597 \\
+5865471 & 596 \\
+5773182 & 596 \\
+5733693 & 595 \\
+5681380 & 595 \\
+5721287 & 584 \\
+5901425 & 519 \\
+5817744 & 469 \\
+\hline
+\end{tabular}
+\caption{Out-Degrees for Patents Citation network}
+\label{tab:patentsout}
+\end{table}
 
 \subsection{LiveJournal}
 The LiveJournal social network\footnote{\url{http://snap.stanford.edu/data/soc-LiveJournal1.html}} contains 4,847,571 nodes and 68,993,773 edges. There are 285730264 triangles present within the network, and the network has an average clustering coefficient of 0.3123.
