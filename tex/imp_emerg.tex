@@ -15,7 +15,7 @@ The basic algorithm is run over a number of iterations (generations). In each it
 A system diagram representing the key data structures and how they interact is shown in figure \ref{fig:graphdatastructures}. The entire system is encapsulated by a instance of the SimGraph class. This class contains an instance of a JUNG graph. Each vertex in this graph is an instance of the Agent class, which is itself an instance of the Vertex class. Each Agent has a unique identifier which is used to access the isObserving and isBeingObservedBy data structures. These data structures are used to handle the observations each agent makes of its neighbouring agents. Each agent can be observing multiple agents therefore, these lookups return a mapping of agents that the agent is observing to the instance of the Observer class that stores the observations the observer made on that agent. The Observer class encapsulates a queue data structure of boolean observations. The two observing data structures, isObserving and isBeingObservedBy are used to provide access to the Observer instances quickly. When a donation is being made, the observations can be quickly added using the isBeingObservedBy data structure, where the isObserving data structure allows the context assessment to be calculated quickly. Two methods, registerObserver and deregisterObserver are used to quickly manipulate the isObserving and isBeingObservedBy data structures, these operations are called during the rewiring operation, as the neighbourhoods and therefore the observers change as a result of the rewiring operation.
 The SimGraph class offers a delegate interface, GraphDelegate. The graph instances call methods on a delegate which implements this interface, and is used to notify the delegate of changes to the graph, such as edges being added or removed. It is in these methods that the isObserving and isBeingObservedBy data structures are modified.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
 	\centering
 	\includegraphics[width=\linewidth]{img/GraphDataStructure.pdf}
 	\caption{Graph Data Structures}
@@ -24,7 +24,7 @@ The SimGraph class offers a delegate interface, GraphDelegate. The graph instanc
 
 The donation algorithm used is presented in figure \ref{fig:donationalgorithm}. The main loop runs once for each interaction pairing per generation. In each iteration, every agent is selected (agent A). A random neighbour of agent A is selected (agent B). The tag and tolerances are compared along with the context assessment to determine if agent A will donate to agent B. If agent A has chosen to donate to agent B, then agent A will incur the cost of donating which agent B will gain the benefit of receiving a donation. Once the choice to donate has been made, every observer of agent A will be informed of agent A’s decision to donate or not to donate. After every agent has had the opportunity to donate once for each interaction pairing per generation, the donation phase is complete.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
 	\begin{algorithmic}
 		\State pairings remaining = interaction pairings per generation
 		\While{pairings remaining $> 0$}
@@ -46,7 +46,7 @@ The donation algorithm used is presented in figure \ref{fig:donationalgorithm}. 
 
 The learning algorithm is presented in figure \ref{fig:learningalgorithm}. Every agent is selected (agent A). Agent A will select a random agent (agent B) at random. Agent A compares his score to the score of Agent B. If Agent A has a higher score than Agent B, then no learning takes place and the loop continues to the next iteration. If Agent A has a lower score than Agent B, i.e. Agent B is more successful than Agent A, then Agent A will learn from Agent B. Agent A adopts Agent B’s tag and tolerance, with a possibility of donation. After this, Agent A will then use the current rewiring algorithm to rewire its local neighbourhood. Once every agent has had the chance to learn, the learning phase is complete.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
 	\begin{algorithmic}
 		\ForAll {Agent $\in$ Graph.vertices}
 			\State random agent = Graph.random vertex()
