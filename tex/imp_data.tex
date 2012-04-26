@@ -35,7 +35,7 @@ A more permanent approach to harvesting information from Twitter would be to obt
 Though the graphml generation scripts scale linearly, they are hindered by writing to disk being slow, and graphml being a verbose format. Thus the two ways to improve their speed would be to use the recipient program\'s API to construct the graph rather than writing it to disk, and using a more concise format than graphml. However, both of these would severely limit their compatibility. A simple extension would be to assign variable weights to edges based on the number of tweets and follows reinforcing them.
 
 \subsection{Stanford Large Network Dataset Collection}
-As explained previously in Section \ref{sec:des_snap}, the majority of the datasets available from the Stanford Large Network Dataset Collection are of the form $SourceNodeId \rightarrow TargetNodeId$ which represents edges present in the network.
+As explained previously in Section \ref{sec:des_snap}, the majority of the datasets available from the Stanford Large Network Dataset Collection are of the form $SourceNodeId$ $\rightarrow$ $TargetNodeId$ which represents edges present in the network.
 
 For use with algorithms implemented with Giraph, these datasets need to processed into the JSON format shown in Listing \ref{lst:json}. The data available from SNAP is sorted by the $SourceNodeId$, and then by the $TargetNodeId$, which allows a simple parser to be constructed which processes the data line-by-line, and consequently node-by-node and edge-by-edge of each node.
 
@@ -50,7 +50,8 @@ while ((line = in.readLine()) != null) {
 	if (node[0].equals(current)) {
 		s.append("["+node[1]+",1],");
 	} else {
-		System.out.println(s.deleteCharAt(s.length()-1).toString()+"]]");
+		System.out.println(
+			s.deleteCharAt(s.length()-1).toString()+"]]");
 		s = new StringBuilder();
 		current = node[0];
 		s.append("["+current+",0,[");
