@@ -29,6 +29,10 @@ reduce  (k2, list(v2))  -> list(v2)
 
 This states the input keys and values are from a different domain to the output keys and values, which also means that the types used can differ.
 
+MapReduce operates in two phases: The Map phase and the Reduce phase. Initially, the input data is split into small chunks to be assigned to the map tasks. A single map task is designated the master, with the remaining tasks designated as workers. The master assigns each map task a chunk of the input data to process, and once this has been processed, it is assigned more until all the input data has been processed. Once data from a map task has been processed, available reduce tasks then process this into the output data from the MapReduce program.
+
+The MapReduce framework is highly fault tolerant, and is able to cope with multiple worker failure and failure of the master program as well. Each worker is required to periodically communicate with the master, and if no communication is received, then the worker is marked as failed, and its work is redistributed back out to be processed again. In case of the master failing, checkpoints are made and the MapReduce program can restart from the last checkpoint recorded.
+
 \subsubsection{Google File System}
 The Google File System, GFS, provides the distributed file system which MapReduce operates with \cite{mapreduce}, but was developed outside of MapReduce to address issues found with previous distributed file systems \cite{gfs}.
 
