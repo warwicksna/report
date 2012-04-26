@@ -153,6 +153,10 @@ As expected the results of the network local clustering coefficient algorithm is
 \subsection{Unite Against Fascism}
 The analysis performed on this data is similar to the analysis performed on the data collected about EDL.
 
+\subsubsection{PageRank}
+
+\subsubsection{Vertex Degrees}
+
 \subsubsection{Clustering Coefficients}
 As the data collected about the UAF was collected in an identical manner to the EDL, we again felt that the results of the clustering coefficients would again be quite biased.
 
@@ -212,7 +216,7 @@ This value is near identical to the average clustering coefficient provided by w
 \subsubsection{PageRank}
 Table \ref{tab:enronpagerank} shows the top twenty nodes in the Enron email network, as ranked by the PageRank algorithm.
 
-What is interesting from the results of running PageRank is that eleven of the top twenty nodes ranked by PageRank also feature within the top twenty nodes connected to the highest number of triangles. These nodes are: 76, 136, 140, 195, 273, 292, 370, 458, 823, 1028 and 1139
+What is interesting from the results of running PageRank is that eleven of the top twenty nodes ranked by PageRank also feature within the top twenty nodes connected to the highest number of triangles. These nodes are: 76, 136, 140, 195, 273, 292, 370, 458, 823, 1028 and 1139.
 
 \begin{table}%
 \centering
@@ -242,7 +246,7 @@ Node ID & PageRank \\
 1768 & 0.0015039521949740957 \\
 \hline
 \end{tabular}
-\caption{Top 20 nodes ranked by PageRank values}
+\caption{Top 20 nodes ranked by PageRank values for the Enron dataset}
 \label{tab:enronpagerank}
 \end{table}
 
@@ -297,7 +301,103 @@ The Wikipedia Talk network\footnote{\url{http://snap.stanford.edu/data/wiki-Talk
 
 \subsubsection{PageRank}
 
+\begin{table}%
+\centering
+\begin{tabular}{|l|l|}
+\hline
+Node ID & PageRank \\
+\hline
+33 & 4.2878023311353714E-5 \\
+1764 & 4.038262594863181E-5 \\
+3823 & 3.0488647366333808E-5 \\
+338 & 2.4508358775208625E-5 \\
+3 & 2.344619684579633E-5 \\
+1511 & 2.2083549459583123E-5 \\
+1113 & 2.1779135214431092E-5 \\
+952 & 2.132568979252501E-5 \\
+853 & 2.0714623865369807E-5 \\
+7307 & 1.8587477598192057E-5 \\
+127 & 1.8348260425041495E-5 \\
+6908 & 1.83178877791565E-5 \\
+4972 & 1.8018530998246515E-5 \\
+2371 & 1.784750791538446E-5 \\
+155 & 1.6972685078088E-5 \\
+1882 & 1.6619039397342076E-5 \\
+736 & 1.640682077506386E-5 \\
+69 & 1.622419193822899E-5 \\
+3504 & 1.581370692324024E-5 \\
+1454 & 1.5795075978284625E-5 \\
+\hline
+\end{tabular}
+\caption{Top 20 nodes ranked by PageRank values for the Wikipedia Talk dataset}
+\label{tab:wikitalkpr}
+\end{table}
+
 \subsubsection{Vertex Degrees}
+
+\begin{table}%
+\centering
+\begin{tabular}{|l|l|}
+\hline
+Node ID & In-Degree \\
+\hline
+33 & 3311 \\
+1644 & 2014 \\
+145 & 1759 \\
+1764 & 1720 \\
+1882 & 1652 \\
+952 & 1584 \\
+2093 & 1578 \\
+1249 & 1466 \\
+619 & 1460 \\
+2376 & 1421 \\
+4251 & 1400 \\
+1113 & 1384 \\
+4972 & 1372 \\
+3 & 1366 \\
+903 & 1349 \\
+2569 & 1284 \\
+1351 & 1256 \\
+957 & 1249 \\
+172 & 1214 \\
+155 & 1213 \\
+\hline
+\end{tabular}
+\caption{In-Degrees for Wikipedia Talk network}
+\label{tab:wikitalkin}
+\end{table}
+
+\begin{table}%
+\centering
+\begin{tabular}{|l|l|}
+\hline
+Node ID & Out-Degree \\
+\hline
+3215 & 100022 \\
+1764 & 31892 \\
+1913 & 22668 \\
+4565 & 19430 \\
+7756 & 18836 \\
+1896 & 18264 \\
+3658 & 17905 \\
+1113 & 16442 \\
+2607 & 15434 \\
+7438 & 14448 \\
+4935 & 13536 \\
+1190 & 13367 \\
+6714 & 13365 \\
+299 & 13005 \\
+7605 & 12861 \\
+4551 & 12694 \\
+25 & 12215 \\
+4690 & 11911 \\
+2093 & 11168 \\
+1722 & 10854 \\
+\hline
+\end{tabular}
+\caption{Out-Degrees for Wikipedia Talk network}
+\label{tab:wikitalkout}
+\end{table}
 
 \subsection{Patent Citation}
 The Patent citation network\footnote{\url{http://snap.stanford.edu/data/cit-Patents.html}} contains 3,774,768 nodes and 16,518,948 edges. There are 7,515,023 triangles present within the network, and the network has an average clustering coefficient of 0.0919.
