@@ -23,6 +23,7 @@ For development purposes single-node clusters were created, using a guide writte
 As a Hadoop cluster is trivially scalable, the performance of this single-node cluster is unimportant as if the program runs and produces the correct output for a small input, it should also run and produce the correct output on a much large cluster with a much larger input.
 
 \subsection{Multi-Node Cluster}
+\label{sec:imp_cluster}
 At request, a nine machine Hadoop cluster was set up for use during this project in the department of computer science. This cluster composed a master head-node, {\tt hadoopmaster}, and eight slave-nodes, {\tt hadoop\{0-7\}}. 
 
 Being the master node, {\tt hadoopmaster} runs the NameNode, JobTracker and SecondaryNameNode processes. A dedicated master node was implemented, firstly for performance, so that the node running the NameNode, JobTracker and SecondaryNameNode were not also running on the same machine as a DataNode or TaskTracker. Secondly, it allows inherent horizontal scalability in the cluster itself, as more slave nodes can be trivially added into the cluster without requiring any complex modifications to the configuration of the cluster. 

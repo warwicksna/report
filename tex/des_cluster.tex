@@ -1,1 +1,6 @@
 \section{Hadoop Cluster}
+The largest dataset which was found, on which the tool could potentially perform analysis on, was a snapshot of the entire Twitter network from 2009, which contains 41.7 million nodes and 1.47 billion edges. As a Hadoop cluster can easily be expanded with the addition of extra nodes, the design of the actual cluster itself was fairly simple.
+
+The group met with members of the High Performance \& Scientific Computing about the possibility of a small Hadoop cluster being set up within the department of computer science for us to use, with the hope that the cluster would be large enough to process the highlighted Twitter dataset.
+
+A cluster was implemented for use by the group (see Section \ref{sec:imp_cluster} for further information), which contained a master node, and eight slave nodes. The design of the cluster in this manner, allows the cluster to grow in size if the department desires, but is sufficient for use by the group to analyse graphs of large sizes.
