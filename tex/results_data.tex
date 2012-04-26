@@ -14,7 +14,7 @@ The most surprising outcome from performing PageRank is that TwitPic\footnote{\u
 
 The majority of the accounts listed in tables \ref{tab:edlpagerank} and \ref{tab:edltweetpagerank} are however related to the EDL, with an approximate equal number for and against the EDL.
 
-\begin{table}%
+\begin{table}[htbp]%
 \centering
 \begin{tabular}{|l|l|}
 \hline
@@ -46,7 +46,7 @@ MuslimCouncil & 0.007313457877227599 \\
 \label{tab:edlpagerank}
 \end{table}
 
-\begin{table}%
+\begin{table}[htbp]%
 \centering
 \begin{tabular}{|l|l|}
 \hline
@@ -78,8 +78,77 @@ OneMillionUtd & 0.007613901445608443 \\
 \label{tab:edltweetpagerank}
 \end{table}
 
+\subsubsection{Vertex Degrees}
+As the EDL dataset is directed, we analyse both the in-degree and out-degree of each vertex and present the results in Tables \ref{tab:edlin} and \ref{tab:edlout}
+
+\begin{table}[htbp]%
+\centering
+\begin{tabular}{|l|l|}
+\hline
+Twitter Name & In-Degree \\
+\hline
+220331507 & 1559 \\
+410224577 & 496 \\
+374712154 & 468 \\
+201247027 & 426 \\
+15610459 & 209 \\
+332320606 & 205 \\
+265287278 & 194 \\
+256943061 & 161 \\
+142082006 & 138 \\
+353657708 & 131 \\
+12925072 & 130 \\
+234309657 & 124 \\
+199808054 & 91 \\
+245761263 & 84 \\
+440109993 & 79 \\
+46760864 & 79 \\
+19985444 & 78 \\
+13058232 & 76 \\
+279714026 & 76 \\
+227954333 & 75 \\
+\hline
+\end{tabular}
+\caption{In-Degrees for EDL dataset}
+\label{tab:edlin}
+\end{table}
+
+\begin{table}[htbp]%
+\centering
+\begin{tabular}{|l|l|}
+\hline
+Twitter Name & Out-Degree \\
+\hline
+353657708 & 204 \\
+199808054 & 133 \\
+495874697 & 128 \\
+264238936 & 93 \\
+142082006 & 92 \\
+373843347 & 87 \\
+245905821 & 83 \\
+47223385 & 80 \\
+392058404 & 77 \\
+185624680 & 75 \\
+94855635 & 72 \\
+21142055 & 68 \\
+279714026 & 67 \\
+409492198 & 65 \\
+55935057 & 63 \\
+415038513 & 49 \\
+448017421 & 49 \\
+19485684 & 48 \\
+509439451 & 47 \\
+479074142 & 44 \\
+\hline
+\end{tabular}
+\caption{Out-Degrees for EDL dataset}
+\label{tab:edlout}
+\end{table}
+
 \subsubsection{Clustering Coefficients}
 Due to the approach of collecting the data, we felt that the results of the clustering coefficients would be quite heavily biased. 
+
+As expected the results of the network local clustering coefficient algorithm is quite high, with a value of \verb/0.68038719629578/ which indicates that the nodes within the network cluster together. This is unsurprising given the method used to collect data.
 
 \subsection{Unite Against Fascism}
 The analysis performed on this data is similar to the analysis performed on the data collected about EDL.
@@ -177,22 +246,170 @@ Node ID & PageRank \\
 \label{tab:enronpagerank}
 \end{table}
 
+\subsubsection{Vertex Degrees}
+The Enron dataset is an undirected network, and as such the in-degrees will be the same as the out-degrees. Table \ref{tab:enrondegree} contains the top twenty results for nodes with the highest number of connections.
+
+\begin{table}[htbp]%
+\centering
+\begin{tabular}{|l|l|}
+\hline
+Node ID & Degree \\
+\hline
+5038 & 1383 \\
+273 & 1367 \\
+458 & 1261 \\
+140 & 1245 \\
+1028 & 1244 \\
+195 & 1143 \\
+370 & 1099 \\
+1139 & 1068 \\
+136 & 1026 \\
+566 & 924 \\
+823 & 908 \\
+292 & 834 \\
+588 & 829 \\
+76 & 815 \\
+416 & 791 \\
+286 & 711 \\
+353 & 705 \\
+734 & 686 \\
+851 & 666 \\
+1824 & 609 \\
+\hline
+\end{tabular}
+\caption{Node degrees for the Enron dataset}
+\label{tab:enrondegree}
+\end{table}
+
+Similarities can be seen with the results of the PageRank algorithm, with the top two nodes being the same, which indicates that these nodes were quite important within Enron.
+
 \subsection{Amazon Product Co-Purchasing}
 The Amazon product co-purchasing network\footnote{\url{http://snap.stanford.edu/data/amazon0302.html}} is data collected from the crawling of the Amazon website. It is based on the \emph{Customers Who Bought This Iterm Also Bought} feature of the Amazon website. A node within the network represents a product on sale, and a directed edge between nodes represents that the product has been co-purchased with the product the edge connects to. The data was collected in March 2003 \cite{snap}.
 
 The datasets contains 262,111 nodes and 1,234,877 edges, and is listed with an average clustering coefficient of 0.4240 and 717,719 triangles present.
 
+\subsubsection{PageRank}
+
+\subsubsection{Vertex Degrees}
+
 \subsection{Wikipedia Talk}
 The Wikipedia Talk network\footnote{\url{http://snap.stanford.edu/data/wiki-Talk.html}} contains 2,394,385 nodes and 5,021,410 edges. There are 9,203,519 triangles present within the network, and the network has an average clustering coefficient of 0.1958.
+
+\subsubsection{PageRank}
+
+\subsubsection{Vertex Degrees}
 
 \subsection{Patent Citation}
 The Patent citation network\footnote{\url{http://snap.stanford.edu/data/cit-Patents.html}} contains 3,774,768 nodes and 16,518,948 edges. There are 7,515,023 triangles present within the network, and the network has an average clustering coefficient of 0.0919.
 
+The results from the various algorithms used are near-meaningless, however they serve the purpose of showing that our tool is capable of analysing these large networks. The results are included purely for interest to the reader.
+
+\subsubsection{PageRank}
+Table \ref{tab:patentspr} contains the largest PageRank values of the Patents Citation network.
+
+\begin{table}[htbp]%
+\centering
+\begin{tabular}{|l|l|}
+\hline
+Node ID & PageRank \\
+\hline
+4237224 & 2.4890060240975007E-5 \\
+3813316 & 2.154212981534069E-5 \\
+3932805 & 1.2391955911526967E-5 \\
+4395486 & 1.1161868281599083E-5 \\
+4298685 & 1.0276200370604275E-5 \\
+4683195 & 1.0267036400471796E-5 \\
+3778614 & 9.558281303049814E-6 \\
+4683202 & 9.36024255530041E-6 \\
+4358535 & 8.708264966788E-6 \\
+3950357 & 8.707317765944523E-6 \\
+3789832 & 7.824135128325006E-6 \\
+4196265 & 7.4890674305812076E-6 \\
+4064521 & 7.458897929020249E-6 \\
+3988545 & 7.20869336958276E-6 \\
+3763480 & 7.072167214787706E-6 \\
+4021726 & 6.992826128596397E-6 \\
+3856513 & 6.899726306781281E-6 \\
+3747120 & 6.767632714954929E-6 \\
+3702886 & 6.693466783697207E-6 \\
+2768114 & 6.473626268751898E-6 \\
+\hline
+\end{tabular}
+\caption{Highest PageRank values for Patent Citation network}
+\label{tab:patentspr}
+\end{table}
+
+\subsubsection{Vertex Degrees}
+Table \ref{tab:patentsin} contains the vertices with the highest in-degree, and Table \ref{tab:patentsin} contains the vertices with the highest out-degree
+
+\begin{table}[htbp]%
+\centering
+\begin{tabular}{|l|l|}
+\hline
+Node ID & In-Degree \\
+\hline
+4723129 & 779 \\
+4463359 & 716 \\
+4740796 & 678 \\
+4345262 & 658 \\
+4558333 & 654 \\
+4313124 & 633 \\
+4683195 & 630 \\
+4459600 & 613 \\
+4683202 & 605 \\
+3953566 & 411 \\
+4367924 & 401 \\
+3702886 & 382 \\
+4733665 & 360 \\
+3845770 & 339 \\
+5103459 & 311 \\
+4535773 & 305 \\
+4358535 & 292 \\
+4655771 & 289 \\
+4901307 & 287 \\
+3849241 & 286 \\
+\hline
+\end{tabular}
+\caption{In-Degrees for Patents Citation network}
+\label{tab:patentsin}
+\end{table}
+
+\begin{table}[htbp]%
+\centering
+\begin{tabular}{|l|l|}
+\hline
+Node ID & Out-Degree \\
+\hline
+5795784 & 770 \\
+5887243 & 745 \\
+5856194 & 737 \\
+5891229 & 626 \\
+5855655 & 626 \\
+5908495 & 624 \\
+6008268 & 623 \\
+5858586 & 623 \\
+5885337 & 621 \\
+5837429 & 612 \\
+5786132 & 611 \\
+5782963 & 606 \\
+5709955 & 597 \\
+5865471 & 596 \\
+5773182 & 596 \\
+5733693 & 595 \\
+5681380 & 595 \\
+5721287 & 584 \\
+5901425 & 519 \\
+5817744 & 469 \\
+\hline
+\end{tabular}
+\caption{Out-Degrees for Patents Citation network}
+\label{tab:patentsout}
+\end{table}
+
 \subsection{LiveJournal}
 The LiveJournal social network\footnote{\url{http://snap.stanford.edu/data/soc-LiveJournal1.html}} contains 4,847,571 nodes and 68,993,773 edges. There are 285730264 triangles present within the network, and the network has an average clustering coefficient of 0.3123.
 
-Unfortunately, this dataset is too large to be analysed on the Hadoop cluster we
-have access to, so no extra analysis was able to be performed.
+Unfortunately, this dataset is too large to be analysed on the Hadoop cluster we have access to, so no extra analysis was able to be performed.
 
 \subsection{Twitter}
 The large Twitter dataset available indirectly from the SNAP website\footnote{\url{http://snap.stanford.edu/data/twitter7.html}}\footnote{\url{http://an.kaist.ac.kr/traces/WWW2010.html}} consists of 41.7 million nodes and 1.47 billion edges. However, since the LiveJournal dataset was too large to process on the cluster we had available, it was decided not to attempt to process the social network presented.
