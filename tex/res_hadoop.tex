@@ -67,6 +67,10 @@ provides functionality similar to the MapReduce framework developed by Google,
 where there exists a $Map$ and a $Reduce$ function which process data across a
 cluster.
 
+Hadoop differs slightly from the approach implemented in MapReduce. With Hadoop, there is always a master controlling the cluster, called the \verb/JobTracker/. The JobTracker is responsibe for controlling each \verb/TaskTracker/ process running on nodes within the cluster. The TaskTracker process allows map and reduce tasks to be executed on a node. The JobTracker is able to coordinate with another process, the NameNode, to distribute work across the cluster so as to minimise network communication in getting the assigned data to the correct worker process.
+
+Hadoop also offers a similar fault tolerance system. The JobTracker creates checkpoints so that in case of failure, it can resume from where it was when the failure occurred. The TaskTracker processes also need to communicate with the JobTracker else they are marked as failed and their work is redistributed back out across the cluster to be executed again.
+
 \subsubsection{Hadoop Distributed File System}
 \label{sec:hdfs}
 Hadoop also provides a the Hadoop Distributed File System, HDFS. The HDFS is a free implementation of the Google File System, and is designed to be used with Hadoop itself, though can also be used a distributed file system by itself \cite{hdfs}.
