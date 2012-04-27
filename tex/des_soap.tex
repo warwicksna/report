@@ -31,7 +31,7 @@ The benefits of SOAP \cite{infoq}, \cite{ajoxonomy}, are:
 \begin{itemize}
 \item Unlike REST, it enables the developer to define their own vocabulary of
 verbs to suit the target domain.
-\item It is language, platform *and* transport agnostic.
+\item It is language, platform \emph{and} transport agnostic.
 \item It is designed to handle distributed computing environments.
 \item It is the predominant standard for web services, meaning there is a
 greater level of support in different programming languages.
@@ -46,7 +46,7 @@ The SOAP communication module followed a standard client-server model. The SOAP 
 
 Two SOAP clients were written. One was a command line client, also written in Python. The second was the C\#-based visualiser written by last year's project group, which would be modified to send SOAP commands.
 
-During the implementation of the server, one major change to the design proved neccesary; this was modifying it so that it worked in a multi-threaded manner, with one Hadoop task being ran per thread. The reason for this change is detailed in the implementation section below.
+During the implementation of the server, one major change to the design proved neccesary. This was making the server multi-threaded, with each Hadoop task being ran in a seperate thread. The reason for this change is detailed in the implementation section below.
 
 Other changes that were made during the design phase included sending large files as base 64-encoding strings, rather than byte arrays, and giving the server the ability to execute algorithms as Python scripts as well as JAR files.
 
