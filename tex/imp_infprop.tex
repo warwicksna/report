@@ -83,7 +83,6 @@ Edges are recorded in the form:
 Note that edges are recorded in both directions. The reason for this is explained in the next section.
 
 \subsubsection{Connected Components}
-[http://blog.piccolboni.info/2011/04/map-reduce-algorithm-for-connected.html]
 
 This step was responsible for taking the spanning subgraph output by the last step and determining which nodes were connected to pre-converted nodes. This is equivalent to the standard connected components problem.
 
@@ -98,8 +97,10 @@ The map step merely parsed each line of the file, each containing two integers, 
 The reduce step performed most of the work. It took advantage of the Hadoop framework, which passes to each reduce task a collection of all the values corresponding to a particular key. Since in our representation keys were nodeIds, that meant that each node would be processed by a different task, and each task would have all the relevant information for it's corresponding node.
 
 This information consisted of:
-- whether the node was already converted
-- all the edges incident on the node (this was the reason that edges were recorded in both directions).
+\begin{itemize}
+\item whether the node was already converted
+\item all the edges incident on the node (this was the reason that edges were recorded in both directions).
+\end{itemize}
 
 For example, node number 4 in the above graph corresponded to the following key-value pairs:
 
@@ -188,6 +189,7 @@ if node1isOn && influence >= threshold {
   changedNodes++
   write(key, -1) # mark this node as converted
   for neighbour in neighbours {
+    write(neighbour, ``key 1'') # mark each neighbours edge so the neighbour's influence will increase on the next reduce step
   	# mark each neighbours edge so the 
   	# neighbour's influence will increase 
   	# on the next reduce step
@@ -204,9 +206,7 @@ As per the paper [CITE], influence can spread more easily in scale-free networks
 
 A scale-free network is one where the degree distribution of nodes follows a power law, ie, the fraction P(n) of nodes in the network having n connections to other nodes is:
 
-\begin{verbatim}
-P(n) =~ ck^(-y)
-\end{verbatim}
+\(P(n) \approx ck^{-y}\)
 
 Where c is a normalisation constant and y is a parameter with a range typically between 2 and 3.
 
@@ -320,7 +320,7 @@ end
 
 \end{verbatim}
 
-The main difference is that if adding an edge would take a node beyond it's maximum number of neighbours, that edge is not added, and a new edge is found. When it becomes too difficult to find valid edges -- ie, when most nodes have reached their allocation of neighbours -- then the algorithm terminates. This means that some nodes will have less than the maximum allocation of neighbours, though in practice such nodes are very few.
+The main difference is that if adding an edge would take a node beyond its maximum number of neighbours, that edge is not added, and a new edge is found. When it becomes too difficult to find valid edges -- ie, when most nodes have reached their allocation of neighbours -- then the algorithm terminates. This means that some nodes will have less than the maximum allocation of neighbours, though in practice such nodes are very few.
 
 In addition, the previous implementation searched the entire list of edges for a duplicate before adding a new edge. This implementation mantains a list of neighbours for each node and checks that instead, causing a great increase in performance.
 

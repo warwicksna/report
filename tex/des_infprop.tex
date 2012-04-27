@@ -14,10 +14,6 @@ Specifically, a simple way of implementing independent cascade is to first ``rol
 
 Therefore, the algorithm was split into two tasks, one to handle the ``dice rolling'', one to handle the connected components. The first task would be run once, whereas the second task would be run iteratively, with the output of one step being fed into the next step. More details can be found below.
 
-\paragraph{Alternatives}
-
-[http://blog.piccolboni.info/2010/07/map-reduce-algorithm-for-connected.html] One alternative way to implement the connected components task was using the PRAM algorithm, as described in [cite]. In theory this allows the connected components of a graph to be found in less iterations.
-
 \subsection{Linear Threshold}
 
 The Linear Threshold implementation follows the same basic pattern as the Independent Cascade implementation, though it only requires one task, which is performed iteratively. Each iteration corresponds to one iteration of the LT algorithm; that is, it counts all the converted neihbours of each unconverted node, and if it is greater than the node's threshold value, the node becomes converted.
