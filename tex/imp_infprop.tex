@@ -34,7 +34,7 @@ The dice rolling step was then straightforward to implement as a single Hadoop t
 
 \begin{verbatim}
 for each key, value {
-  # key is a line number and can be discarded, we only care about the value
+  # key is a line number and is discarded, we only care about the value
 
   values = parse(value)
   if values represent a node {
@@ -129,13 +129,15 @@ for each value in values {
 }
 
 if node1isconverted {
-  write(node1, convertingNeighbour) # copy this data from the last iteration
+	# copy this data from the last iteration
+  write(node1, convertingNeighbour) 
   for neighbour in neighbours {
     write(neighbour, -node1)
     changedNodes++
   } 
 } else {
-    # node1 is not converted, so nothing changes, so just copy the previous values
+    # node1 is not converted, so nothing changes, 
+    # so just copy the previous values
     for neighbour in neighbours {
       write(node1, neighbours)
     }            
@@ -177,19 +179,22 @@ for value in values {
   } else if data represents edge {
     neighbours.add(data[0])
     if data[1] == 1 {
-      influence++ \# count converted neighbours
+      influence++ # count converted neighbours
     }
   }
 }
 
-if node1isOn \&\& influence >= threshold {
+if node1isOn && influence >= threshold {
   changedNodes++
-  write(key, -1) \# mark this node as converted
+  write(key, -1) # mark this node as converted
   for neighbour in neighbours {
-    write(neighbour, ``key 1'') \# mark each neighbours edge so the neighbour's influence will increase on the next reduce step
+  	# mark each neighbours edge so the 
+  	# neighbour's influence will increase 
+  	# on the next reduce step
+    write(neighbour, ``key 1'') 
   }
 } else {
-  \# nothing happens, so just copy over previous values
+  # nothing happens, so just copy over previous values
 }
 \end{verbatim}
 
