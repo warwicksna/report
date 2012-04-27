@@ -2,7 +2,7 @@
 
 \subsection{Choice of Language/Library}
 
-We initially planned to use Java for the SOAP server. Java has a robust SOAP implementation in the form of the Apache Axis2 project. \footnote{\url{http://axis.apache.org/axis2/java/core/index.html}}. However, this project was highly configurable at the expense of simplicity. For example, the project features five different methods to deploy SOAP services.
+We initially planned to use Java for the SOAP server. Java has a robust SOAP implementation in the form of the Apache Axis2 project\footnote{\url{http://axis.apache.org/axis2/java/core/index.html}}. However, this project was highly configurable at the expense of simplicity. For example, the project features five different methods to deploy SOAP services.
 
 We therefore decided to implement the SOAP server in Python, using the rpclib library for the server, and the suds library for the client. This allowed both the server and the client to be implemented within a single Python script each, leading to easier development and deployment.
 
