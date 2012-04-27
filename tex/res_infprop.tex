@@ -1,10 +1,10 @@
-\section{Influence Propogation}
+\section{Influence Propagation}
 
- Influence propogation algorithms attempt to model the spread of ideas \cite{rogers}, viruses, word-of-mouth recommendations \cite{goldlimul}, viral marketing campaigns \cite{kempe}, or other transmissable entities, through a social network.
+ Influence Propagation algorithms attempt to model the spread of ideas \cite{rogers}, viruses, word-of-mouth recommendations \cite{goldlimul}, viral marketing campaigns \cite{kempe}, or other transmissable entities, through a social network.
 
-Influence propogation algorithms make the following assumptions about the social networks that they model. Social networks are modelled as directed graphs, with nodes representing individuals, and vertices representing relationships between individuals. In most influence propogation models, nodes can be in one of two states: "converted" or "unconverted". At the begin of the simulation, a subset of the nodes will be converted; over time they will convert their unconverted neighbours. There is an assumption of monotonicity, ie, converted nodes do not become unconverted.
+Influence Propagation algorithms make the following assumptions about the social networks that they model. Social networks are modelled as directed graphs, with nodes representing individuals, and vertices representing relationships between individuals. In most influence Propagation models, nodes can be in one of two states: "converted" or "unconverted". At the begin of the simulation, a subset of the nodes will be converted; over time they will convert their unconverted neighbours. There is an assumption of monotonicity, ie, converted nodes do not become unconverted.
 
- The exact conditions that determine when nodes will change from unconverted to converted depends on the influence propogation model used. There are three main models of transmission used; the independent cascade model, the linear threshold model, and the dependent cascade model.
+ The exact conditions that determine when nodes will change from unconverted to converted depends on the influence Propagation model used. There are three main models of transmission used; the independent cascade model, the linear threshold model, and the dependent cascade model.
 
 \subsection{Independent Cascade}
  In the independent cascade model, whenever a node becomes converted, it has one chance to convert each of its neighbours. Every edge \((A -> B)\) is assigned a weight between 0 and 1, which represents the probability that node A can convert node B, or vice versa.
@@ -61,7 +61,7 @@ The decreasing cascade model works similarly to the independent cascade model, b
 
 \subsection{Influence Maximisation Problem}
 
-One common use of an influence propogation model is to determine the best subset of nodes \cite{kempe}, that, if converted at the start of the simulation, will maximise the number of converted nodes at the end of the simulation. More formally, given a fixed budget k, and a function f(S), which takes an initial set of converted nodes and computes the expected final number of converted nodes, find a set of k nodes that maximises f(S).
+One common use of an influence Propagation model is to determine the best subset of nodes \cite{kempe}, that, if converted at the start of the simulation, will maximise the number of converted nodes at the end of the simulation. More formally, given a fixed budget k, and a function f(S), which takes an initial set of converted nodes and computes the expected final number of converted nodes, find a set of k nodes that maximises f(S).
 
 One practical example would be a viral marketing company that might wish to kickstart their campaign by giving a group of influential bloggers a free trial of their service, and hope that these bloggers would then hopefuly recommend the product to their followers, who would recommend it to their followers, and so on. One strategy for choosing the optimal set of free trial users would be to rank the bloggers by a precomputed influence rating, and then select the top k most influential individuals from the list.
 
@@ -85,7 +85,7 @@ Of course, this method relies on a fast method of working out the expected numbe
 
 \cite{muslims} looks in depth at this situation, and applies it to the spread of radical and counter-radical ideas through the Muslim community.
 
-They observe that the key reason that the standard influence propogation model cannot capture the nature of adverserial networks is as follows. Observe the network in \ref{fig:adverserial_network}. \(Node_2\) is initially converted to idea A, and \(node_4\) is converted to idea B. All other nodes are unconverted. At some point, \(node_9\), which is a bottleneck between the two sides of the graph, may be converted to one idea or the other. Once this happens -- assume that it is converted to idea A -- there will be no chance that it will ever be converted to idea B. For that reason, there is no way that idea B can ``pass through'' \(node_9\) and so no way that nodes 10 to 14 will ever be converted to idea B. The standard influence models have no way to capture this situation.
+They observe that the key reason that the standard influence Propagation model cannot capture the nature of adverserial networks is as follows. Observe the network in \ref{fig:adverserial_network}. \(Node_2\) is initially converted to idea A, and \(node_4\) is converted to idea B. All other nodes are unconverted. At some point, \(node_9\), which is a bottleneck between the two sides of the graph, may be converted to one idea or the other. Once this happens -- assume that it is converted to idea A -- there will be no chance that it will ever be converted to idea B. For that reason, there is no way that idea B can ``pass through'' \(node_9\) and so no way that nodes 10 to 14 will ever be converted to idea B. The standard influence models have no way to capture this situation.
 
 \begin{figure}[htbp]
 \centering
