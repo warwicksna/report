@@ -4,17 +4,13 @@ An important part of our project was connecting our code running on the Hadoop c
 
 \subsection{Choice of SOAP over REST}
 
-[http://www.infoq.com/articles/rest-soap-when-to-use-each]
-
-The two leading candidates for the communication interface were REST and SOAP. These are usually compared side by side, although strictly speaking SOAP is a communications protocol wheras REST is more of an architectural pattern that sits on top of HTTP.
+The two leading candidates for the communication interface were REST and SOAP. These are usually compared side by side, although strictly speaking SOAP is a communications protocol wheras REST is more of an architectural pattern that sits on top of HTTP. \cite{infoq}
 
 \subsubsection{Advantages of REST}
 
 REST, short for REpresentational State Transfer, is an architectural pattern for using HTTP as a web service. The motivation behind REST is that HTTP already contains a rich vocabulary for manipulating resources -- GET, POST, PUT and so on -- and thus, the logic goes, avoid reimplementing these commands in a complicated new protocol such as SOAP.
 
-[http://www.ajaxonomy.com/2008/xml/web-services-part-1-soap-vs-rest]
-
-The benefits of REST, as defined by [ajaxonomy] and [infoQ], are:
+The benefits of REST, as defined by \cite{ajoxonomy} and \cite{infoq}, are:
 \begin{itemize}
 \item It is language and platform agnostic.
 \item It is simpler than SOAP, as it does not require an additional messaging
@@ -31,7 +27,7 @@ SOAP, short for Simple Object Access Protocol, is a protocol designed for exchan
 
 Unlike REST, SOAP can run on top of any transport layer -- this may be HTTP or something else.
 
-The benefits of SOAP [same sources as above], are:
+The benefits of SOAP \cite{infoq}, \cite{ajoxonomy}, are:
 \begin{itemize}
 \item Unlike REST, it enables the developer to define their own vocabulary of
 verbs to suit the target domain.
@@ -45,8 +41,6 @@ greater level of support in different programming languages.
 For these reasons, we chose to use SOAP as the communications protocol.
 
 \subsection{Architecture Overview}
-
-[Insert Diagram Here]
 
 The SOAP communication module followed a standard client-server model. The SOAP server (written in Python) would run on the same machine as the Hadoop head node. Python's subprocess module, which lets shell commands be executed from within Python scripts, would be used to allow the SOAP server to control the Hadoop cluster.
 
