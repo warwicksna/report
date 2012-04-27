@@ -189,7 +189,10 @@ if node1isOn && influence >= threshold {
   changedNodes++
   write(key, -1) # mark this node as converted
   for neighbour in neighbours {
-    write(neighbour, ``key 1'') # mark each neighbours edge so the neighbour's influence will increase on the next reduce step
+     # mark each neighbours edge so the 
+     # neighbour's influence will increase on
+the next reduce step
+    write(neighbour, ``key 1'')
   	# mark each neighbours edge so the 
   	# neighbour's influence will increase 
   	# on the next reduce step

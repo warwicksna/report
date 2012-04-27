@@ -23,7 +23,7 @@ dbURL.Text & ``localhost'' \\
 dbPort.Text & ``3306'' \\
 dbName.Text & ``resultstesting'' \\
 dbUsername.Text & ``root'' \\
-dbPassword.Password & `` `` \\
+dbPassword.Password & `` '' \\
 \end{tabular}
 %\caption{}
 %\label{}
@@ -161,3 +161,17 @@ node benchmark with messages and errors developing due to a high number of nodes
 and edges in a very simple graph with no edge labels in the form of messages,
 one can only draw the conclusion that the scalability of the current interface
 in the testing manner described is unsuitable for this project.
+
+\subsection{Future considerations visualising large social-networks}
+
+One of the main issues with the design and implementation of the GUI for this project, is that what is considered a small network or a large network in terms of a visualisation perspective, may in fact be considered very small networks from the notion of research only through the use of the statistical data generated. Essentially, there is a mismatch between the size of graphs that are obtainable now in terms of visualisation in comparison to the raw processing power available for just pure statistical graph analysis. Interesting propositions put forward by Rafiei et Curial \cite{rafiei} suggest that with the increase in the size of the topology and components of the graphs currently in demand by modern day researchers, a state in which sampling occurs at a progressive level within the visualisation is performed. This would lead to only small network segments becoming visualised at any given time, therefore reducing an extremely large network into smaller more easier to visualise networks.
+
+Another consideration is that some of the most up to date visualisers for social-networks, do in fact have limitations in the size of graph they are capable of producing. For example, while the we have been able to produce graphs with cytoscape of a large size, due to the restrictions of the Java virtual machine, this again is only as powerful as the system it is run on ( and provided that the configuration files for the cytoscape software are altered to accommodate the usage of more memory for the Java virtual machine.
+
+Further possibilities are detailed in various other papers examined such as \cite{Hu10algorithmsfor} where Hu examines the constraints involving the visualisation of large social networks as being specific problems that need to be overcome. The key enabling ingredients for generating large social network graphs include a multilevel approach, force approximations by space decomposition, and algebraic techniques for the robust solution of the stress model.
+
+An appropriate alternative to a SOAP interface between a client visualisation application and the cluster could be the use of adaptive image manipulation in web-sites to extend the distributed nature of the project. One could design a new visualiser which is capable of processing the visualisation of the social network on a cluster. With the cluster influencing the power of the visualisation components, an image representing a sample of the graph taken and transmitted in simple quality, to the client browser. All SOAP requests can be made via the use of buttons incorporated into the site, e.g. html buttons next to visualisation window. 
+
+
+% http://www.google.co.uk/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&ved=0CCwQFjAA&url=http%3A%2F%2Fciteseerx.ist.psu.edu%2Fviewdoc%2Fdownload%3Fdoi%3D10.1.1.125.9455%26rep%3Drep1%26type%3Dpdf&ei=ywyaT7HoE82r8AOXkIWZDw&usg=AFQjCNGh2l6XsX0syrUPEdMsA_2fxBp24w&sig2=GeETLDqvzZOazqJWUMI9MQ – Effectively Visualising large network through sampling- Rafiei et curial.
+% http://www2.research.att.com/~yifanhu/PUB/ch16.pdf – Algorithms for Visualising Large networks by Yifan Hu

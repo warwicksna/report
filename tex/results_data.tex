@@ -156,7 +156,7 @@ The analysis performed on this data is similar to the analysis performed on the 
 \subsubsection{PageRank}
 Again, we have run the PageRank algorithm on both the network structure, and also the structure after considering edges as tweets. Tables \ref{tab:uafpagerank} and \ref{tab:uaftweetpagerank} show the results of this. There are few differences between the two results, unlike with the EDL data where there was a more noticeable difference. Whether this is due to the larger dataset, or just due to how the data was collected is unknown.
 
-\begin{table}%
+\begin{table}[htbp]%
 \centering
 \begin{tabular}{|l|l|}
 \hline
@@ -188,7 +188,7 @@ GuyAitchison & 0.0033005826068107074 \\
 \label{tab:uafpagerank}
 \end{table}
 
-\begin{table}%
+\begin{table}[htbp]%
 \centering
 \begin{tabular}{|l|l|}
 \hline
@@ -223,7 +223,7 @@ davidwearing & 0.0035662115177339288 \\
 \subsubsection{Vertex Degrees}
 Table \ref{tab:uafin} shows the results of analysing the number of connections incoming on each node within the UAF dataset. The top three users are the same as the PageRank results, the first of which is the root node selected for starting the data collection, which shows that these users are quite important within the network surrounding the UAF
 
-\begin{table}%
+\begin{table}[htbp]%
 \centering
 \begin{tabular}{|l|l|}
 \hline
@@ -255,7 +255,7 @@ strike2012 & 235 \\
 \label{tab:uafin}
 \end{table}
 
-\begin{table}%
+\begin{table}[htbp]%
 \centering
 \begin{tabular}{|l|l|}
 \hline
@@ -302,7 +302,7 @@ The number of triangles existing within the network is simply the sum of the val
 
 After summing the number of triangles, we also arrive at the same figure of 727,044 triangles present within the Enron network. Table \ref{tab:enrontriangles} shows the node ID of email addresses present in the Enron network forming the most triangles.
 
-\begin{table}%
+\begin{table}[htbp]%
 \centering
 \begin{tabular}{|c|c|}
 \hline
@@ -348,7 +348,7 @@ Table \ref{tab:enronpagerank} shows the top twenty nodes in the Enron email netw
 
 What is interesting from the results of running PageRank is that eleven of the top twenty nodes ranked by PageRank also feature within the top twenty nodes connected to the highest number of triangles. These nodes are: 76, 136, 140, 195, 273, 292, 370, 458, 823, 1028 and 1139.
 
-\begin{table}%
+\begin{table}[htbp]%
 \centering
 \begin{tabular}{|c|c|}
 \hline
@@ -424,7 +424,7 @@ The datasets contains 262,111 nodes and 1,234,877 edges, and is listed with an a
 
 \subsubsection{PageRank}
 
-\begin{table}%
+\begin{table}[htbp]%
 \centering
 \begin{tabular}{|l|l|}
 \hline
@@ -459,7 +459,7 @@ Node ID & PageRank \\
 \subsubsection{Vertex Degrees}
 The results of the calculating the in-degree and out-degree for the Amazon dataset are presented in Tables \ref{tab:amazonin} and \ref{tab:amazonout}. The results seem to indicate that node 33 is a popular item on sale at Amazon.
 
-\begin{table}%
+\begin{table}[htbp]%
 \centering
 \begin{tabular}{|l|l|}
 \hline
@@ -491,7 +491,7 @@ Node ID & In-Degree \\
 \label{tab:amazonin}
 \end{table}
 
-\begin{table}%
+\begin{table}[htbp]%
 \centering
 \begin{tabular}{|l|l|}
 \hline
@@ -530,7 +530,7 @@ The Wikipedia Talk network\footnote{\url{http://snap.stanford.edu/data/wiki-Talk
 \subsubsection{PageRank}
 Table \ref{tab:wikitalkpr} shows the top results from running the PageRank algorithm on the Wikipedia Talk network.
 
-\begin{table}%
+\begin{table}[htbp]%
 \centering
 \begin{tabular}{|l|l|}
 \hline
@@ -565,7 +565,7 @@ Node ID & PageRank \\
 \subsubsection{Vertex Degrees}
 Tables \ref{tab:wikitalkin} and \ref{tab:wikitalkout} show the in-degrees and out-degrees for nodes within the Wikipedia Talk network. Node 33 seems to be quite important within this network as it is the most important node ranked by PageRank and by number of edges connecting to it.
 
-\begin{table}%
+\begin{table}[htbp]%
 \centering
 \begin{tabular}{|l|l|}
 \hline
@@ -597,7 +597,7 @@ Node ID & In-Degree \\
 \label{tab:wikitalkin}
 \end{table}
 
-\begin{table}%
+\begin{table}[htbp]%
 \centering
 \begin{tabular}{|l|l|}
 \hline
