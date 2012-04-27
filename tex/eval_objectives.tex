@@ -1,26 +1,67 @@
 \section{Objectives}
+Our project had a series of objectives to meet in order to be a success. This section details these objectives and identifies whether they were met
+
+\subsection{DSNAT}
+DSNAT had both system and research oriented objectives. The system objectives are analysed first:
+
+\begin{enumerate}
+  \item Provides the ability to analyse social networks of a much larger scale than possible with SNAT
+  
+  The use of a cluster of computers to perform analysis of network instantly allows computation on a much larger scale to take place. With SNAT having only been recorded as processing data regarding Enron, which consisted of 36,692 nodes and 367,662 edges, DSNAT has been shown to process the Patent Citation network consisting of 3,774,768 nodes and 16,518,948 edges.
+  		
+  \item Is presented via a web services interface to allow computation to occur remotely
+  
+  Interaction with DSNAT is possible using the command line SOAP client produced
+  
+  \item Utilises data collected for the purpose of the project, and provides the ability for users to supply their own data for analysis
+  
+  This has been achieved through the collection of data regarding the EDL and UAF, which was processed and uploaded into DSNAT for analysis. Due to time and system constraints, the quantity of data collected from Twitter is small in comparison to the size of the networks can be analysed on DSNAT, yet the results produced are worthwhile.
+  
+  \item Provide a basis for modelling emergent behaviour on a larger scale
+  
+  This has partly been achieved. DSNAT is able to process graphs and networks of a large scale, yet the modelling of emergent behaviours needs to be adapted to either the MapReduce or Pregel paradigm before it can be used on DSNAT.
+\end{enumerate}
+
+These are the research objectives for DSNAT:
+
+\begin{enumerate}
+	\item Clustering: $k$-cliques, $k$-trusses, Kernigham-Lin algorithm and Clustering coefficients
+	
+	This has been partly achieved. DSNAT has algorithms implemented which can identify 3-cliques and compute various clustering coefficients. $k$-trusses and the Kerningham-Lin algorithm were not implemented
+	
+	\item Centrality: Betweenness centrality and PageRank
+	
+	The Giraph library came supplied with a simplified version of the PageRank algorithm, which has been improved slightly. The betweenness centrality measure algorithms remains unimplemented
+	\item Influence Propagation: Independent Cascade and Linear Threshold
+	
+	This has been achieved. Both the independent cascade model and the linear threshold model have been implemented for DSNAT, with promising results produced
+\end{enumerate}
+
+The reason behind some algorithms not having been implemented is due to the difficulty encountered in implementing algorithms to operate in a parallelised manner. The Giraph framework makes some algorithms nearly trivial to parallelise, but makes others seemingly impossible due to the lack of a central data-structure which can be referred to.
+
+The algorithms which have been implemented, have been used to analyse the various datasets which were collected and the results can be observed of these can be observed in Section \ref{sec:results_datasets}.
 
 \subsection{Emergent Behaviours}
 
 \begin{enumerate}
-	\item research on Modelling Emergent Behaviours;
+	\item Research on Modelling Emergent Behaviours;
 	
 	We performed this research, and focused on simulations of tag-based cooperation.
 	
-	\item evaluate research;
+	\item Evaluate research;
 	
 	We identified that the previous research had only been performed on graphs with random topologies.
 	
-	\item design an algorithm to simulate strategies of disruption;
+	\item Design an algorithm to simulate strategies of disruption;
 	
 	We designed software to perform the simulations presented in the papers we read, and also to look at extending the research that had already been performed.
 	
-	\item implement the algorithm on top of the distributed social network analysis tool;
+	\item Implement the algorithm on top of the distributed social network analysis tool;
 	
 	We were able to create a software simulation and use it as a platform to further extend the existing research.
 	We did not create this software using the distributed social network analysis tool that was created as part of this project due to the time constraints.
 	
-	\item evaluate results.
+	\item Evaluate results.
 	
 	We were able to evaluate the results of the extensions we made to the research.
 \end{enumerate}
