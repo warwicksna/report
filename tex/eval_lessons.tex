@@ -3,6 +3,11 @@
 
 \subsection{Hadoop}
 
+\begin{itemize}
+  \item 
+  \item 
+\end{itemize}
+
 \subsection{Emergent Behaviour}
 
 \subsection{SOAP}
@@ -24,18 +29,12 @@
 
 \subsection{Visualiser}
 
-The main lessons and issues discovered when attempting to make a graphical user interface for a distributed system are as follows:
+\begin{itemize}
 
-\subsubsection{Scalability}
+\item Issues surrounding the potential use of the previous years work as the basis for the visualation component of this years project, may have been proven to be unwise. As the visualisation, while visually pleasing, does not have the scalability required to allow it function with the graphs that have been generated in this project. While the exact cause of the errors regarding the fatal crashes of the visualiser have not been explained due to uncertainty, it is clear that there is a distinct correlation between the size of the graph and the inability of the graphical processing unit on the system running the interface to generate and visualise a graph of the size we desire. As the size of graph we wish to visualise increasing in node density, the greater the strain on the graphics processing areas of the system involved. 
 
-Issues surrounding the potential use of the previous years work as the basis for the visualation component of this years project, may have been proven to be unwise. As the visualisation, while visually pleasing, does not have the scalability required to allow it function with the graphs that have been generated in this project. While the exact cause of the errors regarding the fatal crashes of the visualiser have not been explained due to uncertainty, it is clear that there is a distinct correlation between the size of the graph and the inability of the graphical processing unit on the system running the interface to generate and visualise a graph of the size we desire. As the size of graph we wish to visualise increasing in node density, the greater the strain on the graphics processing areas of the system involved. 
+\item The next issue is with performance and the interface. While some graphs may have been visualised, and while ignoring the scalability issue, the overall performance of the visualiser is also not suitable for the size of graphs we wish to generate. The main issue with the performance of the visualiser is the extremely long length of time taken to generate the graph. For certain graphs with messages included, delays of up to one hour and a half were experienced. These graphs were of a small nature compared to graphs generated within this project, therefore it must be concluded that the previous visualiser was not of suitability to this project.
 
-\subsubsection{Performance}
-
-The next issue is with performance and the interface. While some graphs may have been visualised, and while ignoring the scalability issue, the overall performance of the visualiser is also not suitable for the size of graphs we wish to generate. The main issue with the performance of the visualiser is the extremely long length of time taken to generate the graph. For certain graphs with messages included, delays of up to one hour and a half were experienced. These graphs were of a small nature compared to graphs generated within this project, therefore it must be concluded that the previous visualiser was not of suitability to this project.
-
-\subsubsection{Testing of key components}
-
-A key component of this project is the visualiser of the graphs, in the GUI. It is regrettable that the interface was only able to be tested once a large portion of time had already been spent in research into web-services and their use in C\#. However, this testing could only really occur once the database had been reverse-engineered so that the database structure was available to modification and control. In hind-sight, the testing of pre-existing software should have been the number one priority when determining the suitability of the interface as it was extremely clear from the very small test networks (in comparison to the networks generated for this project), that the scalability of the visualisation component may not have been entirely useful.
-
+\item A key component of this project is the visualiser of the graphs, in the GUI. It is regrettable that the interface was only able to be tested once a large portion of time had already been spent in research into web-services and their use in C\#. However, this testing could only really occur once the database had been reverse-engineered so that the database structure was available to modification and control. In hind-sight, the testing of pre-existing software should have been the number one priority when determining the suitability of the interface as it was extremely clear from the very small test networks (in comparison to the networks generated for this project), that the scalability of the visualisation component may not have been entirely useful.
+\end{itemize}
 
