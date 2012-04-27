@@ -1,0 +1,119 @@
+\section{Graphical User Interface}
+The first task in testing the GUI's visualiser component with regards to it scalability, was to naturally reverse-engineer the database schema. Once this was completed, simple data was generated and run to test the performance and output of the visualiser with respect to the database requirements that are required by this project. 
+
+Before connecting any of the interface to different parts of cluster, simple data had to be generated and visualised. The database used for this testing process was Xampp which runs a local Apache server. The graphical user interface developed using PHP by the creators of xampp also allowed for easier testing and verification of the database structure, giving a simple and efficient manner in which to check certain table entries against the expected values.
+
+Connecting the visualiser to the local database server, proved to be a rather simple task. The dialog box shown in Figure \ref{fig:mysql}, allows simple routing of the GUI to different databases. 
+
+\begin{figure}[htbp]%
+\includegraphics[width=0.5\columnwidth]{./img/mysql}%
+\caption{SNAT Database Dialog Box}%
+\label{fig:mysql}%
+\end{figure}
+
+However, for simplicity, the code regarding the default values was changed such that the following values were substituted in so that the database would connect straight to the Xampp server and different databases depending on what data we were testing. While not a significant step in testing, this proved to be a very useful step as it lead to increased efficiency in the testing process.
+
+\begin{table}[htbp]%
+\centering
+\begin{tabular}{l|l}
+Setting & Value \\
+\hline
+dbURL.Text & ``localhost'' \\
+dbPort.Text & ``3306'' \\
+dbName.Text & ``resultstesting'' \\
+dbUsername.Text & ``root'' \\
+dbPassword.Password & `` `` \\
+\end{tabular}
+%\caption{}
+%\label{}
+\end{table}
+
+The next step after testing simple graphs were to test various size graphs to determine the absolute limit of the visualiser and thus determining the suitability of the visualiser. The various databases used are shown in Figure \ref{fig:phpmyadmin}
+
+\begin{figure}[htbp]%
+\includegraphics[width=\columnwidth]{./img/phpmyadmin}%
+\caption{Databases used testing of visualisation component of GUI}%
+\label{fig:phpmyadmin}%
+\end{figure}
+
+As Xampp php upload only supports up to a maximum of 8,192KiB, it was necessary to begin compressing the database into zip files, such that they could be uploaded to the local server. However, when this process proved to be limiting with respect to pushing the limits of the visualiser, alteration to the configuration of xampp was needed. 
+
+The the values of upload\_max\_filesize, memory\_limit and post\_max\_size in the php.ini configuration file were altered so that the memory limit now usable would become 3/4 of the available RAM on the system. The laptop on which the visualiser was tested and developed on sports 4GB of RAM, which therefore should be enough to test the visualiser's performance in terms of scalability. 
+
+The interface was set up in the following manner:
+\begin{enumerate}
+	\item I.	The interface was set up into visual studio complete with standard unedited code. The essential reasons being:
+	
+	\begin{enumerate}
+		\item It was necessary to prevent errors that were created in the SOAP inclusion in the existing code
+		
+		\item It allowed for complete control of the visualisation environment
+		
+		\item Ensured that any errors were local
+	\end{enumerate}
+	
+	\item The database management system used to connect the visualiser and the database would be xampp as the local system would rule out errors in connection such as potential corrupt data leading to false assumptions
+	
+	\item The interface was to only visualise data and perform no other action other than acquiring the dataset and visualising it. As such algorithms chosen were ``none'' and the dataset type, Full cluster node.
+\end{enumerate}
+
+The result of this rigorous testing saw no real problems with the visualiser until the database shown in Figure \ref{fig:2test} was selected. 
+
+\begin{figure}[htbp]%
+\includegraphics[width=0.5\columnwidth]{./img/2test}%
+\caption{Database ``2test'' which identified 
+the visualisation problems with the GUI
+}%
+\label{fig:2test}%
+\end{figure}
+
+As we can see from image above, the database ``2test'' was given a sample slot of data from the gathered twitter data that was currently being harvested at the time. This database was created after the completion of the reverse-engineering of the database schema and testing of correctness of the schema confirmed. The specification of the database ``2test'' is shown in Table \ref{tab:2test}:
+
+\begin{table}%
+\centering
+\begin{tabular}{|l|l|}
+\hline
+Data & \# or Present \\
+\hline
+Nodes	34193
+Edges	53172
+Message properties & Empty (no messages) \\
+Message Receive	Empty &(no messages) \\
+Message Send	Empty & (no messages) \\
+\hline
+\end{tabular}
+\caption{Database ``2test'' specification}
+\label{tab:2test}
+\end{table}
+
+When this dataset was run, which was in fact a small fraction of the twitter data already harvested to that point in time, the visualiser could not cope and in fact, the system on which it was run could not handle the graphical processing involved. The system collapsed and shut the GUI and Microsoft Visual Studio reporting errors with the display adapter. This was after a 1 hour 21 minute wait for the network view model to initialise. Given the specification shown in Figures \ref{fig:hardwarespecs1} and \ref{fig:hardwarespecs2}
+
+\begin{figure}[htbp]%
+\centering
+\includegraphics[width=0.5\columnwidth]{./img/hardwarespecs1}%
+\caption{Specification of the system where visualisation is non-functional}%
+\label{fig:hardwarespecs1}%
+\end{figure}
+
+\begin{figure}[htbp]%
+\centering
+\includegraphics[width=0.5\columnwidth]{./img/hardwarespecs2}%
+\caption{Graphics processing power of system in question}%
+\label{fig:hardwarespecs2}%
+\end{figure}
+
+As we can see by the specification of the system, it was by no means lacking in terms of power. The conclusion that can be drawn from this experimentation is that the network view model developed by the previous group, while aesthetically pleasing, lacks scalability as a system which surpasses the system requirements specified by the previous group:
+
+\begin{itemize}
+	\item 1.6GHz or faster processor
+	
+	\item 1 GB (32 Bit) or 2 GB (64 Bit) RAM (Add 512 MB if running in a virtual machine)
+	
+	\item 3GB of available hard disk space
+	
+	\item	5400 RPM hard disk drive
+	
+	\item DirectX 9 capable video card running at 1024 x 768 or higher-resolution display
+\end{itemize}
+
+An issue identified with the visualiser however is that it is extremely dependent on the system on which it is currently running. That is, it can only produce large graphs with powerful systems, and the ratio of technical specification power to graph size is currently unknown. In other-words, it is unknown whether or not the lack of CPU power, RAM or video processing power is the cause of the fatal crashes when trying to visualise the graphs. 
