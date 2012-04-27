@@ -143,21 +143,19 @@ logging pages running on localhost, and returns the contents of that page.
     \end{description}
 \end{itemize}
 
-The command line client's interface was designed to be familiar to anyone who has used standard UNIX based commands like ‘ls’:
-\begin{verbatim}
-./snat.py    Arguments                                                   Effect
+The command line client's interface was designed to be familiar to anyone who has used standard UNIX based commands like ls. Table \ref{tab:soapclient} shows the commands available.
 
-
-             s                                                           Status
-        
-             e    <algorithm id> <dataset id> <\#nodes> <args>           Execute
-        
-             la                                                          List algorithms
-        
-             ld                                                          List datasets
-        
-             ua   <name> <filename> <job class>                          Upload algorithm
-        
-             ud   <name> <filename>                                      Upload dataset
-\end{verbatim}
-
+\begin{table}[htbp]%
+\begin{tabular}{l|l|l}
+./snat.py & Arguments & Effect \\
+\hline
+ & s & Status \\
+ & e <algorithm id> <dataset id> <\#nodes> <args> & Execute \\
+ & la & List Algorithms \\
+ & ld & List Dataests \\
+ & ua <name> <filename> <job class> & Upload Algorithm \\
+ & ud <name> <filename> & Upload Dataset \\
+\end{tabular}
+\caption{SOAP Client Commands}
+\label{tab:soapclient}
+\end{table}
