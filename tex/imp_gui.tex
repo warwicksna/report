@@ -1,7 +1,7 @@
 \section{Graphical User Interface}
 The first task in testing the GUI's visualiser component with regards to it scalability, was to naturally reverse-engineer the database schema. Once this was completed, simple data was generated and run to test the performance and output of the visualiser with respect to the database requirements that are required by this project. 
 
-Before connecting any of the interface to different parts of cluster, simple data had to be generated and visualised. The database used for this testing process was Xampp which runs a local Apache server. The graphical user interface developed using PHP by the creators of xampp also allowed for easier testing and verification of the database structure, giving a simple and efficient manner in which to check certain table entries against the expected values.
+Before connecting any of the interface to different parts of cluster, simple data had to be generated and visualised. The database used for this testing process was XAMPP which runs a local Apache server. The graphical user interface developed using PHP by the creators of XAMPP also allowed for easier testing and verification of the database structure, giving a simple and efficient manner in which to check certain table entries against the expected values.
 
 Connecting the visualiser to the local database server, proved to be a rather simple task. The dialog box shown in Figure \ref{fig:mysql}, allows simple routing of the GUI to different databases. 
 
@@ -12,7 +12,7 @@ Connecting the visualiser to the local database server, proved to be a rather si
 \label{fig:mysql}%
 \end{figure}
 
-However, for simplicity, the code regarding the default values was changed such that the following values were substituted in so that the database would connect straight to the Xampp server and different databases depending on what data we were testing. While not a significant step in testing, this proved to be a very useful step as it lead to increased efficiency in the testing process.
+However, for simplicity, the code regarding the default values was changed such that the following values were substituted in so that the database would connect straight to the XAMPP server and different databases depending on what data we were testing. While not a significant step in testing, this proved to be a very useful step as it lead to increased efficiency in the testing process.
 
 \begin{table}[htbp]%
 \centering
@@ -37,7 +37,7 @@ The next step after testing simple graphs were to test various size graphs to de
 \label{fig:phpmyadmin}%
 \end{figure}
 
-As Xampp php upload only supports up to a maximum of 8,192KiB, it was necessary to begin compressing the database into zip files, such that they could be uploaded to the local server. However, when this process proved to be limiting with respect to pushing the limits of the visualiser, alteration to the configuration of xampp was needed. 
+As XAMPP php upload only supports up to a maximum of 8,192KiB, it was necessary to begin compressing the database into zip files, such that they could be uploaded to the local server. However, when this process proved to be limiting with respect to pushing the limits of the visualiser, alteration to the configuration of XAMPP was needed. 
 
 The the values of upload\_max\_filesize, memory\_limit and post\_max\_size in the php.ini configuration file were altered so that the memory limit now usable would become 3/4 of the available RAM on the system. The laptop on which the visualiser was tested and developed on sports 4GB of RAM, which therefore should be enough to test the visualiser's performance in terms of scalability. 
 
@@ -54,7 +54,7 @@ unedited code. The essential reasons being:
 		\item Ensured that any errors were local
 	\end{enumerate}
 	
-	\item The database management system used to connect the visualiser and the database would be xampp as the local system would rule out errors in connection such as potential corrupt data leading to false assumptions
+	\item The database management system used to connect the visualiser and the database would be XAMPP as the local system would rule out errors in connection such as potential corrupt data leading to false assumptions
 	
 	\item The interface was to only visualise data and perform no other action other than acquiring the dataset and visualising it. As such algorithms chosen were ``none'' and the dataset type, Full cluster node.
 \end{enumerate}
@@ -166,7 +166,7 @@ in the testing manner described is unsuitable for this project.
 
 One of the main issues with the design and implementation of the GUI for this project, is that what is considered a small network or a large network in terms of a visualisation perspective, may in fact be considered very small networks from the notion of research only through the use of the statistical data generated. Essentially, there is a mismatch between the size of graphs that are obtainable now in terms of visualisation in comparison to the raw processing power available for just pure statistical graph analysis. Interesting propositions put forward by Rafiei et Curial \cite{rafiei} suggest that with the increase in the size of the topology and components of the graphs currently in demand by modern day researchers, a state in which sampling occurs at a progressive level within the visualisation is performed. This would lead to only small network segments becoming visualised at any given time, therefore reducing an extremely large network into smaller more easier to visualise networks.
 
-Another consideration is that some of the most up to date visualisers for social-networks, do in fact have limitations in the size of graph they are capable of producing. For example, while the we have been able to produce graphs with cytoscape of a large size, due to the restrictions of the Java virtual machine, this again is only as powerful as the system it is run on ( and provided that the configuration files for the cytoscape software are altered to accommodate the usage of more memory for the Java virtual machine.
+Another consideration is that some of the most up to date visualisers for social-networks, do in fact have limitations in the size of graph they are capable of producing. For example, while the we have been able to produce graphs with cytoscape of a large size, due to the restrictions of the Java virtual machine, this again is only as powerful as the system it is run on (and provided that the configuration files for the cytoscape software are altered to accommodate the usage of more memory for the Java virtual machine.
 
 Further possibilities are detailed in various other papers examined such as \cite{Hu10algorithmsfor} where Hu examines the constraints involving the visualisation of large social networks as being specific problems that need to be overcome. The key enabling ingredients for generating large social network graphs include a multilevel approach, force approximations by space decomposition, and algebraic techniques for the robust solution of the stress model.
 
