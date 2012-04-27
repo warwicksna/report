@@ -1,15 +1,14 @@
 \section{Data Acquisition}
-
-\subsection{Twitter}
 Our requirements were as follows:
 \begin{itemize}
 \item Sufficient data per item to construct a graph
 \item Temporal data for use in last year's interface
-\item Sufficient nodes to illustrate the cluster’s usefulness
+\item Sufficient nodes to illustrate the cluster's usefulness
 \item Modern, real-world data
 \end{itemize}
 
-The social networking site Twitter met all these requirements. As an added bonus, it had information on two groups our customer has an interest in; the English Defence League (EDL) and Unite Against Fascism (UAF). Twitter is easily mapped onto a directed graph as it uses an asymmetric following system where user X can follow user Y without user Y having to follow user X. In addition to collecting the following/followers lists for each user we store the messages they broadcast, their `tweets'. Tweets may be addressed to particular users, and can thus be modelled as edges themselves. In addition to normal, hand-typed tweets there are  `retweets' where the user has essentially endorsed another user’s tweet by repeating it themselves. These can likewise be modelled as directed edges. Along with the text content of a tweet comes a significant amount of metadata such as its timestamp, a unique id, who it\'s addressed to and sometimes geolocational data. Followers have much less information available on them; there is no way to directly tell when a user followed another, or whether a user used to follow another.
+\subsection{Twitter}
+The social networking site Twitter met all these requirements. As an added bonus, it had information on two groups our customer has an interest in; the English Defence League (EDL) and Unite Against Fascism (UAF). Twitter is easily mapped onto a directed graph as it uses an asymmetric following system where user X can follow user Y without user Y having to follow user X. In addition to collecting the following/followers lists for each user we store the messages they broadcast, their `tweets'. Tweets may be addressed to particular users, and can thus be modelled as edges themselves. In addition to normal, hand-typed tweets there are  `retweets' where the user has essentially endorsed another user's tweet by repeating it themselves. These can likewise be modelled as directed edges. Along with the text content of a tweet comes a significant amount of metadata such as its timestamp, a unique id, who it's addressed to and sometimes geolocational data. Followers have much less information available on them; there is no way to directly tell when a user followed another, or whether a user used to follow another.
 
 \subsubsection{Twitter API}
 Twitter provides two main interfaces for developers wishing to harvest data from it; a Representational State Transfer (REST) API and a streaming API. REST is a stateless protocol similar in style to the ubiquitous HTTP/1.1. As a result of prior abuse and overuse The REST API is heavily rate limited. According to the documentation non authenticated calls are limited to 150 requests per hour per IP, and OAuth-authenticated requests are limited to 350 per hour per account. Each of the exposed functions have strict limits on the amount of data they can return; the `statuses/user\_timeline' will only return the 3,200 most recent tweets of a user, and no more than 200 per request. This places a hard limit of 200x350/3200 ~ 20 user's tweets per hour. 
