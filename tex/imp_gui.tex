@@ -176,14 +176,6 @@ An appropriate alternative to a SOAP interface between a client visualisation ap
 % http://www.google.co.uk/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&ved=0CCwQFjAA&url=http%3A%2F%2Fciteseerx.ist.psu.edu%2Fviewdoc%2Fdownload%3Fdoi%3D10.1.1.125.9455%26rep%3Drep1%26type%3Dpdf&ei=ywyaT7HoE82r8AOXkIWZDw&usg=AFQjCNGh2l6XsX0syrUPEdMsA_2fxBp24w&sig2=GeETLDqvzZOazqJWUMI9MQ – Effectively Visualising large network through sampling- Rafiei et curial.
 % http://www2.research.att.com/~yifanhu/PUB/ch16.pdf – Algorithms for Visualising Large networks by Yifan Hu
 
-
-\subsection{Lessons learnt (GUI)}
-
-The main lessons and issues discovered when attempting to make a graphical user interface for a distributed system are as follows:
-
-The first lesson is scalability:
-Issues surrounding the potential use of the previous years work as the basis for the visualation component of this years project, may have been proven to be unwise. As the visualisation, while visually pleasing, does not have the scalability required to allow it function with the graphs that have been generated in this project. While the exact cause of the errors regarding the fatal crashes of the visualiser have not been explained due to uncertainty, it is clear that there is a distinct correlation between the size of the graph and the inability of the graphical processing unit on the system running the interface to generate and visualise a graph of the size we desire. As the size of graph we wish to visualise increasing in node density, the greater the strain on the graphics processing areas of the system involved. 
-
 \subsection{Performance}
 
 The next issue is with performance and the interface. While some graphs may have been visualised, and while ignoring the scalability issue, the overall performance of the visualiser is also not suitable for the size of graphs we wish to generate. The main issue with the performance of the visualiser is the extremely long length of time taken to generate the graph. For certain graphs with messages included, delays of up to one hour and a half were experienced. These graphs were of a small nature compared to graphs generated within this project, therefore it must be concluded that the previous visualiser was not of suitability to this project.
