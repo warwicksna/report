@@ -1,31 +1,19 @@
 \section{Lessons}
 
-
-\subsection{Hadoop}
-
-\begin{itemize}
-  \item 
-  \item 
-\end{itemize}
-
-\subsection{Emergent Behaviour}
-
 \subsection{SOAP}
 
 \begin{itemize}
-  \item SOAP, by default, times out after a set time, which is usually less than the time to run a Hadoop job. Therefore, the SOAP server needs to run Hadoop jobs in background threads.
+  \item By default, SOAP times out after a set time, which is usually less than the time needed to run a Hadoop job. Therefore, the SOAP server needs to run Hadoop jobs in background threads.
   \item The easiest way to transfer binary data between Python's SOAP implementations (suds/rpclib), is as base-64-encoded strings.
 \end{itemize}
 
 \subsection{Influence Propagation}
 
 \begin{itemize}
-	\item Hadoop can be used to implement graph algorithms, without relying on a specialised framework such as Giraph or Pregel, but its tricky. Hadoop is not a natural fit for graph algorithms.
-	\item When trying to write graph algorithms in Hadoop, its more effective to work out algorithms with pen and paper before starting to code. The lack of shared global memory makes things a lot trickier than when writing single threaded code.
+	\item Hadoop can be used to implement graph algorithms, without relying on a specialised framework such as Giraph or Pregel; however, this is difficult, as Hadoop is not a natural fit for graph algorithms.
+	\item The lack of shared global memory makes implementing graph algorithms in Hadoop significantly harder than when writing single threaded code.
         \item Influence cascades in scale-free networks exhibit a ``tipping point'', where the size of the cascade increases greatly past a certain level of degree distribution skew.
 \end{itemize}
-
-\subsection{Giraph}
 
 \subsection{Visualiser}
 

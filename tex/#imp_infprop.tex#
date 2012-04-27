@@ -12,7 +12,7 @@ Example TGF graph:
 
 \begin{verbatim}
 1 A false
-2 B false
+2 B false 
 3 C false
 4 D true
 5 E false
